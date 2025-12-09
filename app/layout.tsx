@@ -18,6 +18,15 @@ export const metadata: Metadata = {
   keywords:
     "hypothèque inversée, CHIP, prêt hypothécaire inversé, retraite, Québec, courtier hypothécaire",
   generator: "v0.app",
+  icons: {
+    icon: [
+      { url: "/logo.png" },
+      { url: "/logo.png", sizes: "32x32", type: "image/png" },
+      { url: "/logo.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/logo.png",
+    shortcut: "/logo.png",
+  },
 };
 
 export default function RootLayout({

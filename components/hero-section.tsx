@@ -1,36 +1,11 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import {
-  CheckCircle2,
-  ArrowRight,
-  Shield,
-  DollarSign,
-  Home,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, DollarSign, Home } from "lucide-react";
+import ContactForm from "@/components/contact-form";
 
 export default function HeroSection() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-  };
-
   return (
     <section className="relative min-h-screen pt-20 md:pt-24 overflow-hidden bg-primary">
       <div className="absolute inset-0 z-0">
@@ -135,107 +110,7 @@ export default function HeroSection() {
               contacterons rapidement.
             </p>
 
-            {isSubmitted ? (
-              <div className="text-center py-6 md:py-8">
-                <CheckCircle2 className="w-12 h-12 md:w-16 md:h-16 text-primary mx-auto mb-3 md:mb-4" />
-                <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-2">
-                  Merci!
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Nous vous contacterons bientôt.
-                </p>
-              </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-2.5 sm:space-y-3 md:space-y-4"
-              >
-                <div>
-                  <Label
-                    htmlFor="firstName"
-                    className="text-card-foreground text-xs sm:text-sm"
-                  >
-                    Prénom
-                  </Label>
-                  <Input
-                    id="firstName"
-                    placeholder="Votre prénom"
-                    value={formData.firstName}
-                    onChange={(e) =>
-                      setFormData({ ...formData, firstName: e.target.value })
-                    }
-                    required
-                    className="mt-1 h-9 sm:h-10 text-sm"
-                  />
-                </div>
-                <div>
-                  <Label
-                    htmlFor="email"
-                    className="text-card-foreground text-xs sm:text-sm"
-                  >
-                    Courriel
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="votre@courriel.com"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    required
-                    className="mt-1 h-9 sm:h-10 text-sm"
-                  />
-                </div>
-                <div>
-                  <Label
-                    htmlFor="phone"
-                    className="text-card-foreground text-xs sm:text-sm"
-                  >
-                    Téléphone
-                  </Label>
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="514 984-8182"
-                    value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({ ...formData, phone: e.target.value })
-                    }
-                    required
-                    className="mt-1 h-9 sm:h-10 text-sm"
-                  />
-                </div>
-                <div>
-                  <Label
-                    htmlFor="message"
-                    className="text-card-foreground text-xs sm:text-sm"
-                  >
-                    Questions ou commentaires
-                  </Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Comment pouvons-nous vous aider?"
-                    value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    rows={2}
-                    className="mt-1 text-sm"
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm sm:text-base h-10 sm:h-11"
-                >
-                  Demander une Consultation
-                </Button>
-                <p className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">
-                  En soumettant ce formulaire, vous acceptez d'être contacté par
-                  notre équipe.
-                </p>
-              </form>
-            )}
+            <ContactForm formType="hero form" compact />
           </div>
         </div>
       </div>
