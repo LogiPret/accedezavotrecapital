@@ -14,7 +14,6 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <HeroSection />
-      <PartnerBanks />
       <WhatIsReverseMortgage />
       <BenefitsSection />
       <Calculator />
