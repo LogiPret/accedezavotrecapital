@@ -23,10 +23,14 @@ export default tseslint.config(
       "react/prop-types": "off",
       "react/no-unescaped-entities": "off",
       "react-hooks/purity": "off",
-      "@typescript-eslint/no-unused-vars": ["warn", { 
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_|^(actionTypes|features|containerRect|inter|libreBaskerville)$"
-      }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern:
+            "^_|^(actionTypes|features|containerRect|inter|libreBaskerville)$",
+        },
+      ],
       "@typescript-eslint/no-explicit-any": "warn",
       "@next/next/no-img-element": "warn",
     },
