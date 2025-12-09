@@ -19,7 +19,6 @@ export default function Home() {
       <BenefitsSection />
       <Calculator />
       <UseCases />
-      <ResourcesSection />
       <ContactSection />
       <Footer />
     </main>

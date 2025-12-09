@@ -58,179 +58,85 @@ export default function ContactSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-start">
-          {/* Broker card - horizontal layout on mobile */}
+          {/* Broker card - horizontal layout */}
           <div className="bg-card border border-border rounded-xl md:rounded-2xl overflow-hidden shadow-lg">
-            {/* Mobile: horizontal layout / Desktop: vertical */}
-            <div className="flex flex-row lg:flex-col">
-              {/* Photo - smaller on mobile */}
-              <div className="relative w-32 sm:w-40 lg:w-full h-32 sm:h-40 lg:h-80 xl:h-96 shrink-0">
+            <div className="flex flex-col sm:flex-row">
+              {/* Photo - left side on larger screens */}
+              <div className="relative w-full sm:w-64 md:w-72 shrink-0 h-64 sm:h-auto">
                 <img
-                  src="/professional-mortgage-broker-man-in-suit-office-se.jpg"
-                  alt="Jean-Pierre Leblanc - Courtier Hypothécaire"
+                  src="/mark.png"
+                  alt="Mark A. Barbieri - Courtier Hypothécaire"
                   className="w-full h-full object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent" />
-                <div className="absolute bottom-2 left-2 right-2 lg:bottom-6 lg:left-6 lg:right-6">
-                  <h3 className="font-serif text-sm sm:text-base lg:text-2xl xl:text-3xl font-bold text-white mb-0 lg:mb-1">
-                    Jean-Pierre Leblanc
+                <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-primary/90 via-primary/40 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 sm:hidden">
+                  <h3 className="font-serif text-xl font-bold text-white mb-1">
+                    Mark A. Barbieri
                   </h3>
-                  <p className="text-white/90 text-[10px] sm:text-xs lg:text-base font-medium">
-                    Courtier Hypothécaire
+                  <p className="text-white/90 text-sm font-medium">
+                    Courtier Hypothécaire agréé
                   </p>
                 </div>
               </div>
 
-              {/* Mobile mini stats */}
-              <div className="flex-1 p-3 sm:p-4 lg:hidden flex flex-col justify-center">
-                <div className="grid grid-cols-3 gap-2 mb-3">
-                  <div className="text-center">
-                    <p className="text-lg sm:text-xl font-bold text-foreground">
-                      15+
-                    </p>
-                    <p className="text-[8px] sm:text-[10px] text-muted-foreground">
-                      Ans exp.
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-lg sm:text-xl font-bold text-foreground">
-                      500+
-                    </p>
-                    <p className="text-[8px] sm:text-[10px] text-muted-foreground">
-                      Clients
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-lg sm:text-xl font-bold text-foreground">
-                      4.9
-                    </p>
-                    <p className="text-[8px] sm:text-[10px] text-muted-foreground">
-                      Note
-                    </p>
-                  </div>
-                </div>
-                <a
-                  href="tel:1-514-555-1234"
-                  className="flex items-center justify-center gap-2 bg-primary text-primary-foreground rounded-lg py-2 text-xs sm:text-sm font-medium"
-                >
-                  <Phone className="w-3 h-3 sm:w-4 sm:h-4" />
-                  1-514-555-1234
-                </a>
-              </div>
-            </div>
-
-            {/* Desktop full info */}
-            <div className="hidden lg:block p-6 md:p-8">
-              {/* Stats Row */}
-              <div className="grid grid-cols-3 gap-4 mb-8 pb-8 border-b border-border">
-                <div className="text-center">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mx-auto mb-2">
-                    <Award className="w-6 h-6 text-primary" />
-                  </div>
-                  <p className="text-2xl font-bold text-foreground">15+</p>
-                  <p className="text-xs text-muted-foreground">
-                    Ans d'expérience
+              {/* Contact info - right side */}
+              <div className="p-4 sm:p-6 md:p-8 flex-1">
+                {/* Name for desktop */}
+                <div className="hidden sm:block mb-4">
+                  <h3 className="font-serif text-2xl lg:text-3xl font-bold text-foreground mb-1">
+                    Mark A. Barbieri
+                  </h3>
+                  <p className="text-muted-foreground text-base font-medium">
+                    Courtier Hypothécaire agréé
                   </p>
                 </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mx-auto mb-2">
-                    <Users className="w-6 h-6 text-primary" />
-                  </div>
-                  <p className="text-2xl font-bold text-foreground">500+</p>
-                  <p className="text-xs text-muted-foreground">
-                    Clients satisfaits
-                  </p>
-                </div>
-                <div className="text-center">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mx-auto mb-2">
-                    <Star className="w-6 h-6 text-primary" />
-                  </div>
-                  <p className="text-2xl font-bold text-foreground">4.9</p>
-                  <p className="text-xs text-muted-foreground">Note moyenne</p>
-                </div>
-              </div>
 
-              {/* Bio */}
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                Spécialiste en hypothèques inversées depuis plus de 15 ans, je
-                suis passionné par l'accompagnement des propriétaires de 55 ans
-                et plus dans la réalisation de leurs projets de retraite.
-              </p>
+                {/* Bio */}
+                <p className="text-muted-foreground mb-6 leading-relaxed text-sm md:text-base">
+                  Accédez à votre capital.ca est dirigé par Mark A. Barbieri, un
+                  expert chevronné en prêts hypothécaires inversés, dédié aux
+                  propriétaires âgés. Fort de plus de 25 ans d’expérience,
+                  acquise tant au sein de la plus grande banque canadienne que
+                  dans le secteur du courtage hypothécaire, Mark et son équipe
+                  offrent une expertise approfondie et une approche centrée sur
+                  le client à chaque étape du processus.
+                </p>
 
-              {/* Credentials */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                <span className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium">
-                  AMF #123456
-                </span>
-                <span className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium">
-                  OACIQ #789012
-                </span>
-                <span className="text-xs bg-primary/10 text-primary px-3 py-1.5 rounded-full font-medium">
-                  Certifié CHIP
-                </span>
-              </div>
+                {/* Contact Info */}
+                <div className="space-y-3">
+                  <a
+                    href="tel:1-514-984-8182"
+                    className="flex items-center gap-3 p-3 md:p-4 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group"
+                  >
+                    <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary rounded-xl text-primary-foreground group-hover:scale-105 transition-transform shrink-0">
+                      <Phone className="w-4 h-4 md:w-5 md:h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs md:text-sm text-muted-foreground">
+                        Téléphone
+                      </p>
+                      <p className="font-semibold text-foreground text-sm md:text-base">
+                        1-514-984-8182
+                      </p>
+                    </div>
+                  </a>
 
-              {/* Contact Info */}
-              <div className="space-y-4">
-                <a
-                  href="tel:1-514-555-1234"
-                  className="flex items-center gap-4 p-4 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group"
-                >
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-xl text-primary-foreground group-hover:scale-105 transition-transform">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Téléphone</p>
-                    <p className="font-semibold text-foreground">
-                      1-514-555-1234
-                    </p>
-                  </div>
-                </a>
-
-                <a
-                  href="mailto:info@hypothequeinversee.qc"
-                  className="flex items-center gap-4 p-4 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group"
-                >
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-xl text-primary-foreground group-hover:scale-105 transition-transform">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Courriel</p>
-                    <p className="font-semibold text-foreground">
-                      info@hypothequeinversee.qc
-                    </p>
-                  </div>
-                </a>
-
-                <div className="flex items-center gap-4 p-4 bg-secondary rounded-xl">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-xl text-primary-foreground">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Bureau</p>
-                    <p className="font-semibold text-foreground">
-                      1234 Rue Sainte-Catherine Ouest
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Montréal, QC H3B 1A1
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-4 p-4 bg-secondary rounded-xl">
-                  <div className="flex items-center justify-center w-12 h-12 bg-primary rounded-xl text-primary-foreground">
-                    <Clock className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">
-                      Heures d'ouverture
-                    </p>
-                    <p className="font-semibold text-foreground">
-                      Lun-Ven: 9h - 17h
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Consultations sur rendez-vous
-                    </p>
-                  </div>
+                  <a
+                    href="mailto:info@hypothequeinversee.qc"
+                    className="flex items-center gap-3 p-3 md:p-4 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group"
+                  >
+                    <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary rounded-xl text-primary-foreground group-hover:scale-105 transition-transform shrink-0">
+                      <Mail className="w-4 h-4 md:w-5 md:h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs md:text-sm text-muted-foreground">
+                        Courriel
+                      </p>
+                      <p className="font-semibold text-foreground text-sm md:text-base break-all">
+                        info@hypothequeinversee.qc
+                      </p>
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>

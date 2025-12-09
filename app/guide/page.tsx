@@ -76,12 +76,12 @@ export default function GuideLandingPage() {
               </span>
             </Link>
             <a
-              href="tel:+15141234567"
+              href="tel:+5149848182"
               className="flex items-center gap-2 text-primary-foreground hover:text-primary-foreground/80 transition-colors"
             >
               <Phone className="w-4 h-4" />
               <span className="hidden sm:inline text-sm font-medium">
-                (514) 123-4567
+                (514) 984-8182
               </span>
             </a>
           </div>
@@ -256,7 +256,7 @@ export default function GuideLandingPage() {
                           value={formData.phone}
                           onChange={handleChange}
                           className="mt-1"
-                          placeholder="(514) 123-4567"
+                          placeholder="(514) 984-8182"
                         />
                       </div>
 
@@ -429,7 +429,7 @@ export default function GuideLandingPage() {
                 className="h-12 px-8 border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent"
                 asChild
               >
-                <a href="tel:+15141234567">
+                <a href="tel:+15149848182">
                   <Phone className="w-5 h-5 mr-2" />
                   Appeler Maintenant
                 </a>

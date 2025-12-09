@@ -21,7 +21,7 @@ export default function PartnerBanks() {
             {partners.map((partner, index) => (
               <div
                 key={`first-${index}`}
-                className="flex-shrink-0 mx-4 md:mx-8 lg:mx-12 flex items-center justify-center h-12 md:h-16 w-28 md:w-40 grayscale hover:grayscale-0 transition-all duration-300"
+                className="flex-shrink-0 mx-4 md:mx-8 lg:mx-12 flex items-center justify-center h-12 md:h-16 w-28 md:w-40 grayscale transition-all duration-300"
               >
                 <img
                   src={partner.logo || "/placeholder.svg"}
@@ -34,7 +34,7 @@ export default function PartnerBanks() {
             {partners.map((partner, index) => (
               <div
                 key={`second-${index}`}
-                className="flex-shrink-0 mx-4 md:mx-8 lg:mx-12 flex items-center justify-center h-12 md:h-16 w-28 md:w-40 grayscale hover:grayscale-0 transition-all duration-300"
+                className="flex-shrink-0 mx-4 md:mx-8 lg:mx-12 flex items-center justify-center h-12 md:h-16 w-28 md:w-40 grayscale transition-all duration-300"
               >
                 <img
                   src={partner.logo || "/placeholder.svg"}

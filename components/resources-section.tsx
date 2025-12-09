@@ -87,23 +87,23 @@ export default function ResourcesSection() {
           {resources.map((resource, index) => (
             <Card
               key={index}
-              className="shrink-0 w-[260px] sm:w-[280px] md:w-auto snap-center group hover:shadow-xl transition-all duration-300 border-border hover:border-primary/30"
+              className="shrink-0 w-[260px] sm:w-[280px] md:w-auto snap-center group hover:shadow-xl transition-all duration-300 border-border hover:border-primary/30 flex flex-col"
             >
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between mb-3">
-                  <div className="w-10 h-10 md:w-12 md:h-12 bg-secondary rounded-lg flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                  <div className="w-10 h-10 md:w-12 md:h-12 bg-secondary rounded-lg flex items-center justify-center group-hover:bg-primary/10 transition-colors shrink-0">
                     <resource.icon className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                   </div>
-                  <span className="text-[10px] md:text-xs font-medium text-muted-foreground bg-secondary px-2 py-1 rounded">
+                  <span className="text-[10px] md:text-xs font-medium text-muted-foreground bg-secondary px-2 py-1 rounded whitespace-nowrap">
                     {resource.type}
                   </span>
                 </div>
-                <CardTitle className="text-base md:text-lg leading-tight">
+                <CardTitle className="text-base md:text-lg leading-tight line-clamp-2">
                   {resource.title}
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="text-xs md:text-sm mb-4">
+              <CardContent className="flex-1 flex flex-col">
+                <CardDescription className="text-xs md:text-sm mb-4 line-clamp-3 flex-1">
                   {resource.description}
                 </CardDescription>
                 <Button
@@ -117,8 +117,8 @@ export default function ResourcesSection() {
                 >
                   {resource.downloadable ? (
                     <>
-                      <Download className="w-3 h-3 md:w-4 md:h-4 mr-2" />
-                      Télécharger
+                      <Download className="w-3 h-3 md:w-4 md:h-4 mr-2 shrink-0" />
+                      <span className="truncate">Télécharger</span>
                     </>
                   ) : (
                     "Consulter"
@@ -129,8 +129,8 @@ export default function ResourcesSection() {
           ))}
         </div>
 
-        {/* Newsletter Signup */}
-        <div className="bg-primary rounded-xl md:rounded-2xl p-5 md:p-8 lg:p-12 mt-10 md:mt-16">
+        {/* implement infolettre newsletter eventually */}
+        <div className="hidden bg-primary rounded-xl md:rounded-2xl p-5 md:p-8 lg:p-12 mt-10 md:mt-16">
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
             <div className="text-primary-foreground">
               <Mail className="w-8 h-8 md:w-12 md:h-12 mb-3 md:mb-4" />

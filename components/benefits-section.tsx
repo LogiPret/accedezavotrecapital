@@ -55,7 +55,7 @@ export default function BenefitsSection() {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="shrink-0 w-[280px] sm:w-[320px] md:w-auto snap-center bg-primary-foreground/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-5 md:p-8 border border-primary-foreground/20"
+              className="shrink-0 w-[280px] sm:w-[320px] md:w-auto snap-center bg-primary-foreground/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-5 md:p-8 border border-primary-foreground/20 flex flex-col"
             >
               <div className="text-4xl md:text-5xl font-bold text-primary-foreground/30 mb-3 md:mb-4">
                 0{index + 1}
@@ -66,7 +66,7 @@ export default function BenefitsSection() {
               <p className="text-sm md:text-base text-primary-foreground/80 mb-4 md:mb-6">
                 {benefit.description}
               </p>
-              <ul className="space-y-2 md:space-y-3">
+              <ul className="space-y-2 md:space-y-3 mt-auto">
                 {benefit.points.map((point, pointIndex) => (
                   <li
                     key={pointIndex}

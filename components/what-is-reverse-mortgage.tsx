@@ -90,6 +90,8 @@ export default function WhatIsReverseMortgage() {
   ];
 
   useEffect(() => {
+    let rafId: number;
+
     const calculateProgress = () => {
       if (!stepsContainerRef.current || window.innerWidth < 768) return;
 
@@ -97,7 +99,6 @@ export default function WhatIsReverseMortgage() {
       const circles = container.querySelectorAll("[data-step-circle]");
       if (circles.length === 0) return;
 
-      const containerRect = container.getBoundingClientRect();
       const activeCircle = circles[activeStep] as HTMLElement;
       if (!activeCircle) return;
 
@@ -109,9 +110,21 @@ export default function WhatIsReverseMortgage() {
       setProgressWidth(`${widthPx}px`);
     };
 
+    const handleResize = () => {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+      rafId = requestAnimationFrame(calculateProgress);
+    };
+
     calculateProgress();
-    window.addEventListener("resize", calculateProgress);
-    return () => window.removeEventListener("resize", calculateProgress);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
+    };
   }, [activeStep]);
 
   useEffect(() => {
@@ -234,7 +247,7 @@ export default function WhatIsReverseMortgage() {
 
             <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
               {/* Traditional - compact on mobile */}
-              <div className="relative bg-secondary/20 border border-border/50 rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 opacity-60">
+              <div className="relative bg-secondary/20 border border-border rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8">
                 <div className="relative">
                   <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
                     <div className="w-7 h-7 md:w-10 md:h-10 rounded-full bg-secondary/50 flex items-center justify-center">
@@ -249,28 +262,28 @@ export default function WhatIsReverseMortgage() {
 
                   <div className="flex items-center justify-center gap-1 sm:gap-2 md:gap-3 mb-3 md:mb-6 py-2 md:py-4">
                     <div className="text-center">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-secondary/50 flex items-center justify-center mb-1 md:mb-2">
-                        <span className="text-base sm:text-lg md:text-2xl opacity-50">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-secondary/80 flex items-center justify-center mb-1 md:mb-2">
+                        <span className="text-base sm:text-lg md:text-2xl">
                           👤
                         </span>
                       </div>
-                      <p className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground/70">
+                      <p className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground">
                         Vous
                       </p>
                     </div>
                     <div className="flex flex-col items-center px-1">
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-muted-foreground/50" />
-                      <span className="text-[8px] sm:text-[10px] text-muted-foreground/50 mt-0.5">
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-muted-foreground/80" />
+                      <span className="text-[8px] sm:text-[10px] text-muted-foreground/80 mt-0.5">
                         $$$/mois
                       </span>
                     </div>
                     <div className="text-center">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-secondary/50 flex items-center justify-center mb-1 md:mb-2">
-                        <span className="text-base sm:text-lg md:text-2xl opacity-50">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-secondary/80 flex items-center justify-center mb-1 md:mb-2">
+                        <span className="text-base sm:text-lg md:text-2xl">
                           🏦
                         </span>
                       </div>
-                      <p className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground/70">
+                      <p className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground">
                         Banque
                       </p>
                     </div>
@@ -278,20 +291,20 @@ export default function WhatIsReverseMortgage() {
 
                   <ul className="space-y-1.5 md:space-y-3">
                     <li className="flex items-start gap-1.5 md:gap-3">
-                      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/40 mt-1.5 md:mt-2 shrink-0" />
-                      <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/70">
+                      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 md:mt-2 shrink-0" />
+                      <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/80">
                         Paiements obligatoires
                       </span>
                     </li>
                     <li className="flex items-start gap-1.5 md:gap-3">
-                      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/40 mt-1.5 md:mt-2 shrink-0" />
-                      <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/70">
+                      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 md:mt-2 shrink-0" />
+                      <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/80">
                         Stress financier
                       </span>
                     </li>
                     <li className="hidden sm:flex items-start gap-1.5 md:gap-3">
-                      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/40 mt-1.5 md:mt-2 shrink-0" />
-                      <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/70">
+                      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 md:mt-2 shrink-0" />
+                      <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/80">
                         Qualification requise
                       </span>
                     </li>
@@ -387,14 +400,6 @@ export default function WhatIsReverseMortgage() {
                 </div>
               </div>
             </div>
-
-            <div className="mt-6 md:mt-8 text-center">
-              <p className="text-sm md:text-lg text-muted-foreground">
-                <span className="font-bold text-foreground">En résumé:</span>{" "}
-                Vous recevez de l'argent comptant, vous restez chez vous, et
-                vous ne remboursez rien tant que vous y vivez.
-              </p>
-            </div>
           </div>
         </div>
 
@@ -409,9 +414,14 @@ export default function WhatIsReverseMortgage() {
             {/* Progress line container - fixed position spanning full viewport */}
             <div className="absolute top-16 left-0 right-0 h-1 -mx-[50vw] ml-[calc(-50vw+50%)] mr-[calc(-50vw+50%)]">
               {/* Background line - full screen width */}
-              <div className="absolute inset-0 bg-secondary" />
               <div
-                className="absolute left-0 top-0 h-full bg-primary transition-all duration-500"
+                className={cn(
+                  "absolute inset-0 transition-colors duration-500",
+                  activeStep >= 3 ? "bg-primary" : "bg-secondary"
+                )}
+              />
+              <div
+                className="absolute left-0 top-0 h-full bg-primary transition-all duration-500 ease-out"
                 style={{ width: progressWidth }}
               />
             </div>
@@ -541,15 +551,6 @@ export default function WhatIsReverseMortgage() {
                   </p>
                 </div>
               ))}
-            </div>
-
-            <div className="mt-6 md:mt-10 text-center">
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 md:px-6 md:py-3">
-                <Shield className="w-4 h-4 md:w-5 md:h-5" />
-                <span className="text-xs md:text-sm font-medium">
-                  Garantie: Jamais plus que la valeur de votre maison
-                </span>
-              </div>
             </div>
           </div>
         </div>

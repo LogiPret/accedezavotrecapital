@@ -100,7 +100,7 @@ export default function CalculatorSection() {
     !hasSpouse || (spouseAge !== null && spouseAge >= 55);
 
   return (
-    <section id="calculatrice" className="py-16 md:py-20 lg:py-28 bg-secondary">
+    <section id="calculatrice" className="py-12 md:py-16 lg:py-20 bg-secondary">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6 text-balance">
@@ -113,8 +113,8 @@ export default function CalculatorSection() {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <Card className="shadow-xl border-0 overflow-hidden">
-            <CardHeader className="bg-primary text-primary-foreground rounded-t-lg p-4 md:p-6">
+          <Card className="shadow-xl border-0 overflow-hidden p-0">
+            <CardHeader className="bg-primary text-primary-foreground p-4 md:p-6">
               <div className="flex items-center gap-2 md:gap-3">
                 <Calculator className="w-6 h-6 md:w-8 md:h-8" />
                 <div>

@@ -145,7 +145,7 @@ export default function UseCases() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((current) => (current + 1) % useCases.length);
-    }, 5000);
+    }, 12000);
 
     return () => clearInterval(interval);
   }, [useCases.length, resetKey]);
@@ -175,10 +175,6 @@ export default function UseCases() {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
-          <div className="inline-flex items-center gap-2 bg-white/10 text-white px-3 py-1 rounded-full text-xs md:text-sm font-medium mb-3 md:mb-4">
-            <Sparkles className="w-3 h-3 md:w-4 md:h-4" />
-            Liberté financière
-          </div>
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4">
             Comment Utiliser <span className="text-sky-300">Vos Fonds?</span>
           </h2>
@@ -190,7 +186,7 @@ export default function UseCases() {
 
         <div className="relative max-w-6xl mx-auto">
           {/* Cards stack */}
-          <div className="relative min-h-[650px] sm:min-h-[680px] md:min-h-[700px] lg:min-h-[720px]">
+          <div className="relative min-h-[550px] sm:min-h-[680px] md:min-h-[700px] lg:min-h-[720px]">
             {useCases.map((useCase, index) => (
               <div
                 key={index}
@@ -218,11 +214,7 @@ export default function UseCases() {
                     {/* Main content area - grows to fill space */}
                     <div className="flex-1 max-w-xl lg:max-w-2xl">
                       {/* Counter badge */}
-                      <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-6">
-                        <div className="w-9 h-9 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
-                          <useCase.icon className="w-4 h-4 md:w-7 md:h-7 text-white" />
-                        </div>
-                        <div className="h-px w-4 md:w-8 bg-white/30" />
+                      <div className="mb-4 md:mb-6">
                         <span className="text-white/60 font-mono text-xs md:text-sm">
                           {String(index + 1).padStart(2, "0")} /{" "}
                           {String(useCases.length).padStart(2, "0")}

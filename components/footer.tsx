@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Linkedin, Youtube } from "lucide-react";
 
@@ -26,25 +28,11 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61581604235295"
                 className="w-10 h-10 bg-card/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-card/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 bg-card/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -56,6 +44,22 @@ export default function Footer() {
               <li>
                 <Link
                   href="#quest-ce-que"
+                  scroll={false}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const target = document.querySelector("#quest-ce-que");
+                    if (target) {
+                      const offset = 80;
+                      const elementPosition =
+                        target.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - offset;
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
                   Qu'est-ce qu'une Hypothèque Inversée?
@@ -64,6 +68,22 @@ export default function Footer() {
               <li>
                 <Link
                   href="#calculatrice"
+                  scroll={false}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const target = document.querySelector("#calculatrice");
+                    if (target) {
+                      const offset = 80;
+                      const elementPosition =
+                        target.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - offset;
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
                   Calculatrice d'Éligibilité
@@ -72,6 +92,22 @@ export default function Footer() {
               <li>
                 <Link
                   href="#avantages"
+                  scroll={false}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const target = document.querySelector("#avantages");
+                    if (target) {
+                      const offset = 80;
+                      const elementPosition =
+                        target.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - offset;
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
                   Avantages
@@ -79,15 +115,23 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="#faq"
-                  className="text-card/70 hover:text-card transition-colors text-sm"
-                >
-                  Questions Fréquentes
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="#ressources"
+                  scroll={false}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const target = document.querySelector("#ressources");
+                    if (target) {
+                      const offset = 80;
+                      const elementPosition =
+                        target.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - offset;
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
                   Ressources
@@ -96,57 +140,26 @@ export default function Footer() {
               <li>
                 <Link
                   href="#contact"
+                  scroll={false}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const target = document.querySelector("#contact");
+                    if (target) {
+                      const offset = 80;
+                      const elementPosition =
+                        target.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - offset;
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
                   Contactez-Nous
                 </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="font-bold text-lg mb-6">Nos Services</h4>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="#"
-                  className="text-card/70 hover:text-card transition-colors text-sm"
-                >
-                  Consultation Gratuite
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-card/70 hover:text-card transition-colors text-sm"
-                >
-                  Évaluation de Propriété
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-card/70 hover:text-card transition-colors text-sm"
-                >
-                  Comparaison des Options
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-card/70 hover:text-card transition-colors text-sm"
-                >
-                  Accompagnement Personnalisé
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-card/70 hover:text-card transition-colors text-sm"
-                >
-                  Suivi Post-Financement
-                </a>
               </li>
             </ul>
           </div>
@@ -158,26 +171,15 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-primary mt-0.5" />
                 <div>
-                  <p className="text-card font-medium">1-514-555-1234</p>
-                  <p className="text-card/70 text-xs">Appel gratuit</p>
+                  <p className="text-card font-medium">1-514-984-8182</p>
                 </div>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-primary mt-0.5" />
                 <div>
                   <p className="text-card font-medium">
-                    info@hypothequeinversee.qc
+                    info@accedezavotrecapital.ca
                   </p>
-                  <p className="text-card/70 text-xs">Réponse en 24h</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary mt-0.5" />
-                <div>
-                  <p className="text-card font-medium">
-                    1234 Rue Sainte-Catherine O.
-                  </p>
-                  <p className="text-card/70 text-xs">Montréal, QC H3B 1A1</p>
                 </div>
               </li>
             </ul>
@@ -191,31 +193,28 @@ export default function Footer() {
               © {currentYear} HypothèqueInversée.qc. Tous droits réservés.
             </p>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
-              <a
-                href="#"
+              <Link
+                href="/politique-de-confidentialite"
                 className="text-card/60 hover:text-card transition-colors"
               >
                 Politique de Confidentialité
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/conditions-dutilisation"
                 className="text-card/60 hover:text-card transition-colors"
               >
                 Conditions d'Utilisation
-              </a>
-              <a
-                href="#"
-                className="text-card/60 hover:text-card transition-colors"
-              >
-                Accessibilité
-              </a>
+              </Link>
             </div>
           </div>
           <p className="text-card/40 text-xs text-center mt-6">
-            Les informations présentées sur ce site sont à titre informatif
-            seulement et ne constituent pas un conseil financier. Veuillez
-            consulter un conseiller qualifié pour des recommandations
-            personnalisées.
+            Avis : Accédez à Votre Capital.ca est un courtier hypothécaire
+            inversé agréé au Québec, Canada. Les informations présentées sur ce
+            site sont fournies à titre informatif général et ne constituent pas
+            des conseils financiers, juridiques ou fiscaux. Les produits
+            d’hypothèque inversée sont soumis à l’approbation du prêteur et aux
+            critères d’admissibilité. Veuillez consulter un professionnel
+            qualifié avant de prendre toute décision financière.
           </p>
         </div>
       </div>
