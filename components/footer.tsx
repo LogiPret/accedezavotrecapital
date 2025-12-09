@@ -13,13 +13,11 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">
-                  HI
-                </span>
+              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                <img src="/logo.png" alt="logo" className="w-8 h-8" />
               </div>
-              <span className="font-serif font-bold text-lg text-card">
-                HypothèqueInversée<span className="text-primary">.qc</span>
+              <span className="font-bold text-lg text-card">
+                AccedezAVotreCapital<span className="text-primary">.ca</span>
               </span>
             </Link>
             <p className="text-card/70 text-sm mb-6">
@@ -190,7 +188,7 @@ export default function Footer() {
         <div className="border-t border-card/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-card/60 text-sm text-center md:text-left">
-              © {currentYear} HypothèqueInversée.qc. Tous droits réservés.
+              © {currentYear} Accedez à Votre Capital.ca. Tous droits réservés.
             </p>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <Link
