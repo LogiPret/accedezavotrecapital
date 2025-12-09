@@ -1,0 +1,27 @@
+fait moi un site web en francais pour un courtier hypothecaire qui veut mettre en valeur lhypotheque inverse au quebec. le but du site est de generer des clients a travers des formulaire / resources qui requieres des informations. 
+il faut que le site expliquer cest quoi lhypotheque inverse et pourquoi les gens devrais faire affaire avec ce courtier. 
+sur le site il faut au moin avoir, 
+- une calculatrice dhypotheque inverser
+- une section deroulante avec le logo des banques partenaires
+- un formulaire pour contacter le courtier
+- une section information avec des ressources
+soit creatif et ajoute des bloques qui vont aider a rendre le site complet
+
+voici une liste de ressource, que ce soit des pdf/word/site web dexemple.
+
+contenu a utiliser:
+documents excel, videos, pdf
+en: https://cloud.chipadvisor.heb.ca/partner-launchpad-resources-en
+fr: https://cloud.chipadvisor.heb.ca/partner-launchpad-resources-fr
+
+documents pdf qui explique comment ca marche / comprendrecomment le mettre sur le site.
+
+
+calculcatrice: https://www.equitablebank.ca/fr/resources/calculators/broker-eligibility-calculator
+inclure cette calculatrice dans le site sous forme de block
+input: age, province, ville, valeur maison
+
+rapport de lexemple
+
+exemple de site en anglais: https://retirebetter.ca/
+utiliser un layout similaire.

@@ -1,0 +1,405 @@
+"use client";
+
+import { useState, useMemo } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Calculator, Home, TrendingUp, Info, Users } from "lucide-react";
+
+const QUEBEC_CITIES = [
+  "Montréal",
+  "Québec",
+  "Laval",
+  "Gatineau",
+  "Longueuil",
+  "Sherbrooke",
+  "Saguenay",
+  "Lévis",
+  "Trois-Rivières",
+  "Terrebonne",
+  "Saint-Jean-sur-Richelieu",
+  "Repentigny",
+  "Brossard",
+  "Drummondville",
+  "Saint-Jérôme",
+  "Granby",
+  "Blainville",
+  "Saint-Hyacinthe",
+  "Autre",
+];
+
+export default function CalculatorSection() {
+  const [age, setAge] = useState(65);
+  const [spouseAge, setSpouseAge] = useState<number | null>(null);
+  const [hasSpouse, setHasSpouse] = useState(false);
+  const [province] = useState("Québec");
+  const [city, setCity] = useState("");
+  const [homeValue, setHomeValue] = useState(500000);
+  const [showResults, setShowResults] = useState(false);
+
+  const eligibility = useMemo(() => {
+    const effectiveAge =
+      hasSpouse && spouseAge ? Math.min(age, spouseAge) : age;
+
+    if (effectiveAge < 55) return null;
+
+    let basePercentage = 0.2;
+    if (effectiveAge >= 55) basePercentage = 0.2;
+    if (effectiveAge >= 60) basePercentage = 0.3;
+    if (effectiveAge >= 65) basePercentage = 0.38;
+    if (effectiveAge >= 70) basePercentage = 0.45;
+    if (effectiveAge >= 75) basePercentage = 0.5;
+    if (effectiveAge >= 80) basePercentage = 0.55;
+    if (effectiveAge >= 85) basePercentage = 0.59;
+
+    const maxAmount = Math.round(homeValue * basePercentage);
+    const minAmount = Math.round(maxAmount * 0.75);
+
+    return {
+      minAmount,
+      maxAmount,
+      percentage: Math.round(basePercentage * 100),
+      effectiveAge,
+    };
+  }, [age, spouseAge, hasSpouse, homeValue]);
+
+  const handleCalculate = () => {
+    if (age >= 55 && city && homeValue >= 100000) {
+      if (hasSpouse && spouseAge && spouseAge < 55) {
+        return;
+      }
+      setShowResults(true);
+    }
+  };
+
+  const formatCurrency = (value: number) => {
+    return new Intl.NumberFormat("fr-CA", {
+      style: "currency",
+      currency: "CAD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(value);
+  };
+
+  const isSpouseAgeValid =
+    !hasSpouse || (spouseAge !== null && spouseAge >= 55);
+
+  return (
+    <section id="calculatrice" className="py-16 md:py-20 lg:py-28 bg-secondary">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6 text-balance">
+            Calculatrice d'Éligibilité
+          </h2>
+          <p className="text-sm md:text-lg text-muted-foreground">
+            Découvrez combien vous pourriez obtenir avec une hypothèque
+            inversée. Cette estimation est gratuite et sans engagement.
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          <Card className="shadow-xl border-0 overflow-hidden">
+            <CardHeader className="bg-primary text-primary-foreground rounded-t-lg p-4 md:p-6">
+              <div className="flex items-center gap-2 md:gap-3">
+                <Calculator className="w-6 h-6 md:w-8 md:h-8" />
+                <div>
+                  <CardTitle className="text-lg md:text-2xl">
+                    Calculez Votre Montant
+                  </CardTitle>
+                  <CardDescription className="text-primary-foreground/80 text-xs md:text-sm">
+                    Entrez vos informations pour obtenir une estimation
+                    instantanée
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-4 md:p-6 lg:p-8">
+              <div className="grid lg:grid-cols-2 gap-6 md:gap-8">
+                {/* Input Section */}
+                <div className="space-y-5 md:space-y-6">
+                  {/* Age */}
+                  <div className="space-y-2 md:space-y-3">
+                    <div className="flex justify-between items-center">
+                      <Label
+                        htmlFor="age"
+                        className="text-sm md:text-base font-medium"
+                      >
+                        Votre Âge
+                      </Label>
+                      <span className="text-xl md:text-2xl font-bold text-primary">
+                        {age} ans
+                      </span>
+                    </div>
+                    <Slider
+                      id="age"
+                      min={50}
+                      max={95}
+                      step={1}
+                      value={[age]}
+                      onValueChange={(value) => {
+                        setAge(value[0]);
+                        setShowResults(false);
+                      }}
+                      className="w-full"
+                    />
+                    {age < 55 && (
+                      <p className="text-xs md:text-sm text-destructive">
+                        L'âge minimum requis est de 55 ans.
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Spouse Section */}
+                  <div className="space-y-2 md:space-y-3">
+                    <div className="flex items-center gap-2 md:gap-3">
+                      <input
+                        type="checkbox"
+                        id="hasSpouse"
+                        checked={hasSpouse}
+                        onChange={(e) => {
+                          setHasSpouse(e.target.checked);
+                          if (!e.target.checked) setSpouseAge(null);
+                          setShowResults(false);
+                        }}
+                        className="w-4 h-4 rounded border-border"
+                      />
+                      <Label
+                        htmlFor="hasSpouse"
+                        className="text-sm md:text-base font-medium flex items-center gap-2"
+                      >
+                        <Users className="w-4 h-4" />
+                        J'ai un(e) conjoint(e) copropriétaire
+                      </Label>
+                    </div>
+
+                    {hasSpouse && (
+                      <div className="pl-6 md:pl-7 space-y-2 md:space-y-3">
+                        <div className="flex justify-between items-center">
+                          <Label
+                            htmlFor="spouseAge"
+                            className="text-xs md:text-sm"
+                          >
+                            Âge du/de la conjoint(e)
+                          </Label>
+                          <span className="text-base md:text-lg font-bold text-primary">
+                            {spouseAge || 55} ans
+                          </span>
+                        </div>
+                        <Slider
+                          id="spouseAge"
+                          min={50}
+                          max={95}
+                          step={1}
+                          value={[spouseAge || 55]}
+                          onValueChange={(value) => {
+                            setSpouseAge(value[0]);
+                            setShowResults(false);
+                          }}
+                          className="w-full"
+                        />
+                        {spouseAge !== null && spouseAge < 55 && (
+                          <p className="text-xs md:text-sm text-destructive">
+                            Les deux conjoints doivent avoir 55 ans ou plus.
+                          </p>
+                        )}
+                        <p className="text-[10px] md:text-xs text-muted-foreground flex items-start gap-1">
+                          <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
+                          Le calcul est basé sur l'âge du plus jeune emprunteur.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Province & City - side by side on mobile */}
+                  <div className="grid grid-cols-2 gap-3 md:gap-4">
+                    <div className="space-y-1 md:space-y-2">
+                      <Label
+                        htmlFor="province"
+                        className="text-sm md:text-base font-medium"
+                      >
+                        Province
+                      </Label>
+                      <Input
+                        id="province"
+                        value={province}
+                        disabled
+                        className="bg-muted text-sm"
+                      />
+                    </div>
+                    <div className="space-y-1 md:space-y-2">
+                      <Label
+                        htmlFor="city"
+                        className="text-sm md:text-base font-medium"
+                      >
+                        Ville
+                      </Label>
+                      <Select
+                        value={city}
+                        onValueChange={(value) => {
+                          setCity(value);
+                          setShowResults(false);
+                        }}
+                      >
+                        <SelectTrigger id="city" className="text-sm">
+                          <SelectValue placeholder="Sélectionnez" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {QUEBEC_CITIES.map((cityName) => (
+                            <SelectItem key={cityName} value={cityName}>
+                              {cityName}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  {/* Home Value */}
+                  <div className="space-y-2 md:space-y-3">
+                    <div className="flex justify-between items-center">
+                      <Label
+                        htmlFor="homeValue"
+                        className="text-sm md:text-base font-medium"
+                      >
+                        Valeur de Votre Propriété
+                      </Label>
+                      <span className="text-lg md:text-xl font-bold text-primary">
+                        {formatCurrency(homeValue)}
+                      </span>
+                    </div>
+                    <Slider
+                      id="homeValue"
+                      min={100000}
+                      max={3000000}
+                      step={25000}
+                      value={[homeValue]}
+                      onValueChange={(value) => {
+                        setHomeValue(value[0]);
+                        setShowResults(false);
+                      }}
+                      className="w-full"
+                    />
+                    <div className="flex justify-between text-[10px] md:text-xs text-muted-foreground">
+                      <span>100 000 $</span>
+                      <span>3 000 000 $</span>
+                    </div>
+                  </div>
+
+                  <Button
+                    onClick={handleCalculate}
+                    disabled={age < 55 || !city || !isSpouseAgeValid}
+                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                    size="lg"
+                  >
+                    Calculer Mon Éligibilité
+                  </Button>
+                </div>
+
+                {/* Results Section */}
+                <div
+                  className={`space-y-4 md:space-y-6 ${!showResults && "opacity-50"}`}
+                >
+                  <div className="bg-secondary rounded-xl p-4 md:p-6 border border-border">
+                    <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                      <Home className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                      <h3 className="font-bold text-base md:text-lg">
+                        Votre Éligibilité Estimée
+                      </h3>
+                    </div>
+
+                    {showResults && eligibility ? (
+                      <>
+                        <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
+                          Basé sur vos informations, vous pourriez être éligible
+                          à recevoir jusqu'à:
+                        </p>
+                        <div className="text-center py-4 md:py-6 bg-background rounded-lg mb-3 md:mb-4">
+                          <p className="text-xs md:text-sm text-muted-foreground mb-1">
+                            Montant Estimé Maximum
+                          </p>
+                          <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary">
+                            {formatCurrency(eligibility.maxAmount)}
+                          </p>
+                          <p className="text-xs md:text-sm text-muted-foreground mt-2">
+                            Soit environ {eligibility.percentage}% de la valeur
+                            de votre propriété
+                          </p>
+                          {hasSpouse && (
+                            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
+                              (Basé sur l'âge de {eligibility.effectiveAge} ans)
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-2 md:gap-3 p-3 md:p-4 bg-accent/10 rounded-lg mb-3 md:mb-4">
+                          <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
+                          <p className="text-xs md:text-sm">
+                            <strong>Fourchette:</strong>{" "}
+                            {formatCurrency(eligibility.minAmount)} -{" "}
+                            {formatCurrency(eligibility.maxAmount)}
+                          </p>
+                        </div>
+
+                        <div className="p-3 md:p-4 bg-primary/5 rounded-lg border border-primary/10">
+                          <p className="text-[10px] md:text-xs text-muted-foreground flex items-start gap-2">
+                            <Info className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 mt-0.5 text-primary" />
+                            <span>
+                              Le montant final dépend de plusieurs facteurs:
+                              votre âge, l'emplacement et le type de propriété,
+                              ainsi que l'évaluation officielle de votre
+                              résidence.
+                            </span>
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="text-center py-8 md:py-12">
+                        <Calculator className="w-12 h-12 md:w-16 md:h-16 text-muted-foreground/30 mx-auto mb-3 md:mb-4" />
+                        <p className="text-sm md:text-base text-muted-foreground">
+                          Entrez vos informations et cliquez sur "Calculer" pour
+                          voir votre estimation.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  {showResults && (
+                    <div className="space-y-3 md:space-y-4">
+                      <Button
+                        variant="outline"
+                        className="w-full bg-transparent"
+                        asChild
+                      >
+                        <a href="#contact">
+                          Obtenir une Évaluation Personnalisée
+                        </a>
+                      </Button>
+                      <p className="text-[10px] md:text-xs text-center text-muted-foreground">
+                        * Cette estimation est fournie à titre indicatif
+                        seulement.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </section>
+  );
+}

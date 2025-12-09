@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.*
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Public assets
+public/
+
+# IDE
+.vscode/
+.idea/
+
+# Other
+coverage/
+*.log
