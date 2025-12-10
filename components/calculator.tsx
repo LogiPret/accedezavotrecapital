@@ -20,6 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Calculator, Home, TrendingUp, Info, Users } from "lucide-react";
+import { useLocale } from "@/lib/locale-context";
 
 const QUEBEC_CITIES = [
   "Montréal",
@@ -44,6 +45,7 @@ const QUEBEC_CITIES = [
 ];
 
 export default function CalculatorSection() {
+  const { t, locale } = useLocale();
   const [age, setAge] = useState(65);
   const [spouseAge, setSpouseAge] = useState<number | null>(null);
   const [hasSpouse, setHasSpouse] = useState(false);
@@ -104,11 +106,10 @@ export default function CalculatorSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6 text-balance">
-            Calculatrice d'Éligibilité
+            {t.calculator.title}
           </h2>
           <p className="text-sm md:text-lg text-muted-foreground">
-            Découvrez combien vous pourriez obtenir avec une hypothèque
-            inversée. Cette estimation est gratuite et sans engagement.
+            {t.calculator.subtitle}
           </p>
         </div>
 
@@ -119,11 +120,10 @@ export default function CalculatorSection() {
                 <Calculator className="w-6 h-6 md:w-8 md:h-8" />
                 <div>
                   <CardTitle className="text-lg md:text-2xl">
-                    Calculez Votre Montant
+                    {t.calculator.cardTitle}
                   </CardTitle>
                   <CardDescription className="text-primary-foreground/80 text-xs md:text-sm">
-                    Entrez vos informations pour obtenir une estimation
-                    instantanée
+                    {t.calculator.cardSubtitle}
                   </CardDescription>
                 </div>
               </div>
@@ -139,10 +139,10 @@ export default function CalculatorSection() {
                         htmlFor="age"
                         className="text-sm md:text-base font-medium"
                       >
-                        Votre Âge
+                        {t.calculator.ageLabel}
                       </Label>
                       <span className="text-xl md:text-2xl font-bold text-primary">
-                        {age} ans
+                        {age} {t.calculator.years}
                       </span>
                     </div>
                     <Slider
@@ -159,7 +159,7 @@ export default function CalculatorSection() {
                     />
                     {age < 55 && (
                       <p className="text-xs md:text-sm text-destructive">
-                        L'âge minimum requis est de 55 ans.
+                        {t.calculator.minAgeError}
                       </p>
                     )}
                   </div>
@@ -183,7 +183,7 @@ export default function CalculatorSection() {
                         className="text-sm md:text-base font-medium flex items-center gap-2"
                       >
                         <Users className="w-4 h-4" />
-                        J'ai un(e) conjoint(e) copropriétaire
+                        {t.calculator.hasSpouse}
                       </Label>
                     </div>
 
@@ -194,10 +194,10 @@ export default function CalculatorSection() {
                             htmlFor="spouseAge"
                             className="text-xs md:text-sm"
                           >
-                            Âge du/de la conjoint(e)
+                            {t.calculator.spouseAge}
                           </Label>
                           <span className="text-base md:text-lg font-bold text-primary">
-                            {spouseAge || 55} ans
+                            {spouseAge || 55} {t.calculator.years}
                           </span>
                         </div>
                         <Slider
@@ -214,12 +214,12 @@ export default function CalculatorSection() {
                         />
                         {spouseAge !== null && spouseAge < 55 && (
                           <p className="text-xs md:text-sm text-destructive">
-                            Les deux conjoints doivent avoir 55 ans ou plus.
+                            {t.calculator.spouseMinAgeError}
                           </p>
                         )}
                         <p className="text-[10px] md:text-xs text-muted-foreground flex items-start gap-1">
                           <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
-                          Le calcul est basé sur l'âge du plus jeune emprunteur.
+                          {t.calculator.spouseAgeNote}
                         </p>
                       </div>
                     )}
@@ -246,7 +246,7 @@ export default function CalculatorSection() {
                         htmlFor="city"
                         className="text-sm md:text-base font-medium"
                       >
-                        Ville
+                        {t.calculator.cityLabel}
                       </Label>
                       <Select
                         value={city}
@@ -256,7 +256,9 @@ export default function CalculatorSection() {
                         }}
                       >
                         <SelectTrigger id="city" className="text-sm">
-                          <SelectValue placeholder="Sélectionnez" />
+                          <SelectValue
+                            placeholder={t.calculator.cityPlaceholder}
+                          />
                         </SelectTrigger>
                         <SelectContent>
                           {QUEBEC_CITIES.map((cityName) => (
@@ -276,7 +278,7 @@ export default function CalculatorSection() {
                         htmlFor="homeValue"
                         className="text-sm md:text-base font-medium"
                       >
-                        Valeur de Votre Propriété
+                        {t.calculator.homeValueLabel}
                       </Label>
                       <span className="text-lg md:text-xl font-bold text-primary">
                         {formatCurrency(homeValue)}
@@ -306,7 +308,7 @@ export default function CalculatorSection() {
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                     size="lg"
                   >
-                    Calculer Mon Éligibilité
+                    {t.calculator.calculateButton}
                   </Button>
                 </div>
 
@@ -318,7 +320,7 @@ export default function CalculatorSection() {
                     <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
                       <Home className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                       <h3 className="font-bold text-base md:text-lg">
-                        Votre Éligibilité Estimée
+                        {t.calculator.resultsTitle}
                       </h3>
                     </div>
 
@@ -330,25 +332,28 @@ export default function CalculatorSection() {
                         </p>
                         <div className="text-center py-4 md:py-6 bg-background rounded-lg mb-3 md:mb-4">
                           <p className="text-xs md:text-sm text-muted-foreground mb-1">
-                            Montant Estimé Maximum
+                            {t.calculator.maxEstimated}
                           </p>
                           <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary">
                             {formatCurrency(eligibility.maxAmount)}
                           </p>
                           <p className="text-xs md:text-sm text-muted-foreground mt-2">
-                            Soit environ {eligibility.percentage}% de la valeur
-                            de votre propriété
+                            {locale === "en"
+                              ? `Approximately ${eligibility.percentage}% of your property value`
+                              : `Soit environ ${eligibility.percentage}% de la valeur de votre propriété`}
                           </p>
                           {hasSpouse && (
                             <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
-                              (Basé sur l'âge de {eligibility.effectiveAge} ans)
+                              {locale === "en"
+                                ? `(Based on age of ${eligibility.effectiveAge} years)`
+                                : `(Basé sur l'âge de ${eligibility.effectiveAge} ans)`}
                             </p>
                           )}
                         </div>
                         <div className="flex items-center gap-2 md:gap-3 p-3 md:p-4 bg-accent/10 rounded-lg mb-3 md:mb-4">
                           <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
                           <p className="text-xs md:text-sm">
-                            <strong>Fourchette:</strong>{" "}
+                            <strong>{t.calculator.range}:</strong>{" "}
                             {formatCurrency(eligibility.minAmount)} -{" "}
                             {formatCurrency(eligibility.maxAmount)}
                           </p>
@@ -357,12 +362,7 @@ export default function CalculatorSection() {
                         <div className="p-3 md:p-4 bg-primary/5 rounded-lg border border-primary/10">
                           <p className="text-[10px] md:text-xs text-muted-foreground flex items-start gap-2">
                             <Info className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 mt-0.5 text-primary" />
-                            <span>
-                              Le montant final dépend de plusieurs facteurs:
-                              votre âge, l'emplacement et le type de propriété,
-                              ainsi que l'évaluation officielle de votre
-                              résidence.
-                            </span>
+                            <span>{t.calculator.factorsInfo}</span>
                           </p>
                         </div>
                       </>
@@ -370,8 +370,7 @@ export default function CalculatorSection() {
                       <div className="text-center py-8 md:py-12">
                         <Calculator className="w-12 h-12 md:w-16 md:h-16 text-muted-foreground/30 mx-auto mb-3 md:mb-4" />
                         <p className="text-sm md:text-base text-muted-foreground">
-                          Entrez vos informations et cliquez sur "Calculer" pour
-                          voir votre estimation.
+                          {t.calculator.fillForm}
                         </p>
                       </div>
                     )}
@@ -384,13 +383,10 @@ export default function CalculatorSection() {
                         className="w-full bg-transparent"
                         asChild
                       >
-                        <a href="#contact">
-                          Obtenir une Évaluation Personnalisée
-                        </a>
+                        <a href="#contact">{t.calculator.getPersonalized}</a>
                       </Button>
                       <p className="text-[10px] md:text-xs text-center text-muted-foreground">
-                        * Cette estimation est fournie à titre indicatif
-                        seulement.
+                        {t.calculator.disclaimer}
                       </p>
                     </div>
                   )}

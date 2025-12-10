@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
+import { useLocale } from "@/lib/locale-context";
 
 export default function Header() {
+  const { t, locale } = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -17,12 +19,14 @@ export default function Header() {
   }, []);
 
   const navItems = [
-    { label: "Hypothèque Inversée", href: "#quest-ce-que" },
-    { label: "Calculatrice", href: "#calculatrice" },
-    { label: "Avantages", href: "#avantages" },
-    { label: "Ressources", href: "#ressources" },
-    { label: "Contact", href: "#contact" },
+    { label: t.nav.whatIs, href: "#quest-ce-que" },
+    { label: t.nav.calculator, href: "#calculatrice" },
+    { label: t.nav.benefits, href: "#avantages" },
+    { label: t.nav.contact, href: "#contact" },
   ];
+
+  const siteName =
+    locale === "en" ? "Access Home Equity" : "Accédez à votre capital";
 
   return (
     <header
@@ -41,7 +45,7 @@ export default function Header() {
                 <img src="/logo.png" alt="logo" />
               </div>
               <span className="font-semibold text-xl text-foreground">
-                Accédez à votre capital
+                {siteName}
               </span>
             </Link>
           )}
@@ -115,7 +119,7 @@ export default function Header() {
                   }
                 }}
               >
-                Consultation Gratuite
+                {t.nav.consultation}
               </Link>
             </Button>
           </div>

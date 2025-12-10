@@ -1,37 +1,46 @@
+"use client";
+
 import { CheckCircle2 } from "lucide-react";
+import { useLocale } from "@/lib/locale-context";
 
 export default function BenefitsSection() {
+  const { t } = useLocale();
+
   const benefits = [
     {
-      title: "Souplesse Financière",
-      description:
-        "Recevez vos fonds en un versement forfaitaire, en avances récurrentes, ou une combinaison des deux selon vos besoins.",
+      title: t.benefits.benefit1Title,
+      description: t.benefits.benefit1Desc,
       points: [
-        "Montant forfaitaire unique",
-        "Avances mensuelles programmées",
-        "Réserve disponible pour plus tard",
+        t.benefits.benefit1Point1,
+        t.benefits.benefit1Point2,
+        t.benefits.benefit1Point3,
       ],
     },
     {
-      title: "Processus Simplifié",
-      description:
-        "Contrairement aux prêts traditionnels, l'hypothèque inversée s'adresse spécifiquement aux retraités avec des critères adaptés.",
+      title: t.benefits.benefit2Title,
+      description: t.benefits.benefit2Desc,
       points: [
-        "Pas de vérification de revenus stricte",
-        "Pas de revérification de crédit continue",
-        "Processus rapide et transparent",
+        t.benefits.benefit2Point1,
+        t.benefits.benefit2Point2,
+        t.benefits.benefit2Point3,
       ],
     },
     {
-      title: "Protection Garantie",
-      description:
-        "Le gouvernement fédéral exige que tous les prêts hypothécaires inversés soient assortis d'une garantie de valeur nette négative.",
+      title: t.benefits.benefit3Title,
+      description: t.benefits.benefit3Desc,
       points: [
-        "Jamais plus que la valeur de la maison",
-        "Vos héritiers ne seront jamais endettés",
-        "Votre patrimoine est protégé",
+        t.benefits.benefit3Point1,
+        t.benefits.benefit3Point2,
+        t.benefits.benefit3Point3,
       ],
     },
+  ];
+
+  const stats = [
+    { value: t.benefits.stat1Value, label: t.benefits.stat1Label },
+    { value: t.benefits.stat2Value, label: t.benefits.stat2Label },
+    { value: t.benefits.stat3Value, label: t.benefits.stat3Label },
+    { value: t.benefits.stat4Value, label: t.benefits.stat4Label },
   ];
 
   return (
@@ -42,12 +51,10 @@ export default function BenefitsSection() {
       <div className="container mx-auto px-4">
         <div className="text-center max-w-3xl mx-auto mb-10 md:mb-16">
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-balance">
-            Pourquoi Choisir l'Hypothèque Inversée?
+            {t.benefits.title}
           </h2>
           <p className="text-sm md:text-lg text-primary-foreground/80">
-            Découvrez les avantages qui font de l'hypothèque inversée une
-            solution financière privilégiée par des milliers de Canadiens
-            retraités.
+            {t.benefits.subtitle}
           </p>
         </div>
 
@@ -82,38 +89,16 @@ export default function BenefitsSection() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-10 md:mt-16 pt-8 md:pt-16 border-t border-primary-foreground/20">
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2">
-              59%
+          {stats.map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2">
+                {stat.value}
+              </div>
+              <p className="text-[10px] sm:text-xs md:text-sm text-primary-foreground/70">
+                {stat.label}
+              </p>
             </div>
-            <p className="text-[10px] sm:text-xs md:text-sm text-primary-foreground/70">
-              Valeur maximale accessible
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2">
-              55+
-            </div>
-            <p className="text-[10px] sm:text-xs md:text-sm text-primary-foreground/70">
-              Âge minimum requis
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2">
-              0$
-            </div>
-            <p className="text-[10px] sm:text-xs md:text-sm text-primary-foreground/70">
-              Paiements mensuels
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2">
-              99%
-            </div>
-            <p className="text-[10px] sm:text-xs md:text-sm text-primary-foreground/70">
-              Ont de l'équité restante
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </section>

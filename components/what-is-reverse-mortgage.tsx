@@ -11,8 +11,10 @@ import {
   Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/lib/locale-context";
 
 export default function WhatIsReverseMortgage() {
+  const { t } = useLocale();
   const [activeStep, setActiveStep] = useState(0);
   const [mobileActiveStep, setMobileActiveStep] = useState(0);
   const [progressWidth, setProgressWidth] = useState("0%");
@@ -20,73 +22,65 @@ export default function WhatIsReverseMortgage() {
   const stepsContainerRef = useRef<HTMLDivElement>(null);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
 
-  // ... existing code for features, processSteps, repaymentTriggers arrays ...
+  // Features, processSteps, repaymentTriggers now use translations
 
   const features = [
     {
       icon: Home,
-      title: "Restez Chez Vous",
-      description:
-        "Conservez la propriété et le droit de vivre dans votre maison aussi longtemps que vous le souhaitez. Votre nom reste sur le titre de propriété.",
-      detail: "Vous gardez 100% du contrôle de votre maison",
+      title: t.whatIs.feature1Title,
+      description: t.whatIs.feature1Desc,
+      detail: t.whatIs.feature1Detail,
     },
     {
       icon: DollarSign,
-      title: "Argent Libre d'Impôt",
-      description:
-        "Les fonds reçus ne sont pas considérés comme un revenu imposable et n'affectent pas vos prestations gouvernementales comme la PSV ou le SRG.",
-      detail: "Aucun impact sur vos prestations",
+      title: t.whatIs.feature2Title,
+      description: t.whatIs.feature2Desc,
+      detail: t.whatIs.feature2Detail,
     },
     {
       icon: Clock,
-      title: "Aucun Paiement Mensuel",
-      description:
-        "Contrairement à une hypothèque traditionnelle, vous n'avez aucun paiement à effectuer jusqu'à la vente de la propriété.",
-      detail: "Zéro paiement requis",
+      title: t.whatIs.feature3Title,
+      description: t.whatIs.feature3Desc,
+      detail: t.whatIs.feature3Detail,
     },
     {
       icon: Shield,
-      title: "Garantie de Protection",
-      description:
-        "Vous ne devrez jamais plus que la valeur de votre maison grâce à la garantie de valeur nette négative.",
-      detail: "Protection garantie par la loi",
+      title: t.whatIs.feature4Title,
+      description: t.whatIs.feature4Desc,
+      detail: t.whatIs.feature4Detail,
     },
   ];
 
   const processSteps = [
     {
-      number: "01",
-      title: "Évaluation",
-      description:
-        "Nous évaluons votre admissibilité basée sur votre âge (55+), la valeur de votre propriété et votre emplacement.",
+      number: t.whatIs.step1Num,
+      title: t.whatIs.step1Title,
+      description: t.whatIs.step1Desc,
     },
     {
-      number: "02",
-      title: "Consultation",
-      description:
-        "Un conseiller vous explique toutes les options et répond à vos questions. Vous recevez une estimation personnalisée.",
+      number: t.whatIs.step2Num,
+      title: t.whatIs.step2Title,
+      description: t.whatIs.step2Desc,
     },
     {
-      number: "03",
-      title: "Approbation",
-      description:
-        "Votre demande est soumise à nos partenaires bancaires. Processus rapide avec réponse en quelques jours.",
+      number: t.whatIs.step3Num,
+      title: t.whatIs.step3Title,
+      description: t.whatIs.step3Desc,
     },
     {
-      number: "04",
-      title: "Financement",
-      description:
-        "Les fonds sont déposés directement dans votre compte. Montant forfaitaire ou versements, c'est votre choix.",
+      number: t.whatIs.step4Num,
+      title: t.whatIs.step4Title,
+      description: t.whatIs.step4Desc,
     },
   ];
 
   const repaymentTriggers = [
-    { text: "Vous vendez ou transférez la propriété", icon: Home },
+    { text: t.whatIs.repaymentTrigger1, icon: Home },
     {
-      text: "Vous déménagez dans un foyer de soins de longue durée",
+      text: t.whatIs.repaymentTrigger2,
       icon: ArrowRight,
     },
-    { text: "Au décès du dernier emprunteur", icon: Shield },
+    { text: t.whatIs.repaymentTrigger3, icon: Shield },
   ];
 
   useEffect(() => {
@@ -218,31 +212,24 @@ export default function WhatIsReverseMortgage() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 md:mb-16">
           <span className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-primary/10 text-primary rounded-full text-xs md:text-sm font-medium mb-3 md:mb-4">
-            Comprendre l'hypothèque inversée
+            {t.whatIs.badge}
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 text-balance">
-            Qu'est-ce qu'une{" "}
-            <span className="text-primary">Hypothèque Inversée</span>?
+            {t.whatIs.title}{" "}
+            <span className="text-primary">{t.whatIs.titleHighlight}</span>?
           </h2>
           <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Un prêt garanti par la valeur nette de votre résidence qui permet
-            aux propriétaires canadiens de
-            <strong className="text-foreground"> 55 ans et plus </strong>
-            d'accéder jusqu'à{" "}
-            <strong className="text-primary">59% de la valeur</strong> de leur
-            maison en argent comptant.
+            {t.whatIs.subtitle}
           </p>
         </div>
 
         <div className="max-w-5xl mx-auto mb-16 md:mb-20">
           <div className="bg-card border border-border rounded-2xl p-4 sm:p-6 md:p-8 lg:p-12">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-2 md:mb-4">
-              Comment ça fonctionne?
+              {t.whatIs.howItWorks}
             </h3>
             <p className="text-sm md:text-base text-muted-foreground text-center mb-6 md:mb-10 max-w-2xl mx-auto">
-              Contrairement à une hypothèque traditionnelle, l'hypothèque
-              inversée vous permet de recevoir de l'argent sans jamais effectuer
-              de paiement.
+              {t.whatIs.howItWorksSubtitle}
             </p>
 
             <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
@@ -256,7 +243,7 @@ export default function WhatIsReverseMortgage() {
                       </span>
                     </div>
                     <h4 className="text-xs sm:text-sm md:text-lg font-semibold text-muted-foreground">
-                      Traditionnelle
+                      {t.whatIs.traditional}
                     </h4>
                   </div>
 
@@ -268,13 +255,13 @@ export default function WhatIsReverseMortgage() {
                         </span>
                       </div>
                       <p className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground">
-                        Vous
+                        {t.whatIs.you}
                       </p>
                     </div>
                     <div className="flex flex-col items-center px-1">
                       <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-muted-foreground/80" />
                       <span className="text-[8px] sm:text-[10px] text-muted-foreground/80 mt-0.5">
-                        $$$/mois
+                        {t.whatIs.monthlyPayments}
                       </span>
                     </div>
                     <div className="text-center">
@@ -284,7 +271,7 @@ export default function WhatIsReverseMortgage() {
                         </span>
                       </div>
                       <p className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground">
-                        Banque
+                        {t.whatIs.bank}
                       </p>
                     </div>
                   </div>
@@ -293,25 +280,25 @@ export default function WhatIsReverseMortgage() {
                     <li className="flex items-start gap-1.5 md:gap-3">
                       <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 md:mt-2 shrink-0" />
                       <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/80">
-                        Paiements obligatoires
+                        {t.whatIs.traditionalPoint1}
                       </span>
                     </li>
                     <li className="flex items-start gap-1.5 md:gap-3">
                       <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 md:mt-2 shrink-0" />
                       <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/80">
-                        Stress financier
+                        {t.whatIs.traditionalPoint2}
                       </span>
                     </li>
                     <li className="hidden sm:flex items-start gap-1.5 md:gap-3">
                       <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 md:mt-2 shrink-0" />
                       <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/80">
-                        Qualification requise
+                        {t.whatIs.traditionalPoint3}
                       </span>
                     </li>
                     <li className="hidden md:flex items-start gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40 mt-2 shrink-0" />
                       <span className="text-sm text-muted-foreground/70">
-                        Risque de défaut
+                        {t.whatIs.traditionalPoint4}
                       </span>
                     </li>
                   </ul>
@@ -322,7 +309,7 @@ export default function WhatIsReverseMortgage() {
               <div className="relative bg-primary/10 border-2 border-primary rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 shadow-xl shadow-primary/20">
                 <div className="absolute -top-2.5 md:-top-4 left-1/2 -translate-x-1/2">
                   <div className="bg-primary text-primary-foreground px-2 py-0.5 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-sm font-bold shadow-lg whitespace-nowrap">
-                    Pour 55+
+                    {t.whatIs.forPlus55}
                   </div>
                 </div>
 
@@ -332,7 +319,7 @@ export default function WhatIsReverseMortgage() {
                       <Check className="w-3 h-3 md:w-5 md:h-5 text-primary-foreground" />
                     </div>
                     <h4 className="text-xs sm:text-sm md:text-lg font-bold text-foreground">
-                      Inversée
+                      {t.whatIs.reverse}
                     </h4>
                   </div>
 
@@ -344,7 +331,7 @@ export default function WhatIsReverseMortgage() {
                         </span>
                       </div>
                       <p className="text-[8px] sm:text-[10px] md:text-xs font-medium text-primary">
-                        Vous
+                        {t.whatIs.you}
                       </p>
                     </div>
                     <div className="flex flex-col items-center px-1">
@@ -360,7 +347,7 @@ export default function WhatIsReverseMortgage() {
                         </span>
                       </div>
                       <p className="text-[8px] sm:text-[10px] md:text-xs font-medium text-primary">
-                        Banque
+                        {t.whatIs.bank}
                       </p>
                     </div>
                   </div>
@@ -369,32 +356,32 @@ export default function WhatIsReverseMortgage() {
                     <li className="flex items-start gap-1.5 md:gap-3">
                       <CheckCircle2 className="w-3.5 h-3.5 md:w-5 md:h-5 text-primary mt-0.5 shrink-0" />
                       <span className="text-[10px] sm:text-xs md:text-sm font-medium text-foreground">
-                        Aucun paiement
+                        {t.whatIs.reversePoint1}
                       </span>
                     </li>
                     <li className="flex items-start gap-1.5 md:gap-3">
                       <CheckCircle2 className="w-3.5 h-3.5 md:w-5 md:h-5 text-primary mt-0.5 shrink-0" />
                       <span className="text-[10px] sm:text-xs md:text-sm font-medium text-foreground">
-                        La banque vous paye!
+                        {t.whatIs.reversePoint2}
                       </span>
                     </li>
                     <li className="hidden sm:flex items-start gap-1.5 md:gap-3">
                       <CheckCircle2 className="w-3.5 h-3.5 md:w-5 md:h-5 text-primary mt-0.5 shrink-0" />
                       <span className="text-[10px] sm:text-xs md:text-sm font-medium text-foreground">
-                        Pas de qualification
+                        {t.whatIs.reversePoint3}
                       </span>
                     </li>
                     <li className="hidden md:flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                       <span className="text-sm font-medium text-foreground">
-                        Restez propriétaire
+                        {t.whatIs.reversePoint4}
                       </span>
                     </li>
                   </ul>
 
                   <div className="mt-3 md:mt-6 pt-2 md:pt-4 border-t border-primary/20">
                     <p className="text-center text-[10px] sm:text-xs md:text-sm font-bold text-primary">
-                      Jusqu'à 59% de valeur
+                      {t.whatIs.upToValue}
                     </p>
                   </div>
                 </div>
@@ -405,8 +392,8 @@ export default function WhatIsReverseMortgage() {
 
         <div className="mb-16 md:mb-20" ref={processSectionRef}>
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
-            Le processus en{" "}
-            <span className="text-primary">4 étapes simples</span>
+            {t.whatIs.processIntro}{" "}
+            <span className="text-primary">{t.whatIs.processSteps}</span>
           </h3>
 
           {/* Desktop - horizontal timeline with full-width lines */}
@@ -517,7 +504,7 @@ export default function WhatIsReverseMortgage() {
                       ? "bg-primary w-6"
                       : "bg-border w-2 hover:bg-muted-foreground/50"
                   )}
-                  aria-label={`Aller à l'étape ${index + 1}`}
+                  aria-label={`${t.whatIs.step} ${index + 1}`}
                 />
               ))}
             </div>
@@ -528,12 +515,10 @@ export default function WhatIsReverseMortgage() {
           <div className="bg-gradient-to-br from-primary to-primary/80 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 text-primary-foreground">
             <div className="text-center mb-6 md:mb-10">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 md:mb-4">
-                Quand dois-je rembourser?
+                {t.whatIs.repaymentTitle}
               </h3>
               <p className="text-sm md:text-base text-primary-foreground/80 max-w-2xl mx-auto">
-                Vous conservez votre maison et ne remboursez rien tant que vous
-                y vivez. Le remboursement n'est requis que dans les situations
-                suivantes:
+                {t.whatIs.repaymentSubtitle}
               </p>
             </div>
 

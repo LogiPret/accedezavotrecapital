@@ -2,9 +2,20 @@
 
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Linkedin, Youtube } from "lucide-react";
+import { useLocale } from "@/lib/locale-context";
 
 export default function Footer() {
+  const { t, locale } = useLocale();
   const currentYear = new Date().getFullYear();
+
+  const siteName =
+    locale === "en" ? "AccessHomeEquity" : "AccedezAVotreCapital";
+  const domain =
+    locale === "en" ? "accesshomeequity.ca" : "accedezavotrecapital.ca";
+  const emailDomain =
+    locale === "en"
+      ? "info@accesshomeequity.ca"
+      : "info@accedezavotrecapital.ca";
 
   return (
     <footer className="bg-foreground text-card py-16">
@@ -17,13 +28,11 @@ export default function Footer() {
                 <img src="/logo.png" alt="logo" className="w-8 h-8" />
               </div>
               <span className="font-bold text-lg text-card">
-                AccedezAVotreCapital<span className="text-primary">.ca</span>
+                {siteName}
+                <span className="text-primary">.ca</span>
               </span>
             </Link>
-            <p className="text-card/70 text-sm mb-6">
-              Votre partenaire de confiance pour libérer la valeur de votre
-              maison et profiter pleinement de votre retraite au Québec.
-            </p>
+            <p className="text-card/70 text-sm mb-6">{t.footer.tagline}</p>
             <div className="flex gap-4">
               <a
                 href="https://www.facebook.com/profile.php?id=61581604235295"
@@ -37,7 +46,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-lg mb-6">Liens Rapides</h4>
+            <h4 className="font-bold text-lg mb-6">{t.footer.quickLinks}</h4>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -60,7 +69,7 @@ export default function Footer() {
                   }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
-                  Qu'est-ce qu'une Hypothèque Inversée?
+                  {t.footer.link1}
                 </Link>
               </li>
               <li>
@@ -84,7 +93,7 @@ export default function Footer() {
                   }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
-                  Calculatrice d'Éligibilité
+                  {t.footer.link2}
                 </Link>
               </li>
               <li>
@@ -108,7 +117,7 @@ export default function Footer() {
                   }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
-                  Avantages
+                  {t.footer.link3}
                 </Link>
               </li>
               <li>
@@ -132,7 +141,7 @@ export default function Footer() {
                   }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
-                  Ressources
+                  {t.footer.link4}
                 </Link>
               </li>
               <li>
@@ -156,7 +165,7 @@ export default function Footer() {
                   }}
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
-                  Contactez-Nous
+                  {t.footer.link5}
                 </Link>
               </li>
             </ul>
@@ -164,7 +173,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-bold text-lg mb-6">Contact</h4>
+            <h4 className="font-bold text-lg mb-6">{t.footer.contactTitle}</h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-primary mt-0.5" />
@@ -175,9 +184,7 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-primary mt-0.5" />
                 <div>
-                  <p className="text-card font-medium">
-                    info@accedezavotrecapital.ca
-                  </p>
+                  <p className="text-card font-medium">{emailDomain}</p>
                 </div>
               </li>
             </ul>
@@ -188,31 +195,25 @@ export default function Footer() {
         <div className="border-t border-card/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-card/60 text-sm text-center md:text-left">
-              © {currentYear} Accedez à Votre Capital.ca. Tous droits réservés.
+              © {currentYear} {t.footer.copyright}
             </p>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <Link
                 href="/politique-de-confidentialite"
                 className="text-card/60 hover:text-card transition-colors"
               >
-                Politique de Confidentialité
+                {t.footer.privacy}
               </Link>
               <Link
                 href="/conditions-dutilisation"
                 className="text-card/60 hover:text-card transition-colors"
               >
-                Conditions d'Utilisation
+                {t.footer.terms}
               </Link>
             </div>
           </div>
           <p className="text-card/40 text-xs text-center mt-6">
-            Avis : Accédez à Votre Capital.ca est un courtier hypothécaire
-            inversé agréé au Québec, Canada. Les informations présentées sur ce
-            site sont fournies à titre informatif général et ne constituent pas
-            des conseils financiers, juridiques ou fiscaux. Les produits
-            d’hypothèque inversée sont soumis à l’approbation du prêteur et aux
-            critères d’admissibilité. Veuillez consulter un professionnel
-            qualifié avant de prendre toute décision financière.
+            {t.footer.disclaimer}
           </p>
         </div>
       </div>

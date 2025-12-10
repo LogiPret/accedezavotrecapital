@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CheckCircle2 } from "lucide-react";
+import { useLocale } from "@/lib/locale-context";
 
 interface ContactFormProps {
   formType: "hero form" | "contact form";
@@ -24,6 +25,7 @@ export default function ContactForm({
   formType,
   compact = false,
 }: ContactFormProps) {
+  const { t } = useLocale();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -65,31 +67,31 @@ export default function ContactForm({
     // Validate name fields (letters, spaces, hyphens, apostrophes only)
     const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
     if (!nameRegex.test(formData.firstName.trim())) {
-      setError("Le prénom contient des caractères invalides.");
+      setError(t.form.errorFirstName);
       return false;
     }
     if (!nameRegex.test(formData.lastName.trim())) {
-      setError("Le nom contient des caractères invalides.");
+      setError(t.form.errorLastName);
       return false;
     }
 
     // Validate email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      setError("L'adresse courriel est invalide.");
+      setError(t.form.errorEmail);
       return false;
     }
 
     // Validate phone (must be exactly 10 digits)
     const phoneDigits = formData.phone.replace(/\D/g, "");
     if (phoneDigits.length !== 10) {
-      setError("Le numéro de téléphone doit contenir 10 chiffres.");
+      setError(t.form.errorPhone);
       return false;
     }
 
     // Validate age is selected
     if (!formData.age) {
-      setError("Veuillez sélectionner votre âge.");
+      setError(t.form.errorAge);
       return false;
     }
 
@@ -143,9 +145,7 @@ export default function ContactForm({
       setTimeout(() => setIsSubmitted(false), 3000);
     } catch (error) {
       console.error("Form submission error:", error);
-      setError(
-        "Une erreur est survenue. Veuillez réessayer ou nous appeler directement."
-      );
+      setError(t.form.errorGeneral);
     } finally {
       setIsSubmitting(false);
     }
@@ -156,11 +156,9 @@ export default function ContactForm({
       <div className="text-center py-6 md:py-8">
         <CheckCircle2 className="w-12 h-12 md:w-16 md:h-16 text-primary mx-auto mb-3 md:mb-4" />
         <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-2">
-          Merci!
+          {t.form.successTitle}
         </h3>
-        <p className="text-sm text-muted-foreground">
-          Nous vous contacterons bientôt.
-        </p>
+        <p className="text-sm text-muted-foreground">{t.form.successMessage}</p>
       </div>
     );
   }
@@ -190,11 +188,11 @@ export default function ContactForm({
                 : "text-xs md:text-sm"
             }
           >
-            Prénom *
+            {t.form.firstName} {t.form.required}
           </Label>
           <Input
             id={`${formType}-firstName`}
-            placeholder="Votre prénom"
+            placeholder={t.form.firstName}
             value={formData.firstName}
             onChange={(e) =>
               setFormData({ ...formData, firstName: e.target.value })
@@ -214,11 +212,11 @@ export default function ContactForm({
                 : "text-xs md:text-sm"
             }
           >
-            Nom *
+            {t.form.lastName} {t.form.required}
           </Label>
           <Input
             id={`${formType}-lastName`}
-            placeholder="Votre nom"
+            placeholder={t.form.lastName}
             value={formData.lastName}
             onChange={(e) =>
               setFormData({ ...formData, lastName: e.target.value })
@@ -240,12 +238,12 @@ export default function ContactForm({
               : "text-xs md:text-sm"
           }
         >
-          Courriel *
+          {t.form.email} {t.form.required}
         </Label>
         <Input
           id={`${formType}-email`}
           type="email"
-          placeholder="votre@courriel.com"
+          placeholder="email@example.com"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           required
@@ -262,7 +260,7 @@ export default function ContactForm({
               : "text-xs md:text-sm"
           }
         >
-          Téléphone *
+          {t.form.phone} {t.form.required}
         </Label>
         <Input
           id={`${formType}-phone`}
@@ -286,7 +284,7 @@ export default function ContactForm({
                 : "text-xs md:text-sm"
             }
           >
-            Votre Âge *
+            {t.form.age} {t.form.required}
           </Label>
           <Select
             value={formData.age}
@@ -297,15 +295,15 @@ export default function ContactForm({
               id={`${formType}-age`}
               className={compact ? "mt-1 h-9 sm:h-10 text-sm" : "mt-1 text-sm"}
             >
-              <SelectValue placeholder="Sélectionnez" />
+              <SelectValue placeholder={t.form.selectPlaceholder} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="55-59">55 - 59 ans</SelectItem>
-              <SelectItem value="60-64">60 - 64 ans</SelectItem>
-              <SelectItem value="65-69">65 - 69 ans</SelectItem>
-              <SelectItem value="70-74">70 - 74 ans</SelectItem>
-              <SelectItem value="75-79">75 - 79 ans</SelectItem>
-              <SelectItem value="80+">80 ans et plus</SelectItem>
+              <SelectItem value="55-59">{t.form.age55_59}</SelectItem>
+              <SelectItem value="60-64">{t.form.age60_64}</SelectItem>
+              <SelectItem value="65-69">{t.form.age65_69}</SelectItem>
+              <SelectItem value="70-74">{t.form.age70_74}</SelectItem>
+              <SelectItem value="75-79">{t.form.age75_79}</SelectItem>
+              <SelectItem value="80+">{t.form.age80plus}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -318,7 +316,7 @@ export default function ContactForm({
                 : "text-xs md:text-sm"
             }
           >
-            Valeur Propriété
+            {t.form.homeValue}
           </Label>
           <Select
             value={formData.homeValue}
@@ -330,14 +328,14 @@ export default function ContactForm({
               id={`${formType}-homeValue`}
               className={compact ? "mt-1 h-9 sm:h-10 text-sm" : "mt-1 text-sm"}
             >
-              <SelectValue placeholder="Sélectionnez" />
+              <SelectValue placeholder={t.form.selectPlaceholder} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="200-400k">200k $ - 400k $</SelectItem>
-              <SelectItem value="400-600k">400k $ - 600k $</SelectItem>
-              <SelectItem value="600-800k">600k $ - 800k $</SelectItem>
-              <SelectItem value="800k-1m">800k $ - 1M $</SelectItem>
-              <SelectItem value="1m+">Plus de 1M $</SelectItem>
+              <SelectItem value="200-400k">{t.form.value200_400k}</SelectItem>
+              <SelectItem value="400-600k">{t.form.value400_600k}</SelectItem>
+              <SelectItem value="600-800k">{t.form.value600_800k}</SelectItem>
+              <SelectItem value="800k-1m">{t.form.value800k_1m}</SelectItem>
+              <SelectItem value="1m+">{t.form.value1mplus}</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -352,11 +350,11 @@ export default function ContactForm({
               : "text-xs md:text-sm"
           }
         >
-          Questions ou commentaires
+          {t.form.message}
         </Label>
         <Textarea
           id={`${formType}-message`}
-          placeholder="Comment pouvons-nous vous aider?"
+          placeholder={t.form.messagePlaceholder}
           value={formData.message}
           onChange={(e) =>
             setFormData({ ...formData, message: e.target.value })
@@ -376,12 +374,11 @@ export default function ContactForm({
         }
         size={compact ? undefined : "lg"}
       >
-        {isSubmitting ? "Envoi en cours..." : "Demander une Consultation"}
+        {isSubmitting ? t.form.submitting : t.form.submit}
       </Button>
 
       <p className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">
-        En soumettant ce formulaire, vous acceptez d'être contacté par notre
-        équipe.
+        {t.form.disclaimer}
       </p>
     </form>
   );

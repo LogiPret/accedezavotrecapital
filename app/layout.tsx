@@ -2,6 +2,9 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Inter, Libre_Baskerville } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { headers } from "next/headers";
+import { LocaleProvider } from "@/lib/locale-context";
+import type { Locale } from "@/lib/i18n";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,15 +32,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headersList = await headers();
+  const locale = (headersList.get("x-locale") || "fr") as Locale;
+
   return (
-    <html lang="fr">
+    <html lang={locale === "en" ? "en" : "fr"}>
       <body className={`font-sans antialiased`}>
-        {children}
+        <LocaleProvider locale={locale}>{children}</LocaleProvider>
         <Analytics />
       </body>
     </html>

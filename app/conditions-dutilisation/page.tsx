@@ -1,187 +1,141 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { useLocale } from "@/lib/locale-context";
 
 export default function ConditionsDUtilisation() {
+  const { t, locale } = useLocale();
+  const email =
+    locale === "en"
+      ? "info@accesshomeequity.ca"
+      : "info@accedezavotrecapital.ca";
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-24 md:py-32 max-w-4xl">
         <Button variant="ghost" asChild className="mb-8">
           <Link href="/">
             <ArrowLeft className="mr-2 w-4 h-4" />
-            Retour à l'accueil
+            {t.terms.backToHome}
           </Link>
         </Button>
 
         <article className="prose prose-slate max-w-none">
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Termes et Conditions
+            {t.terms.title}
           </h1>
           <p className="text-lg text-muted-foreground mb-8">
-            Accédez à votre capital
+            {t.terms.company}
           </p>
           <p className="text-sm text-muted-foreground mb-8">
-            Date d'entrée en vigueur : 1er septembre 2025
+            {t.terms.effectiveDate}
           </p>
 
           <div className="space-y-8 text-foreground">
-            <p>
-              Bienvenue sur www.accedezavotrecapital.ca. En utilisant notre site
-              web et nos services, vous acceptez les conditions générales
-              suivantes. Veuillez les lire attentivement.
-            </p>
+            <p>{t.terms.intro}</p>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                1. Utilisation du site web
+                {t.terms.section1Title}
               </h2>
               <ul className="list-disc pl-6 space-y-2">
-                <li>
-                  Vous devez avoir atteint l'âge de la majorité dans votre
-                  province ou territoire pour utiliser nos services.
-                </li>
-                <li>
-                  Vous consentez à utiliser ce site web uniquement à des fins
-                  légales.
-                </li>
-                <li>
-                  Vous ne devez pas tenter de perturber, d'endommager ou
-                  d'obtenir un accès non autorisé à nos systèmes.
-                </li>
+                <li>{t.terms.section1Item1}</li>
+                <li>{t.terms.section1Item2}</li>
+                <li>{t.terms.section1Item3}</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                2. Services offerts
+                {t.terms.section2Title}
               </h2>
               <ul className="list-disc pl-6 space-y-2">
-                <li>
-                  Accédez à votre capital est un courtier hypothécaire inversé
-                  agréé au Canada.
-                </li>
-                <li>
-                  Les renseignements fournis sur ce site web sont uniquement à
-                  titre informatif et ne constituent pas des conseils financiers
-                  ou juridiques.
-                </li>
-                <li>
-                  L'approbation finale des produits d'hypothèque inversée est
-                  assujettie aux conditions du prêteur, à l'admissibilité et aux
-                  exigences réglementaires.
-                </li>
+                <li>{t.terms.section2Item1}</li>
+                <li>{t.terms.section2Item2}</li>
+                <li>{t.terms.section2Item3}</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                3. Exactitude de l'information
+                {t.terms.section3Title}
               </h2>
-              <p>
-                On vise la précision, mais on garantit pas que tout le contenu
-                du site web est complet, à jour ou sans erreurs. C'est à vous de
-                vérifier l'info avant de vous y fier.
-              </p>
+              <p>{t.terms.section3Text}</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                4. Limitation de responsabilité
+                {t.terms.section4Title}
               </h2>
               <ul className="list-disc pl-6 space-y-2">
-                <li>
-                  Accédez à votre capital n'est pas responsable des dommages
-                  découlant de l'utilisation de ce site web ou de la confiance
-                  accordée aux informations fournies.
-                </li>
-                <li>
-                  Nous ne sommes pas responsables des pertes liées aux retards,
-                  erreurs, problèmes techniques ou liens de tiers.
-                </li>
+                <li>{t.terms.section4Item1}</li>
+                <li>{t.terms.section4Item2}</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                5. Propriété intellectuelle
+                {t.terms.section5Title}
               </h2>
-              <p>
-                Tout le contenu du site web, y compris le texte, les images,
-                l'image de marque et la conception, est la propriété d'Access
-                Home Equity et ne peut être reproduit ou utilisé sans
-                autorisation écrite.
-              </p>
+              <p>{t.terms.section5Text}</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                6. Liens de tiers
+                {t.terms.section6Title}
               </h2>
-              <p>
-                Notre site web peut inclure des liens vers des sites web de
-                tiers. Nous ne sommes pas responsables du contenu, de la
-                sécurité ou des pratiques de ces sites web.
-              </p>
+              <p>{t.terms.section6Text}</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                7. Confidentialité
+                {t.terms.section7Title}
               </h2>
               <p>
-                Votre utilisation de notre site web est également régie par
-                notre{" "}
+                {t.terms.section7Text1}{" "}
                 <Link
                   href="/politique-de-confidentialite"
                   className="text-primary hover:underline"
                 >
-                  politique de confidentialité
+                  {t.terms.section7Link}
                 </Link>
-                , qui explique comment nous recueillons et traitons vos données.
+                {t.terms.section7Text2}
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                8. Résiliation
+                {t.terms.section8Title}
               </h2>
-              <p>
-                Nous nous réservons le droit de suspendre ou de mettre fin à
-                l'accès à notre site web ou à nos services en cas de violation
-                des présentes conditions.
-              </p>
+              <p>{t.terms.section8Text}</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                9. Droit applicable
+                {t.terms.section9Title}
               </h2>
-              <p>
-                Ces conditions sont régies par les lois de la province ou du
-                territoire où le client reçoit les services et les lois du
-                Canada qui s'y appliquent.
-              </p>
+              <p>{t.terms.section9Text}</p>
             </section>
 
             <section>
               <h2 className="text-2xl font-semibold text-foreground mb-4">
-                10. Contactez-nous
+                {t.terms.section10Title}
               </h2>
-              <p className="mb-2">
-                If you have questions about these Terms, contact:
-              </p>
-              <p className="font-semibold">Accédez à votre capital</p>
+              <p className="mb-2">{t.terms.section10Intro}</p>
+              <p className="font-semibold">{t.terms.company}</p>
               <p>
-                Courriel :{" "}
+                {t.terms.email}{" "}
                 <a
-                  href="mailto:info@accedezavotrecapital.ca"
+                  href={`mailto:${email}`}
                   className="text-primary hover:underline"
                 >
-                  info@accedezavotrecapital.ca
+                  {email}
                 </a>
               </p>
               <p>
-                Téléphone :{" "}
+                {t.terms.phone}{" "}
                 <a
                   href="tel:+15149848182"
                   className="text-primary hover:underline"

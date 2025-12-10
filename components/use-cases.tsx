@@ -18,126 +18,124 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useLocale } from "@/lib/locale-context";
 
 export default function UseCases() {
+  const { t } = useLocale();
   const [activeIndex, setActiveIndex] = useState(0);
   const [resetKey, setResetKey] = useState(0);
 
   const useCases = [
     {
       icon: Heart,
-      title: "Soins de Santé",
-      dream: "Vous pensiez ne plus pouvoir rester chez vous?",
-      reality: "Restez dans votre maison en toute sécurité",
-      description:
-        "Payez pour des soins à domicile de qualité, des équipements médicaux adaptés ou des aménagements pour vieillir chez vous en toute autonomie.",
+      title: t.useCases.case1Title,
+      dream: t.useCases.case1Dream,
+      reality: t.useCases.case1Reality,
+      description: t.useCases.case1Desc,
       benefits: [
-        "Soins à domicile personnalisés",
-        "Équipements médicaux",
-        "Monte-escalier, barres d'appui",
+        t.useCases.case1Benefit1,
+        t.useCases.case1Benefit2,
+        t.useCases.case1Benefit3,
       ],
-      amount: "15 000$ - 50 000$",
+      amount: t.useCases.case1Amount,
       image: "/elderly-couple-receiving-home-healthcare-nurse-vis.jpg",
     },
     {
       icon: Wrench,
-      title: "Rénovations",
-      dream: "Votre maison a besoin de réparations majeures?",
-      reality: "Transformez votre chez-vous",
-      description:
-        "Modernisez votre cuisine, réparez votre toiture, remplacez les fenêtres ou adaptez votre maison à vos besoins actuels.",
+      title: t.useCases.case2Title,
+      dream: t.useCases.case2Dream,
+      reality: t.useCases.case2Reality,
+      description: t.useCases.case2Desc,
       benefits: [
-        "Nouvelle toiture",
-        "Cuisine moderne",
-        "Fenêtres écoénergétiques",
+        t.useCases.case2Benefit1,
+        t.useCases.case2Benefit2,
+        t.useCases.case2Benefit3,
       ],
-      amount: "20 000$ - 100 000$",
+      amount: t.useCases.case2Amount,
       image: "/beautiful-modern-kitchen-renovation-white-cabinets.jpg",
     },
     {
       icon: Wallet,
-      title: "Supplément de Revenu",
-      dream: "L'inflation gruge votre pouvoir d'achat?",
-      reality: "Retrouvez votre tranquillité financière",
-      description:
-        "Augmentez vos liquidités mensuelles pour maintenir le niveau de vie que vous méritez après des décennies de travail.",
+      title: t.useCases.case3Title,
+      dream: t.useCases.case3Dream,
+      reality: t.useCases.case3Reality,
+      description: t.useCases.case3Desc,
       benefits: [
-        "Paiements mensuels réguliers",
-        "Aucun impact sur vos prestations",
-        "Flexibilité totale",
+        t.useCases.case3Benefit1,
+        t.useCases.case3Benefit2,
+        t.useCases.case3Benefit3,
       ],
-      amount: "1 000$ - 3 000$/mois",
+      amount: t.useCases.case3Amount,
       image: "/happy-retired-couple-relaxed-at-cafe-enjoying-coff.jpg",
     },
     {
       icon: Umbrella,
-      title: "Dépenses Imprévues",
-      dream: "Une urgence financière vous inquiète?",
-      reality: "Faites face aux imprévus sans stress",
-      description:
-        "Que ce soit une réparation urgente, des frais médicaux ou une situation inattendue, vous avez accès à des fonds rapidement.",
+      title: t.useCases.case4Title,
+      dream: t.useCases.case4Dream,
+      reality: t.useCases.case4Reality,
+      description: t.useCases.case4Desc,
       benefits: [
-        "Accès rapide aux fonds",
-        "Aucune justification requise",
-        "Tranquillité d'esprit",
+        t.useCases.case4Benefit1,
+        t.useCases.case4Benefit2,
+        t.useCases.case4Benefit3,
       ],
-      amount: "10 000$ - 75 000$",
+      amount: t.useCases.case4Amount,
       image: "/senior-person-relieved-peaceful-expression-reading.jpg",
     },
     {
       icon: Gift,
-      title: "Héritage Anticipé",
-      dream: "Vous aimeriez aider vos proches maintenant?",
-      reality: "Voyez l'impact de votre générosité",
-      description:
-        "Aidez vos enfants avec une mise de fonds, payez les études de vos petits-enfants ou faites un don significatif.",
+      title: t.useCases.case5Title,
+      dream: t.useCases.case5Dream,
+      reality: t.useCases.case5Reality,
+      description: t.useCases.case5Desc,
       benefits: [
-        "Mise de fonds pour vos enfants",
-        "Frais de scolarité",
-        "Don de bienfaisance",
+        t.useCases.case5Benefit1,
+        t.useCases.case5Benefit2,
+        t.useCases.case5Benefit3,
       ],
-      amount: "25 000$ - 150 000$",
+      amount: t.useCases.case5Amount,
       image: "/grandparents-giving-gift-to-young-couple-new-home-.jpg",
     },
     {
       icon: Plane,
-      title: "Voyages de Rêve",
-      dream: "Vous avez remis vos rêves de voyage à plus tard?",
-      reality: "C'est maintenant le moment de partir",
-      description:
-        "Cette croisière en Europe, ce voyage au Japon, cette visite aux proches à l'étranger... Vos rêves sont enfin à portée de main.",
+      title: t.useCases.case6Title,
+      dream: t.useCases.case6Dream,
+      reality: t.useCases.case6Reality,
+      description: t.useCases.case6Desc,
       benefits: [
-        "Croisières internationales",
-        "Voyages en famille",
-        "Aventures inoubliables",
+        t.useCases.case6Benefit1,
+        t.useCases.case6Benefit2,
+        t.useCases.case6Benefit3,
       ],
-      amount: "5 000$ - 30 000$",
+      amount: t.useCases.case6Amount,
       image: "/senior-couple-on-cruise-ship-deck-sunset-ocean-vie.jpg",
     },
     {
       icon: Building2,
-      title: "Résidence Secondaire",
-      dream: "Ce chalet au bord du lac vous fait rêver?",
-      reality: "Offrez-vous ce refuge bien mérité",
-      description:
-        "Achetez cette propriété de vacances dont vous rêvez depuis des années. Un investissement dans votre qualité de vie.",
-      benefits: ["Chalet en nature", "Condo en Floride", "Patrimoine familial"],
-      amount: "50 000$ - 200 000$",
+      title: t.useCases.case7Title,
+      dream: t.useCases.case7Dream,
+      reality: t.useCases.case7Reality,
+      description: t.useCases.case7Desc,
+      benefits: [
+        t.useCases.case7Benefit1,
+        t.useCases.case7Benefit2,
+        t.useCases.case7Benefit3,
+      ],
+      amount: t.useCases.case7Amount,
       image: "/beautiful-lakeside-cottage-cabin-quebec-autumn-col.jpg",
     },
     {
       icon: CreditCard,
-      title: "Consolidation de Dettes",
-      dream: "Les paiements mensuels vous étouffent?",
-      reality: "Éliminez vos dettes et respirez",
-      description:
-        "Remboursez vos cartes de crédit à taux élevé, consolidez vos prêts et libérez-vous du stress des paiements.",
+      title: t.useCases.case8Title,
+      dream: t.useCases.case8Dream,
+      reality: t.useCases.case8Reality,
+      description: t.useCases.case8Desc,
       benefits: [
-        "Éliminer les cartes de crédit",
-        "Un seul paiement simplifié",
-        "Plus de liberté",
+        t.useCases.case8Benefit1,
+        t.useCases.case8Benefit2,
+        t.useCases.case8Benefit3,
       ],
-      amount: "15 000$ - 100 000$",
+      amount: t.useCases.case8Amount,
       image: "/relieved-senior-cutting-credit-card-debt-free-cele.jpg",
     },
   ];
@@ -176,11 +174,10 @@ export default function UseCases() {
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4">
-            Comment Utiliser <span className="text-sky-300">Vos Fonds?</span>
+            {t.useCases.title}
           </h2>
           <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
-            Découvrez les possibilités qui s'offrent à vous avec une hypothèque
-            inversée
+            {t.useCases.subtitle}
           </p>
         </div>
 
@@ -259,7 +256,7 @@ export default function UseCases() {
                       {/* Amount */}
                       <div className="bg-white text-[#0a2b59] px-4 md:px-5 py-2 md:py-3 rounded-xl md:rounded-2xl inline-block">
                         <span className="text-[10px] md:text-xs uppercase tracking-wider opacity-70 block">
-                          Montant typique
+                          {t.useCases.typicalAmount}
                         </span>
                         <p className="text-lg md:text-2xl font-bold">
                           {useCase.amount}
@@ -273,7 +270,7 @@ export default function UseCases() {
                       <button
                         onClick={goToPrevious}
                         className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
-                        aria-label="Précédent"
+                        aria-label={t.useCases.previous}
                       >
                         <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
                       </button>
@@ -289,7 +286,7 @@ export default function UseCases() {
                                 ? "w-6 md:w-8 h-1.5 md:h-2 bg-white"
                                 : "w-1.5 md:w-2 h-1.5 md:h-2 bg-white/30 hover:bg-white/50"
                             }`}
-                            aria-label={`Aller au slide ${dotIndex + 1}`}
+                            aria-label={`${t.useCases.goToSlide} ${dotIndex + 1}`}
                           />
                         ))}
                       </div>
@@ -297,7 +294,7 @@ export default function UseCases() {
                       <button
                         onClick={goToNext}
                         className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all"
-                        aria-label="Suivant"
+                        aria-label={t.useCases.next}
                       >
                         <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
                       </button>
@@ -312,26 +309,45 @@ export default function UseCases() {
         {/* Bottom CTA */}
         <div className="mt-12 md:mt-20 text-center">
           <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">
-            Votre argent. Vos choix. Aucune restriction.
+            {t.useCases.bottomTitle}
           </h3>
           <p className="text-white/70 text-sm md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
-            Peu importe comment vous souhaitez utiliser vos fonds, nous sommes
-            là pour vous accompagner.
+            {t.useCases.bottomSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
             <Button
               size="lg"
               className="bg-white text-[#0a2b59] hover:bg-white/90 gap-2 w-full sm:w-auto"
+              onClick={() => {
+                const target = document.querySelector("#calculatrice");
+                if (target) {
+                  const offset = 80;
+                  const elementPosition = target.getBoundingClientRect().top;
+                  const offsetPosition =
+                    elementPosition + window.pageYOffset - offset;
+                  window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                }
+              }}
             >
-              Calculer mon montant
+              {t.useCases.calculateAmount}
               <ArrowRight className="w-4 h-4" />
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-white text-white hover:bg-white/10 bg-transparent w-full sm:w-auto"
+              onClick={() => {
+                const target = document.querySelector("#contact");
+                if (target) {
+                  const offset = 80;
+                  const elementPosition = target.getBoundingClientRect().top;
+                  const offsetPosition =
+                    elementPosition + window.pageYOffset - offset;
+                  window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                }
+              }}
             >
-              Parler à un conseiller
+              {t.useCases.talkToAdvisor}
             </Button>
           </div>
         </div>
