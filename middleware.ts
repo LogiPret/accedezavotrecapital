@@ -3,11 +3,20 @@ import type { NextRequest } from "next/server";
 
 export function middleware(request: NextRequest) {
   const hostname = request.headers.get("host") || "";
+  const { searchParams } = new URL(request.url);
 
-  // Determine locale based on domain
+  // Check for ?lang=en or ?lang=fr query parameter (for testing)
+  const langParam = searchParams.get("lang");
+
+  // Determine locale based on domain or query param
   let locale: "fr" | "en" = "fr"; // Default to French
 
-  if (
+  // Query param takes priority (for testing)
+  if (langParam === "en") {
+    locale = "en";
+  } else if (langParam === "fr") {
+    locale = "fr";
+  } else if (
     hostname.includes("accesshomeequity.ca") ||
     hostname.includes("accesshomeequity") ||
     // For local development, you can use a query param or subdomain
