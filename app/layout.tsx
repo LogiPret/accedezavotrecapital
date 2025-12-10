@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title:
     "Hypothèque Inversée Québec | Votre Courtier Hypothécaire de Confiance",
   description:
-    "Découvrez comment une hypothèque inversée peut vous aider à profiter de votre retraite. Obtenez jusqu'à 59% de la valeur de votre maison en argent libre d'impôt, sans paiements mensuels.",
+    "Découvrez comment une hypothèque inversée peut vous aider à profiter de votre retraite. Obtenez jusqu'à 55% de la valeur de votre maison en argent libre d'impôt, sans paiements mensuels.",
   keywords:
     "hypothèque inversée, CHIP, prêt hypothécaire inversé, retraite, Québec, courtier hypothécaire",
   generator: "v0.app",

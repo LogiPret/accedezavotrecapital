@@ -16,7 +16,7 @@ export const translations = {
     hero: {
       title: "Libérez la Valeur de Votre Maison Pour Votre Retraite",
       subtitle:
-        "Accédez jusqu'à 59% de la valeur nette de votre propriété en argent libre d'impôt, sans paiements mensuels obligatoires. Restez chez vous et profitez de votre retraite.",
+        "Accédez jusqu'à 55% de la valeur nette de votre propriété en argent libre d'impôt, sans paiements mensuels obligatoires. Restez chez vous et profitez de votre retraite.",
       cta: "Calculer Mon Éligibilité",
       badge1: "55 ans et plus",
       badge2: "Aucun paiement",
@@ -73,7 +73,7 @@ export const translations = {
       title: "Qu'est-ce qu'une",
       titleHighlight: "Hypothèque Inversée",
       subtitle:
-        "Un prêt garanti par la valeur nette de votre résidence qui permet aux propriétaires canadiens de 55 ans et plus d'accéder jusqu'à 59% de la valeur de leur maison en argent comptant.",
+        "Un prêt garanti par la valeur nette de votre résidence qui permet aux propriétaires canadiens de 55 ans et plus d'accéder jusqu'à 55% de la valeur de leur maison en argent comptant.",
       howItWorks: "Comment ça fonctionne?",
       howItWorksSubtitle:
         "Contrairement à une hypothèque traditionnelle, l'hypothèque inversée vous permet de recevoir de l'argent sans jamais effectuer de paiement.",
@@ -127,7 +127,7 @@ export const translations = {
       reversePoint2: "La banque vous paye!",
       reversePoint3: "Pas de qualification",
       reversePoint4: "Restez propriétaire",
-      upToValue: "Jusqu'à 59% de valeur",
+      upToValue: "Jusqu'à 55% de valeur",
       // Repayment
       repaymentTitle: "Quand rembourser?",
       repaymentSubtitle: "Le prêt devient dû uniquement dans ces situations:",
@@ -171,7 +171,7 @@ export const translations = {
       benefit3Point2: "Vos héritiers ne seront jamais endettés",
       benefit3Point3: "Votre patrimoine est protégé",
       // Stats
-      stat1Value: "59%",
+      stat1Value: "55%",
       stat1Label: "Valeur maximale accessible",
       stat2Value: "55+",
       stat2Label: "Âge minimum requis",
@@ -330,7 +330,7 @@ export const translations = {
       q2: "À qui s'adresse l'hypothèque inversée?",
       a2: "L'hypothèque inversée s'adresse exclusivement aux propriétaires canadiens âgés de 55 ans ou plus. Cette exigence d'âge s'applique à tous les propriétaires inscrits sur le titre. Vous devez également habiter la propriété comme résidence principale au moins 6 mois par année.",
       q3: "Combien puis-je obtenir avec une hypothèque inversée?",
-      a3: "Vous pouvez recevoir jusqu'à 59% de la valeur de votre résidence. Le montant exact dépend de votre âge (et celui de votre conjoint le cas échéant), de l'emplacement de votre propriété, du type de résidence et de sa valeur actuelle selon l'évaluation. Utilisez notre calculatrice pour obtenir une estimation gratuite.",
+      a3: "Vous pouvez recevoir jusqu'à environ 55% de la valeur de votre résidence. Le pourcentage exact dépend principalement de votre âge : à 55 ans, vous pouvez emprunter environ 15-20% de la valeur, tandis qu'à 80 ans ou plus, vous pouvez atteindre le maximum d'environ 55%. D'autres facteurs incluent l'emplacement et le type de propriété, ainsi que l'évaluation officielle. La propriété doit avoir une valeur minimale d'environ 250 000 $.",
       q4: "Est-ce que la banque deviendra propriétaire de ma maison?",
       a4: "Non, absolument pas! Vous demeurez le seul et unique propriétaire et gardez les titres de propriété. La banque détient simplement une hypothèque de premier rang sur le titre, exactement comme avec un prêt hypothécaire traditionnel. Vous devez toutefois entretenir la propriété, payer vos impôts fonciers et maintenir une assurance habitation.",
       q5: "Devrai-je rembourser plus que la valeur de ma maison?",
@@ -520,7 +520,7 @@ export const translations = {
     hero: {
       title: "Unlock Your Home's Value for Your Retirement",
       subtitle:
-        "Access up to 59% of your home equity in tax-free cash, with no monthly payments required. Stay in your home and enjoy your retirement.",
+        "Access up to 55% of your home equity in tax-free cash, with no monthly payments required. Stay in your home and enjoy your retirement.",
       cta: "Calculate My Eligibility",
       badge1: "55 and older",
       badge2: "No payments",
@@ -576,7 +576,7 @@ export const translations = {
       title: "What Is a",
       titleHighlight: "Reverse Mortgage",
       subtitle:
-        "A loan secured by your home equity that allows Canadian homeowners aged 55 and older to access up to 59% of their home's value in cash.",
+        "A loan secured by your home equity that allows Canadian homeowners aged 55 and older to access up to 55% of their home's value in cash.",
       howItWorks: "How does it work?",
       howItWorksSubtitle:
         "Unlike a traditional mortgage, a reverse mortgage allows you to receive money without ever making a payment.",
@@ -630,7 +630,7 @@ export const translations = {
       reversePoint2: "The bank pays you!",
       reversePoint3: "No qualification",
       reversePoint4: "Stay owner",
-      upToValue: "Up to 59% of value",
+      upToValue: "Up to 55% of value",
       // Repayment
       repaymentTitle: "When to repay?",
       repaymentSubtitle: "The loan becomes due only in these situations:",
@@ -673,7 +673,7 @@ export const translations = {
       benefit3Point2: "Your heirs will never be in debt",
       benefit3Point3: "Your estate is protected",
       // Stats
-      stat1Value: "59%",
+      stat1Value: "55%",
       stat1Label: "Maximum accessible value",
       stat2Value: "55+",
       stat2Label: "Minimum age required",
@@ -829,7 +829,7 @@ export const translations = {
       q2: "Who is eligible for a reverse mortgage?",
       a2: "Reverse mortgages are exclusively for Canadian homeowners aged 55 or older. This age requirement applies to all owners listed on the title. You must also live in the property as your primary residence at least 6 months per year.",
       q3: "How much can I get with a reverse mortgage?",
-      a3: "You can receive up to 59% of your home's value. The exact amount depends on your age (and your spouse's age if applicable), your property's location, the type of residence, and its current appraised value. Use our calculator for a free estimate.",
+      a3: "You can receive up to approximately 55% of your home's value. The exact percentage depends mainly on your age: at 55, you can borrow about 15-20% of the value, while at 80 or older, you can reach the maximum of approximately 55%. Other factors include the property's location and type, as well as the official appraisal. The property must have a minimum value of approximately $250,000.",
       q4: "Will the bank become the owner of my home?",
       a4: "No, absolutely not! You remain the sole owner and keep the property titles. The bank simply holds a first-rank mortgage on the title, exactly like with a traditional mortgage. However, you must maintain the property, pay your property taxes, and maintain home insurance.",
       q5: "Will I have to repay more than my home is worth?",

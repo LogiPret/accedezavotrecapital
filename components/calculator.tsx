@@ -51,7 +51,7 @@ export default function CalculatorSection() {
   const [hasSpouse, setHasSpouse] = useState(false);
   const [province] = useState("Québec");
   const [city, setCity] = useState("");
-  const [homeValue, setHomeValue] = useState(500000);
+  const [homeValue, setHomeValue] = useState(400000);
   const [showResults, setShowResults] = useState(false);
 
   const eligibility = useMemo(() => {
@@ -60,28 +60,50 @@ export default function CalculatorSection() {
 
     if (effectiveAge < 55) return null;
 
-    let basePercentage = 0.2;
-    if (effectiveAge >= 55) basePercentage = 0.2;
-    if (effectiveAge >= 60) basePercentage = 0.3;
-    if (effectiveAge >= 65) basePercentage = 0.38;
-    if (effectiveAge >= 70) basePercentage = 0.45;
-    if (effectiveAge >= 75) basePercentage = 0.5;
-    if (effectiveAge >= 80) basePercentage = 0.55;
-    if (effectiveAge >= 85) basePercentage = 0.59;
+    // Percentages based on Equitable Bank Flex product: 15% at 55, scaling to 55% at 80+
+    // Each age group has a min and max percentage range
+    let minPercentage = 0.15;
+    let maxPercentage = 0.2;
 
-    const maxAmount = Math.round(homeValue * basePercentage);
-    const minAmount = Math.round(maxAmount * 0.75);
+    if (effectiveAge >= 55) {
+      minPercentage = 0.15;
+      maxPercentage = 0.2;
+    }
+    if (effectiveAge >= 60) {
+      minPercentage = 0.2;
+      maxPercentage = 0.28;
+    }
+    if (effectiveAge >= 65) {
+      minPercentage = 0.28;
+      maxPercentage = 0.36;
+    }
+    if (effectiveAge >= 70) {
+      minPercentage = 0.36;
+      maxPercentage = 0.45;
+    }
+    if (effectiveAge >= 75) {
+      minPercentage = 0.45;
+      maxPercentage = 0.52;
+    }
+    if (effectiveAge >= 80) {
+      minPercentage = 0.5;
+      maxPercentage = 0.55;
+    }
+
+    const minAmount = Math.round(homeValue * minPercentage);
+    const maxAmount = Math.round(homeValue * maxPercentage);
 
     return {
       minAmount,
       maxAmount,
-      percentage: Math.round(basePercentage * 100),
+      minPercentage: Math.round(minPercentage * 100),
+      maxPercentage: Math.round(maxPercentage * 100),
       effectiveAge,
     };
   }, [age, spouseAge, hasSpouse, homeValue]);
 
   const handleCalculate = () => {
-    if (age >= 55 && city && homeValue >= 100000) {
+    if (age >= 55 && city && homeValue >= 250000) {
       if (hasSpouse && spouseAge && spouseAge < 55) {
         return;
       }
@@ -286,7 +308,7 @@ export default function CalculatorSection() {
                     </div>
                     <Slider
                       id="homeValue"
-                      min={100000}
+                      min={250000}
                       max={3000000}
                       step={25000}
                       value={[homeValue]}
@@ -297,7 +319,7 @@ export default function CalculatorSection() {
                       className="w-full"
                     />
                     <div className="flex justify-between text-[10px] md:text-xs text-muted-foreground">
-                      <span>100 000 $</span>
+                      <span>250 000 $</span>
                       <span>3 000 000 $</span>
                     </div>
                   </div>
@@ -327,20 +349,29 @@ export default function CalculatorSection() {
                     {showResults && eligibility ? (
                       <>
                         <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
-                          Basé sur vos informations, vous pourriez être éligible
-                          à recevoir jusqu'à:
+                          {locale === "en"
+                            ? "Based on your information, you could be eligible to receive:"
+                            : "Basé sur vos informations, vous pourriez être éligible à recevoir:"}
                         </p>
                         <div className="text-center py-4 md:py-6 bg-background rounded-lg mb-3 md:mb-4">
                           <p className="text-xs md:text-sm text-muted-foreground mb-1">
-                            {t.calculator.maxEstimated}
+                            {locale === "en"
+                              ? "Estimated Amount"
+                              : "Montant Estimé"}
                           </p>
                           <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary">
-                            {formatCurrency(eligibility.maxAmount)}
+                            {formatCurrency(eligibility.minAmount)}
+                          </p>
+                          <p className="text-lg md:text-xl text-muted-foreground mt-2">
+                            {locale === "en" ? "up to" : "jusqu'à"}{" "}
+                            <span className="font-semibold text-primary/80">
+                              {formatCurrency(eligibility.maxAmount)}
+                            </span>
                           </p>
                           <p className="text-xs md:text-sm text-muted-foreground mt-2">
                             {locale === "en"
-                              ? `Approximately ${eligibility.percentage}% of your property value`
-                              : `Soit environ ${eligibility.percentage}% de la valeur de votre propriété`}
+                              ? `${eligibility.minPercentage}% to ${eligibility.maxPercentage}% of your property value`
+                              : `${eligibility.minPercentage}% à ${eligibility.maxPercentage}% de la valeur de votre propriété`}
                           </p>
                           {hasSpouse && (
                             <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
