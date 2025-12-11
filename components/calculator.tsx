@@ -44,15 +44,31 @@ const QUEBEC_CITIES = [
   "Autre",
 ];
 
+const CANADIAN_PROVINCES = [
+  "Ontario",
+  "Quebec",
+  "British Columbia",
+  "Alberta",
+  "Manitoba",
+  "Saskatchewan",
+  "Nova Scotia",
+  "New Brunswick",
+  "Newfoundland and Labrador",
+  "Prince Edward Island",
+];
+
 export default function CalculatorSection() {
   const { t, locale } = useLocale();
   const [age, setAge] = useState(65);
   const [spouseAge, setSpouseAge] = useState<number | null>(null);
   const [hasSpouse, setHasSpouse] = useState(false);
-  const [province] = useState("Québec");
+  const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   const [homeValue, setHomeValue] = useState(400000);
   const [showResults, setShowResults] = useState(false);
+
+  // For English: use province selector; For French: use city selector with fixed Quebec province
+  const locationValid = locale === "en" ? province !== "" : city !== "";
 
   const eligibility = useMemo(() => {
     const effectiveAge =
@@ -103,7 +119,7 @@ export default function CalculatorSection() {
   }, [age, spouseAge, hasSpouse, homeValue]);
 
   const handleCalculate = () => {
-    if (age >= 55 && city && homeValue >= 250000) {
+    if (age >= 55 && locationValid && homeValue >= 250000) {
       if (hasSpouse && spouseAge && spouseAge < 55) {
         return;
       }
@@ -247,8 +263,9 @@ export default function CalculatorSection() {
                     )}
                   </div>
 
-                  {/* Province & City - side by side on mobile */}
-                  <div className="grid grid-cols-2 gap-3 md:gap-4">
+                  {/* Province & City - different layout for EN vs FR */}
+                  {locale === "en" ? (
+                    // English: Province selector only (all of Canada)
                     <div className="space-y-1 md:space-y-2">
                       <Label
                         htmlFor="province"
@@ -256,42 +273,72 @@ export default function CalculatorSection() {
                       >
                         Province
                       </Label>
-                      <Input
-                        id="province"
-                        value={province}
-                        disabled
-                        className="bg-muted text-sm"
-                      />
-                    </div>
-                    <div className="space-y-1 md:space-y-2">
-                      <Label
-                        htmlFor="city"
-                        className="text-sm md:text-base font-medium"
-                      >
-                        {t.calculator.cityLabel}
-                      </Label>
                       <Select
-                        value={city}
+                        value={province}
                         onValueChange={(value) => {
-                          setCity(value);
+                          setProvince(value);
                           setShowResults(false);
                         }}
                       >
-                        <SelectTrigger id="city" className="text-sm">
-                          <SelectValue
-                            placeholder={t.calculator.cityPlaceholder}
-                          />
+                        <SelectTrigger id="province" className="text-sm">
+                          <SelectValue placeholder="Select your province" />
                         </SelectTrigger>
                         <SelectContent>
-                          {QUEBEC_CITIES.map((cityName) => (
-                            <SelectItem key={cityName} value={cityName}>
-                              {cityName}
+                          {CANADIAN_PROVINCES.map((prov) => (
+                            <SelectItem key={prov} value={prov}>
+                              {prov}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
                     </div>
-                  </div>
+                  ) : (
+                    // French: Quebec fixed + City selector
+                    <div className="grid grid-cols-2 gap-3 md:gap-4">
+                      <div className="space-y-1 md:space-y-2">
+                        <Label
+                          htmlFor="province"
+                          className="text-sm md:text-base font-medium"
+                        >
+                          Province
+                        </Label>
+                        <Input
+                          id="province"
+                          value="Québec"
+                          disabled
+                          className="bg-muted text-sm"
+                        />
+                      </div>
+                      <div className="space-y-1 md:space-y-2">
+                        <Label
+                          htmlFor="city"
+                          className="text-sm md:text-base font-medium"
+                        >
+                          {t.calculator.cityLabel}
+                        </Label>
+                        <Select
+                          value={city}
+                          onValueChange={(value) => {
+                            setCity(value);
+                            setShowResults(false);
+                          }}
+                        >
+                          <SelectTrigger id="city" className="text-sm">
+                            <SelectValue
+                              placeholder={t.calculator.cityPlaceholder}
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {QUEBEC_CITIES.map((cityName) => (
+                              <SelectItem key={cityName} value={cityName}>
+                                {cityName}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Home Value */}
                   <div className="space-y-2 md:space-y-3">
@@ -326,7 +373,7 @@ export default function CalculatorSection() {
 
                   <Button
                     onClick={handleCalculate}
-                    disabled={age < 55 || !city || !isSpouseAgeValid}
+                    disabled={age < 55 || !locationValid || !isSpouseAgeValid}
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                     size="lg"
                   >

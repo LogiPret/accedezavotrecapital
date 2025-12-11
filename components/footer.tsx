@@ -24,8 +24,12 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
-                <img src="/logo.png" alt="logo" className="w-8 h-8" />
+              <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1.5">
+                <img
+                  src="/logo.png"
+                  alt="logo"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <span className="font-bold text-lg text-card">
                 {siteName}
@@ -35,7 +39,11 @@ export default function Footer() {
             <p className="text-card/70 text-sm mb-6">{t.footer.tagline}</p>
             <div className="flex gap-4">
               <a
-                href="https://www.facebook.com/profile.php?id=61581604235295"
+                href={
+                  locale === "en"
+                    ? "https://www.facebook.com/people/Access-Home-Equityca/61581888230517/"
+                    : "https://www.facebook.com/profile.php?id=61581604235295"
+                }
                 className="w-10 h-10 bg-card/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors"
                 aria-label="Facebook"
               >
@@ -118,30 +126,6 @@ export default function Footer() {
                   className="text-card/70 hover:text-card transition-colors text-sm"
                 >
                   {t.footer.link3}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#ressources"
-                  scroll={false}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const target = document.querySelector("#ressources");
-                    if (target) {
-                      const offset = 80;
-                      const elementPosition =
-                        target.getBoundingClientRect().top;
-                      const offsetPosition =
-                        elementPosition + window.pageYOffset - offset;
-                      window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth",
-                      });
-                    }
-                  }}
-                  className="text-card/70 hover:text-card transition-colors text-sm"
-                >
-                  {t.footer.link4}
                 </Link>
               </li>
               <li>

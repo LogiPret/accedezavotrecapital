@@ -26,9 +26,9 @@ export default function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-start">
           {/* Broker card - horizontal layout */}
           <div className="bg-card border border-border rounded-xl md:rounded-2xl overflow-hidden shadow-lg">
-            <div className="flex flex-col sm:flex-row">
+            <div className="flex flex-col md:flex-row">
               {/* Photo - left side on larger screens */}
-              <div className="relative w-full sm:w-64 md:w-72 shrink-0 h-64 sm:h-auto">
+              <div className="relative w-full md:w-64 lg:w-72 shrink-0 h-64 md:h-auto">
                 <img
                   src="/mark.png"
                   alt={
@@ -38,8 +38,8 @@ export default function ContactSection() {
                   }
                   className="w-full h-full object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-primary/90 via-primary/40 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 sm:hidden">
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-primary/90 via-primary/40 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4 md:hidden">
                   <h3 className="font-serif text-xl font-bold text-white mb-1">
                     Mark A. Barbieri
                   </h3>
@@ -52,7 +52,7 @@ export default function ContactSection() {
               {/* Contact info - right side */}
               <div className="p-4 sm:p-6 md:p-8 flex-1">
                 {/* Name for desktop */}
-                <div className="hidden sm:block mb-4">
+                <div className="hidden md:block mb-4">
                   <h3 className="font-serif text-2xl lg:text-3xl font-bold text-foreground mb-1">
                     Mark A. Barbieri
                   </h3>

@@ -1,16 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, DollarSign, Home } from "lucide-react";
 import ContactForm from "@/components/contact-form";
 import { useLocale } from "@/lib/locale-context";
 
 export default function HeroSection() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+
+  const siteName =
+    locale === "en" ? "Access Home Equity" : "Accédez à Votre Capital";
+  const siteUrl =
+    locale === "en" ? "accesshomeequity.ca" : "accedezavotrecapital.ca";
 
   return (
-    <section className="relative min-h-[100svh] lg:min-h-screen pt-20 md:pt-24 overflow-hidden bg-primary">
+    <section className="relative h-[100svh] lg:h-screen pt-20 md:pt-24 overflow-hidden bg-primary">
       <div className="absolute inset-0 z-0">
         {/* Greyscale image on the right side */}
         <div
@@ -30,21 +36,40 @@ export default function HeroSection() {
         <div className="absolute top-20 right-20 w-64 h-64 bg-primary-foreground/5 rounded-full blur-2xl" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center min-h-[calc(100svh-5rem)] lg:min-h-[calc(100vh-6rem)] py-8 md:py-8 lg:py-12">
-          {/* Left Content */}
-          <div className="text-primary-foreground lg:col-span-1 flex flex-col justify-center">
-            <h1 className="font-serif text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-4 sm:mb-4 md:mb-6 text-balance">
+      <div className="container mx-auto px-4 sm:px-4 relative z-10 h-full flex flex-col justify-center lg:justify-start">
+        {/* Mobile: Logo + Content grouped together and centered */}
+        <div className="flex flex-col lg:hidden">
+          {/* Logo and Site Name */}
+          <div className="flex justify-center items-center lg:mb-52 mb-6">
+            <div className="flex items-center gap-3">
+              <div className="bg-white rounded-xl p-1.5 shadow-lg">
+                <Image
+                  src="/logo.png"
+                  alt={siteName}
+                  width={48}
+                  height={48}
+                  className="rounded-lg w-8 h-8 md:w-10 md:h-10"
+                />
+              </div>
+              <span className="text-3xl sm:text-4xl md:text-4xl font-semibold text-white">
+                {siteName}
+              </span>
+            </div>
+          </div>
+
+          {/* Hero Content */}
+          <div className="text-primary-foreground">
+            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-3 sm:mb-4 md:mb-6 text-balance">
               {t.hero.title}
             </h1>
-            <p className="text-base sm:text-lg md:text-lg lg:text-xl text-primary-foreground/90 mb-6 sm:mb-6 md:mb-8 leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base md:text-lg text-primary-foreground/90 mb-4 sm:mb-6 md:mb-8 leading-relaxed max-w-xl">
               {t.hero.subtitle}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-8 md:mb-8 lg:mb-10">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
               <Button
                 size="lg"
-                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold w-full sm:w-auto text-base md:text-base py-6 sm:py-4"
+                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold w-full sm:w-auto text-sm sm:text-base md:text-base py-5 sm:py-6"
                 asChild
               >
                 <Link
@@ -67,50 +92,136 @@ export default function HeroSection() {
                   }}
                 >
                   {t.hero.cta}
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Link>
               </Button>
             </div>
 
-            {/* Feature badges - better mobile handling */}
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-3 md:gap-3">
-              <div className="flex items-center gap-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-4 md:p-3 lg:p-4">
-                <div className="w-10 h-10 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-5 h-5 md:w-4 md:h-4 lg:w-5 lg:h-5" />
+            {/* Feature badges */}
+            <div className="grid grid-cols-1 gap-2 sm:gap-3 md:grid-cols-3 md:gap-3">
+              <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3 md:p-3">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-9 md:h-9 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="w-4 h-4 sm:w-4 sm:h-4 md:w-4 md:h-4" />
                 </div>
-                <span className="text-sm sm:text-sm md:text-sm font-medium">
+                <span className="text-xs sm:text-sm md:text-sm font-medium">
                   {t.hero.badge1}
                 </span>
               </div>
-              <div className="flex items-center gap-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-4 md:p-3 lg:p-4">
-                <div className="w-10 h-10 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
-                  <DollarSign className="w-5 h-5 md:w-4 md:h-4 lg:w-5 lg:h-5" />
+              <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3 md:p-3">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-9 md:h-9 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
+                  <DollarSign className="w-4 h-4 sm:w-4 sm:h-4 md:w-4 md:h-4" />
                 </div>
-                <span className="text-sm sm:text-sm md:text-sm font-medium">
+                <span className="text-xs sm:text-sm md:text-sm font-medium">
                   {t.hero.badge2}
                 </span>
               </div>
-              <div className="flex items-center gap-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-4 md:p-3 lg:p-4">
-                <div className="w-10 h-10 md:w-9 md:h-9 lg:w-10 lg:h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
-                  <Home className="w-5 h-5 md:w-4 md:h-4 lg:w-5 lg:h-5" />
+              <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3 md:p-3">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-9 md:h-9 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
+                  <Home className="w-4 h-4 sm:w-4 sm:h-4 md:w-4 md:h-4" />
                 </div>
-                <span className="text-sm sm:text-sm md:text-sm font-medium">
+                <span className="text-xs sm:text-sm md:text-sm font-medium">
                   {t.hero.badge3}
                 </span>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Right Content - Contact Form - Hidden on mobile */}
-          <div className="hidden lg:block bg-card rounded-xl md:rounded-2xl shadow-2xl p-4 sm:p-5 md:p-6 lg:p-8 w-full max-w-md mx-auto lg:max-w-none">
-            <h2 className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-card-foreground mb-1 md:mb-2">
-              {t.hero.formTitle}
-            </h2>
-            <p className="text-muted-foreground text-xs sm:text-sm mb-3 md:mb-4 lg:mb-6">
-              {t.hero.formSubtitle}
-            </p>
+        {/* Desktop Layout */}
+        <div className="hidden lg:flex lg:flex-col lg:h-full">
+          {/* Logo and Site Name */}
+          <div className="flex justify-center items-center flex-grow">
+            <div className="flex items-center gap-4">
+              <div className="bg-white rounded-xl p-2 shadow-lg">
+                <Image
+                  src="/logo.png"
+                  alt={siteName}
+                  width={48}
+                  height={48}
+                  className="rounded-lg w-12 h-12"
+                />
+              </div>
+              <span className="text-6xl font-semibold text-white">
+                {siteName}
+              </span>
+            </div>
+          </div>
 
-            <ContactForm formType="hero form" compact />
+          <div className="grid lg:grid-cols-2 gap-12 items-start flex-grow py-0">
+            {/* Left Content */}
+            <div className="text-primary-foreground flex flex-col justify-center">
+              <h1 className="font-serif text-5xl xl:text-6xl font-bold leading-tight mb-6 text-balance">
+                {t.hero.title}
+              </h1>
+              <p className="text-xl text-primary-foreground/90 mb-8 leading-relaxed max-w-xl">
+                {t.hero.subtitle}
+              </p>
+
+              <div className="flex gap-4 mb-10">
+                <Button
+                  size="lg"
+                  className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold"
+                  asChild
+                >
+                  <Link
+                    href="#calculatrice"
+                    scroll={false}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const target = document.querySelector("#calculatrice");
+                      if (target) {
+                        const offset = 80;
+                        const elementPosition =
+                          target.getBoundingClientRect().top;
+                        const offsetPosition =
+                          elementPosition + window.pageYOffset - offset;
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: "smooth",
+                        });
+                      }
+                    }}
+                  >
+                    {t.hero.cta}
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Link>
+                </Button>
+              </div>
+
+              {/* Feature badges */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="flex items-center gap-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-4">
+                  <div className="w-10 h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm font-medium">{t.hero.badge1}</span>
+                </div>
+                <div className="flex items-center gap-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-4">
+                  <div className="w-10 h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
+                    <DollarSign className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm font-medium">{t.hero.badge2}</span>
+                </div>
+                <div className="flex items-center gap-3 bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-4">
+                  <div className="w-10 h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
+                    <Home className="w-5 h-5" />
+                  </div>
+                  <span className="text-sm font-medium">{t.hero.badge3}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Content - Contact Form */}
+            <div className="bg-card rounded-2xl shadow-2xl p-8 w-full">
+              <h2 className="font-serif text-2xl font-bold text-card-foreground mb-2">
+                {t.hero.formTitle}
+              </h2>
+              <p className="text-muted-foreground text-sm mb-6">
+                {t.hero.formSubtitle}
+              </p>
+
+              <ContactForm formType="hero form" compact />
+            </div>
           </div>
         </div>
       </div>

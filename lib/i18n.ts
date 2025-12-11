@@ -522,9 +522,9 @@ export const translations = {
       subtitle:
         "Access up to 55% of your home equity in tax-free cash, with no monthly payments required. Stay in your home and enjoy your retirement.",
       cta: "Calculate My Eligibility",
-      badge1: "55 and older",
-      badge2: "No payments",
-      badge3: "Stay home",
+      badge1: "55+ yrs",
+      badge2: "Zero payments",
+      badge3: "Stay in your home",
       formTitle: "Speak to an Expert",
       formSubtitle:
         "Get a free, no-obligation consultation. We'll contact you shortly.",
@@ -622,14 +622,14 @@ export const translations = {
       bank: "Bank",
       monthlyPayments: "$$$/month",
       noPayments: "$0/month",
-      traditionalPoint1: "Mandatory payments",
-      traditionalPoint2: "Financial stress",
-      traditionalPoint3: "Qualification required",
+      traditionalPoint1: "Mandatory monthly payments",
+      traditionalPoint2: "Financial stress to repay loan",
+      traditionalPoint3: "Must qualify for the loan",
       traditionalPoint4: "Risk of default",
-      reversePoint1: "No payments",
+      reversePoint1: "No monthly payments",
       reversePoint2: "The bank pays you!",
-      reversePoint3: "No qualification",
-      reversePoint4: "Stay owner",
+      reversePoint3: "Automatically qualify",
+      reversePoint4: "Always maintain ownership",
       upToValue: "Up to 55% of value",
       // Repayment
       repaymentTitle: "When to repay?",
@@ -659,18 +659,18 @@ export const translations = {
         "Receive your funds as a lump sum, recurring advances, or a combination of both based on your needs.",
       benefit1Point1: "One-time lump sum",
       benefit1Point2: "Scheduled monthly advances",
-      benefit1Point3: "Reserve available for later",
+      benefit1Point3: "Withdraw as needed",
       benefit2Title: "Simplified Process",
       benefit2Desc:
         "Unlike traditional loans, reverse mortgages are specifically designed for retirees with adapted criteria.",
-      benefit2Point1: "No strict income verification",
-      benefit2Point2: "No ongoing credit rechecks",
-      benefit2Point3: "Fast and transparent process",
+      benefit2Point1: "Simplified application process",
+      benefit2Point2: "No minimum-income requirements",
+      benefit2Point3: "Fast & transparent process",
       benefit3Title: "Guaranteed Protection",
       benefit3Desc:
         "The federal government requires all reverse mortgage loans to include a negative equity guarantee.",
-      benefit3Point1: "Never more than the home's value",
-      benefit3Point2: "Your heirs will never be in debt",
+      benefit3Point1: "Never owe more than the home's value",
+      benefit3Point2: "Your heirs will never inherit debt",
       benefit3Point3: "Your estate is protected",
       // Stats
       stat1Value: "55%",
@@ -753,7 +753,7 @@ export const translations = {
       case7Reality: "Treat yourself to this well-deserved retreat",
       case7Desc:
         "Buy that vacation property you've dreamed of for years. An investment in your quality of life.",
-      case7Benefit1: "Cottage in nature",
+      case7Benefit1: "Country cottage",
       case7Benefit2: "Condo in Florida",
       case7Benefit3: "Family legacy",
       case7Amount: "$50,000 - $200,000",
@@ -856,7 +856,7 @@ export const translations = {
       email: "Email",
       brokerTitle: "Licensed Mortgage Broker",
       brokerBio:
-        "Access Home Equity is led by Mark A. Barbieri, a seasoned reverse mortgage expert dedicated to senior homeowners. With over 25 years of experience, gained at both Canada's largest bank and in the mortgage brokerage sector, Mark and his team offer deep expertise and a client-centered approach at every step of the process.",
+        "Access Home Equity is led by Mark A. Barbieri, a seasoned Reverse-Mortgage expert dedicated to helping senior homeowners. With over 25 years of experience, gained working at both Canada's largest bank & within the mortgage brokerage sector, Mark and his team offer a profound expertise and a client-first approach at every step of the process.",
     },
     // Footer
     footer: {
