@@ -12,11 +12,9 @@ export default function HeroSection() {
 
   const siteName =
     locale === "en" ? "Access Home Equity" : "Accédez à Votre Capital";
-  const siteUrl =
-    locale === "en" ? "accesshomeequity.ca" : "accedezavotrecapital.ca";
 
   return (
-    <section className="relative h-[100svh] lg:h-screen pt-20 md:pt-24 overflow-hidden bg-primary">
+    <section className="relative min-h-[100svh] pt-24 md:pt-28 lg:pt-32 pb-12 md:pb-16 lg:pb-20 overflow-hidden bg-primary">
       <div className="absolute inset-0 z-0">
         {/* Greyscale image on the right side */}
         <div
@@ -36,7 +34,7 @@ export default function HeroSection() {
         <div className="absolute top-20 right-20 w-64 h-64 bg-primary-foreground/5 rounded-full blur-2xl" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-4 relative z-10 h-full flex flex-col justify-center lg:justify-start">
+      <div className="container mx-auto px-4 sm:px-4 relative z-10 flex flex-col">
         {/* Mobile: Logo + Content grouped together and centered */}
         <div className="flex flex-col lg:hidden">
           {/* Logo and Site Name */}
@@ -128,26 +126,8 @@ export default function HeroSection() {
         </div>
 
         {/* Desktop Layout */}
-        <div className="hidden lg:flex lg:flex-col lg:h-full">
-          {/* Logo and Site Name */}
-          <div className="flex justify-center items-center flex-grow">
-            <div className="flex items-center gap-4">
-              <div className="bg-white rounded-xl p-2 shadow-lg">
-                <Image
-                  src="/logo.png"
-                  alt={siteName}
-                  width={48}
-                  height={48}
-                  className="rounded-lg w-12 h-12"
-                />
-              </div>
-              <span className="text-6xl font-semibold text-white">
-                {siteName}
-              </span>
-            </div>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 items-start flex-grow py-0">
+        <div className="hidden lg:block">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left Content */}
             <div className="text-primary-foreground flex flex-col justify-center">
               <h1 className="font-serif text-5xl xl:text-6xl font-bold leading-tight mb-6 text-balance">

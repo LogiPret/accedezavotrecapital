@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function PartnerBanks() {
   const partners = [
     { name: "Banque Équitable", logo: "/equitable-bank-logo-simple.jpg" },
@@ -23,11 +25,15 @@ export default function PartnerBanks() {
                 key={`first-${index}`}
                 className="flex-shrink-0 mx-4 md:mx-8 lg:mx-12 flex items-center justify-center h-12 md:h-16 w-28 md:w-40 grayscale transition-all duration-300"
               >
-                <img
-                  src={partner.logo || "/placeholder.svg"}
-                  alt={partner.name}
-                  className="max-h-8 md:max-h-12 max-w-full object-contain"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={partner.logo || "/placeholder.svg"}
+                    alt={partner.name}
+                    fill
+                    sizes="(min-width: 1024px) 10rem, (min-width: 768px) 10rem, 7rem"
+                    className="object-contain"
+                  />
+                </div>
               </div>
             ))}
             {/* Duplicate set for seamless loop */}
@@ -36,11 +42,15 @@ export default function PartnerBanks() {
                 key={`second-${index}`}
                 className="flex-shrink-0 mx-4 md:mx-8 lg:mx-12 flex items-center justify-center h-12 md:h-16 w-28 md:w-40 grayscale transition-all duration-300"
               >
-                <img
-                  src={partner.logo || "/placeholder.svg"}
-                  alt={partner.name}
-                  className="max-h-8 md:max-h-12 max-w-full object-contain"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={partner.logo || "/placeholder.svg"}
+                    alt={partner.name}
+                    fill
+                    sizes="(min-width: 1024px) 10rem, (min-width: 768px) 10rem, 7rem"
+                    className="object-contain"
+                  />
+                </div>
               </div>
             ))}
           </div>

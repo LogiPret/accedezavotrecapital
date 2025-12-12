@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Phone, Mail, MapPin, Facebook, Linkedin, Youtube } from "lucide-react";
+import Image from "next/image";
+import { Phone, Mail, Facebook } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 
 export default function Footer() {
@@ -10,8 +11,6 @@ export default function Footer() {
 
   const siteName =
     locale === "en" ? "AccessHomeEquity" : "AccedezAVotreCapital";
-  const domain =
-    locale === "en" ? "accesshomeequity.ca" : "accedezavotrecapital.ca";
   const emailDomain =
     locale === "en"
       ? "info@accesshomeequity.ca"
@@ -25,9 +24,11 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2 mb-6">
               <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-1.5">
-                <img
+                <Image
                   src="/logo.png"
                   alt="logo"
+                  width={48}
+                  height={48}
                   className="w-full h-full object-contain"
                 />
               </div>

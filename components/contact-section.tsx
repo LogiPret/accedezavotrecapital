@@ -1,6 +1,7 @@
 "use client";
 
 import { Phone, Mail } from "lucide-react";
+import Image from "next/image";
 import ContactForm from "@/components/contact-form";
 import { useLocale } from "@/lib/locale-context";
 
@@ -29,14 +30,16 @@ export default function ContactSection() {
             <div className="flex flex-col md:flex-row">
               {/* Photo - left side on larger screens */}
               <div className="relative w-full md:w-64 lg:w-72 shrink-0 h-64 md:h-auto">
-                <img
+                <Image
                   src="/mark.png"
                   alt={
                     locale === "en"
                       ? "Mark A. Barbieri - Mortgage Broker"
                       : "Mark A. Barbieri - Courtier Hypothécaire"
                   }
-                  className="w-full h-full object-cover object-top"
+                  fill
+                  sizes="(min-width: 1024px) 18rem, (min-width: 768px) 16rem, 100vw"
+                  className="object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-primary/90 via-primary/40 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 md:hidden">

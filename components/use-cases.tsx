@@ -11,7 +11,6 @@ import {
   Building2,
   CreditCard,
   Check,
-  Sparkles,
   ArrowRight,
   ChevronLeft,
   ChevronRight,
