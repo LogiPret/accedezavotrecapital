@@ -45,7 +45,12 @@ export default function Header() {
               {isScrolled && (
                 <Link href="/" className="flex lg:hidden items-center gap-2">
                   <div className="w-8 h-8 rounded-lg flex">
-                    <Image src="/logo.png" alt={siteName} width={32} height={32} />
+                    <Image
+                      src="/logo.png"
+                      alt={siteName}
+                      width={32}
+                      height={32}
+                    />
                   </div>
                   <span className="font-semibold text-xl text-foreground">
                     {siteName}
