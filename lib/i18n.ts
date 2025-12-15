@@ -123,7 +123,7 @@ export const translations = {
       traditionalPoint3: "Qualification requise",
       traditionalPoint4: "Risque de défaut",
       reversePoint1: "Aucun paiement",
-      reversePoint2: "C'est la banque qui vosu paie!",
+      reversePoint2: "C'est la banque qui vous paie!",
       reversePoint3: "Pas de qualification",
       reversePoint4: "Restez propriétaire",
       upToValue: "Jusqu'à 55% de valeur",
