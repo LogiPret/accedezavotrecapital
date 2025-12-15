@@ -35,7 +35,7 @@ export default function HeroSection() {
         <div className="absolute top-20 right-20 w-64 h-64 bg-primary-foreground/5 rounded-full blur-2xl" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-4 relative z-10 flex flex-col">
+      <div className="container mx-auto px-4 sm:px-4 relative z-10 flex flex-col pt-4 sm:pt-8 md:pt-12">
         {/* Mobile: Logo + Content grouped together and centered */}
         <div className="flex flex-col lg:hidden">
           {/* Logo and Site Name */}

@@ -37,10 +37,11 @@ function getLangSwitchUrl(locale: string): string | null {
 export default function Header() {
   const { t, locale } = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [langSwitchUrl, setLangSwitchUrl] = useState<string | null>(null);
 
-  // Compute URL on client-side only during render
-  const langSwitchUrl =
-    typeof window !== "undefined" ? getLangSwitchUrl(locale) : null;
+  useEffect(() => {
+    setLangSwitchUrl(getLangSwitchUrl(locale));
+  }, [locale]);
 
   useEffect(() => {
     const handleScroll = () => {
