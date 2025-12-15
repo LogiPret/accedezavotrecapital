@@ -30,8 +30,8 @@ This project uses a simple in-repo i18n setup (no external i18n library).
 
 - **Production (domain-based):** English is served on `accesshomeequity.ca`, French on `accedezavotrecapital.ca`.
 - **Local/dev (easy):** add a query param:
-	- `http://localhost:3000/?lang=en`
-	- `http://localhost:3000/?lang=fr`
+  - `http://localhost:3000/?lang=en`
+  - `http://localhost:3000/?lang=fr`
 
 Note: there is no in-app “toggle” that changes language client-side; switching language happens by navigating to the other domain or using the `?lang=` parameter (which causes the server to render with a different locale).
 

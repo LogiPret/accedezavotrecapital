@@ -98,7 +98,7 @@ export const translations = {
       step1Num: "01",
       step1Title: "Évaluation",
       step1Desc:
-        "Nous évaluons votre admissibilité basée sur votre âge (55+), la valeur de votre propriété et votre emplacement.",
+        "Nous évaluons votre admissibilité basée sur votre âge (55+), la valeur de votre propriété et de votre région.",
       step2Num: "02",
       step2Title: "Consultation",
       step2Desc:
@@ -106,7 +106,7 @@ export const translations = {
       step3Num: "03",
       step3Title: "Approbation",
       step3Desc:
-        "Votre demande est soumise à nos partenaires bancaires. Processus rapide avec réponse en quelques jours.",
+        "Votre demande est soumise à nos partenaires bancaires. C'est un processus rapide avec une réponse en quelques jours.",
       step4Num: "04",
       step4Title: "Financement",
       step4Desc:
@@ -117,20 +117,19 @@ export const translations = {
       forPlus55: "Pour 55+",
       you: "Vous",
       bank: "Banque",
-      monthlyPayments: "$$$/mois",
-      noPayments: "0$/mois",
+      monthlyPayments: "$$$",
       traditionalPoint1: "Paiements obligatoires",
       traditionalPoint2: "Stress financier",
       traditionalPoint3: "Qualification requise",
       traditionalPoint4: "Risque de défaut",
       reversePoint1: "Aucun paiement",
-      reversePoint2: "La banque vous paye!",
+      reversePoint2: "C'est la banque qui vosu paie!",
       reversePoint3: "Pas de qualification",
       reversePoint4: "Restez propriétaire",
       upToValue: "Jusqu'à 55% de valeur",
       // Repayment
       repaymentTitle: "Quand rembourser?",
-      repaymentSubtitle: "Le prêt devient dû uniquement dans ces situations:",
+      repaymentSubtitle: "Le prêt n'est dû uniquement que dans ces situations:",
       repaymentTrigger1: "Vous vendez ou transférez la propriété",
       repaymentTrigger2:
         "Vous déménagez dans un foyer de soins de longue durée",
@@ -248,7 +247,7 @@ export const translations = {
       // Case 7 - Vacation home
       case7Title: "Résidence Secondaire",
       case7Dream: "Ce chalet au bord du lac vous fait rêver?",
-      case7Reality: "Offrez-vous ce refuge bien mérité",
+      case7Reality: "Offrez-vous ce havre de paix bien mérité",
       case7Desc:
         "Achetez cette propriété de vacances dont vous rêvez depuis des années. Un investissement dans votre qualité de vie.",
       case7Benefit1: "Chalet en nature",
@@ -621,7 +620,6 @@ export const translations = {
       you: "You",
       bank: "Bank",
       monthlyPayments: "$$$/month",
-      noPayments: "$0/month",
       traditionalPoint1: "Mandatory monthly payments",
       traditionalPoint2: "Financial stress to repay loan",
       traditionalPoint3: "Must qualify for the loan",

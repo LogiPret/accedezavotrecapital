@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useLocale } from "@/lib/locale-context";
+import { trackFAQClick } from "@/lib/tracking";
 
 export default function FAQSection() {
   const { t } = useLocale();
@@ -24,6 +25,10 @@ export default function FAQSection() {
     { question: t.faq.q10, answer: t.faq.a10 },
   ];
 
+  const handleFAQClick = (index: number, question: string) => {
+    trackFAQClick(index, question);
+  };
+
   return (
     <section id="faq" className="py-20 md:py-28 bg-secondary">
       <div className="container mx-auto px-4">
@@ -35,7 +40,17 @@ export default function FAQSection() {
         </div>
 
         <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion
+            type="single"
+            collapsible
+            className="space-y-4"
+            onValueChange={(value) => {
+              if (value) {
+                const index = parseInt(value.replace("item-", ""));
+                handleFAQClick(index, faqs[index].question);
+              }
+            }}
+          >
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}

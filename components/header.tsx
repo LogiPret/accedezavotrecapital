@@ -6,10 +6,41 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
+import {
+  trackPhoneClick,
+  trackLanguageSwitch,
+  trackCTAClick,
+} from "@/lib/tracking";
+
+function getLangSwitchUrl(locale: string): string | null {
+  if (typeof window === "undefined") return null;
+
+  const hostname = window.location.hostname;
+  const isLocalhost =
+    hostname.includes("localhost") || hostname.includes("127.0.0.1");
+
+  if (isLocalhost) {
+    if (locale === "en") {
+      return `${window.location.protocol}//localhost:${window.location.port}${window.location.pathname}`;
+    } else {
+      return `${window.location.protocol}//en.localhost:${window.location.port}${window.location.pathname}`;
+    }
+  } else {
+    if (locale === "en") {
+      return `https://accedezavotrecapital.ca${window.location.pathname}`;
+    } else {
+      return `https://accesshomeequity.ca${window.location.pathname}`;
+    }
+  }
+}
 
 export default function Header() {
   const { t, locale } = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
+
+  // Compute URL on client-side only during render
+  const langSwitchUrl =
+    typeof window !== "undefined" ? getLangSwitchUrl(locale) : null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -117,8 +148,68 @@ export default function Header() {
 
               {/* CTA Button (right) */}
               <div className="hidden md:flex items-center gap-4 ml-auto lg:ml-0 justify-self-end">
+                {langSwitchUrl && (
+                  <div className="flex items-center text-sm font-medium">
+                    {locale === "en" ? (
+                      <a
+                        href={langSwitchUrl}
+                        onClick={() => trackLanguageSwitch("en", "fr")}
+                        className={`hover:underline ${
+                          isScrolled
+                            ? "text-muted-foreground/50 hover:text-foreground"
+                            : "text-primary-foreground/40 hover:text-primary-foreground"
+                        }`}
+                      >
+                        FR
+                      </a>
+                    ) : (
+                      <span
+                        className={
+                          isScrolled
+                            ? "text-foreground"
+                            : "text-primary-foreground"
+                        }
+                      >
+                        FR
+                      </span>
+                    )}
+                    <span
+                      className={`mx-1 ${
+                        isScrolled
+                          ? "text-muted-foreground/50"
+                          : "text-primary-foreground/40"
+                      }`}
+                    >
+                      /
+                    </span>
+                    {locale === "fr" ? (
+                      <a
+                        href={langSwitchUrl}
+                        onClick={() => trackLanguageSwitch("fr", "en")}
+                        className={`hover:underline ${
+                          isScrolled
+                            ? "text-muted-foreground/50 hover:text-foreground"
+                            : "text-primary-foreground/40 hover:text-primary-foreground"
+                        }`}
+                      >
+                        EN
+                      </a>
+                    ) : (
+                      <span
+                        className={
+                          isScrolled
+                            ? "text-foreground"
+                            : "text-primary-foreground"
+                        }
+                      >
+                        EN
+                      </span>
+                    )}
+                  </div>
+                )}
                 <a
                   href="tel:+15149848182"
+                  onClick={() => trackPhoneClick("header")}
                   className={`flex items-center gap-2 text-sm font-medium ${
                     isScrolled ? "text-primary" : "text-primary-foreground"
                   }`}
@@ -139,6 +230,7 @@ export default function Header() {
                     scroll={false}
                     onClick={(e) => {
                       e.preventDefault();
+                      trackCTAClick("free_consultation", "header");
                       const target = document.querySelector("#contact");
                       if (target) {
                         const offset = 80;

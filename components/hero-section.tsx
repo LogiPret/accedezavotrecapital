@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2, DollarSign, Home } from "lucide-react";
 import ContactForm from "@/components/contact-form";
 import { useLocale } from "@/lib/locale-context";
+import { trackCTAClick } from "@/lib/tracking";
 
 export default function HeroSection() {
   const { t, locale } = useLocale();
@@ -75,6 +76,7 @@ export default function HeroSection() {
                   scroll={false}
                   onClick={(e) => {
                     e.preventDefault();
+                    trackCTAClick("calculate_eligibility", "hero_mobile");
                     const target = document.querySelector("#calculatrice");
                     if (target) {
                       const offset = 80;
@@ -148,6 +150,7 @@ export default function HeroSection() {
                     scroll={false}
                     onClick={(e) => {
                       e.preventDefault();
+                      trackCTAClick("calculate_eligibility", "hero_desktop");
                       const target = document.querySelector("#calculatrice");
                       if (target) {
                         const offset = 80;

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/card";
 import { Calculator, Home, TrendingUp, Info, Users } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
+import { trackCalculatorInteraction } from "@/lib/tracking";
 
 const QUEBEC_CITIES = [
   "Montréal",
@@ -124,6 +125,11 @@ export default function CalculatorSection() {
         return;
       }
       setShowResults(true);
+      trackCalculatorInteraction(
+        "result_view",
+        homeValue,
+        eligibility?.maxAmount
+      );
     }
   };
 

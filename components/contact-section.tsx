@@ -4,6 +4,7 @@ import { Phone, Mail } from "lucide-react";
 import Image from "next/image";
 import ContactForm from "@/components/contact-form";
 import { useLocale } from "@/lib/locale-context";
+import { trackPhoneClick, trackButtonClick } from "@/lib/tracking";
 
 export default function ContactSection() {
   const { t, locale } = useLocale();
@@ -73,6 +74,7 @@ export default function ContactSection() {
                 <div className="space-y-3">
                   <a
                     href="tel:1-514-984-8182"
+                    onClick={() => trackPhoneClick("contact_section")}
                     className="flex items-center gap-3 p-3 md:p-4 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group"
                   >
                     <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary rounded-xl text-primary-foreground group-hover:scale-105 transition-transform shrink-0">
@@ -90,6 +92,7 @@ export default function ContactSection() {
 
                   <a
                     href={`mailto:${email}`}
+                    onClick={() => trackButtonClick("email", "contact_section")}
                     className="flex items-center gap-3 p-3 md:p-4 bg-secondary rounded-xl hover:bg-secondary/80 transition-colors group"
                   >
                     <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary rounded-xl text-primary-foreground group-hover:scale-105 transition-transform shrink-0">

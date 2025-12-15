@@ -8,7 +8,6 @@ import {
   Shield,
   CheckCircle2,
   ArrowRight,
-  Check,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/lib/locale-context";
@@ -232,16 +231,11 @@ export default function WhatIsReverseMortgage() {
               {t.whatIs.howItWorksSubtitle}
             </p>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+            <div className="grid grid-cols-[1fr_auto_1fr] gap-2 sm:gap-3 md:gap-4 lg:gap-6 items-stretch">
               {/* Traditional - compact on mobile */}
               <div className="relative bg-secondary/20 border border-border rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8">
                 <div className="relative">
                   <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
-                    <div className="w-7 h-7 md:w-10 md:h-10 rounded-full bg-secondary/50 flex items-center justify-center">
-                      <span className="text-xs md:text-sm font-medium text-muted-foreground">
-                        VS
-                      </span>
-                    </div>
                     <h4 className="text-xs sm:text-sm md:text-lg font-semibold text-muted-foreground">
                       {t.whatIs.traditional}
                     </h4>
@@ -296,12 +290,21 @@ export default function WhatIsReverseMortgage() {
                       </span>
                     </li>
                     <li className="hidden md:flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40 mt-2 shrink-0" />
-                      <span className="text-sm text-muted-foreground/70">
+                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60 mt-2 shrink-0" />
+                      <span className="text-sm text-muted-foreground/80">
                         {t.whatIs.traditionalPoint4}
                       </span>
                     </li>
                   </ul>
+                </div>
+              </div>
+
+              {/* VS divider */}
+              <div className="flex items-center justify-center">
+                <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-secondary flex items-center justify-center">
+                  <span className="text-xs md:text-sm font-bold text-muted-foreground">
+                    VS
+                  </span>
                 </div>
               </div>
 
@@ -315,9 +318,6 @@ export default function WhatIsReverseMortgage() {
 
                 <div className="relative pt-1 md:pt-2">
                   <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
-                    <div className="w-7 h-7 md:w-10 md:h-10 rounded-full bg-primary flex items-center justify-center">
-                      <Check className="w-3 h-3 md:w-5 md:h-5 text-primary-foreground" />
-                    </div>
                     <h4 className="text-xs sm:text-sm md:text-lg font-bold text-foreground">
                       {t.whatIs.reverse}
                     </h4>

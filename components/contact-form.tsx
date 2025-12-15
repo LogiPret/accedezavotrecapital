@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,6 +15,11 @@ import {
 } from "@/components/ui/select";
 import { CheckCircle2 } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
+import {
+  trackFormStart,
+  trackFormSubmit,
+  trackFormError,
+} from "@/lib/tracking";
 
 interface ContactFormProps {
   formType: "hero form" | "contact form";
@@ -38,6 +43,14 @@ export default function ContactForm({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const hasTrackedStart = useRef(false);
+
+  const handleFormInteraction = () => {
+    if (!hasTrackedStart.current) {
+      trackFormStart(formType);
+      hasTrackedStart.current = true;
+    }
+  };
 
   const formatPhoneNumber = (value: string) => {
     // Remove all non-digits
@@ -68,10 +81,12 @@ export default function ContactForm({
     const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
     if (!nameRegex.test(formData.firstName.trim())) {
       setError(t.form.errorFirstName);
+      trackFormError(formType, "invalid_first_name");
       return false;
     }
     if (!nameRegex.test(formData.lastName.trim())) {
       setError(t.form.errorLastName);
+      trackFormError(formType, "invalid_last_name");
       return false;
     }
 
@@ -79,6 +94,7 @@ export default function ContactForm({
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setError(t.form.errorEmail);
+      trackFormError(formType, "invalid_email");
       return false;
     }
 
@@ -86,12 +102,14 @@ export default function ContactForm({
     const phoneDigits = formData.phone.replace(/\D/g, "");
     if (phoneDigits.length !== 10) {
       setError(t.form.errorPhone);
+      trackFormError(formType, "invalid_phone");
       return false;
     }
 
     // Validate age is selected
     if (!formData.age) {
       setError(t.form.errorAge);
+      trackFormError(formType, "missing_age");
       return false;
     }
 
@@ -132,6 +150,7 @@ export default function ContactForm({
         throw new Error("Form submission failed");
       }
 
+      trackFormSubmit(formType, true);
       setIsSubmitted(true);
       setFormData({
         firstName: "",
@@ -146,6 +165,8 @@ export default function ContactForm({
     } catch (error) {
       console.error("Form submission error:", error);
       setError(t.form.errorGeneral);
+      trackFormSubmit(formType, false);
+      trackFormError(formType, "submission_failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -194,6 +215,7 @@ export default function ContactForm({
             id={`${formType}-firstName`}
             placeholder={t.form.firstName}
             value={formData.firstName}
+            onFocus={handleFormInteraction}
             onChange={(e) =>
               setFormData({ ...formData, firstName: e.target.value })
             }

@@ -6,17 +6,30 @@ import Calculator from "@/components/calculator";
 import UseCases from "@/components/use-cases";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
+import TrackedSection from "@/components/tracked-section";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Header />
-      <HeroSection />
-      <WhatIsReverseMortgage />
-      <BenefitsSection />
-      <Calculator />
-      <UseCases />
-      <ContactSection />
+      <TrackedSection sectionId="hero">
+        <HeroSection />
+      </TrackedSection>
+      <TrackedSection sectionId="what-is-reverse-mortgage">
+        <WhatIsReverseMortgage />
+      </TrackedSection>
+      <TrackedSection sectionId="benefits">
+        <BenefitsSection />
+      </TrackedSection>
+      <TrackedSection sectionId="calculator">
+        <Calculator />
+      </TrackedSection>
+      <TrackedSection sectionId="use-cases">
+        <UseCases />
+      </TrackedSection>
+      <TrackedSection sectionId="contact">
+        <ContactSection />
+      </TrackedSection>
       <Footer />
     </main>
   );
