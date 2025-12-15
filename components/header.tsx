@@ -12,36 +12,56 @@ import {
   trackCTAClick,
 } from "@/lib/tracking";
 
-function getLangSwitchUrl(locale: string): string | null {
-  if (typeof window === "undefined") return null;
+function getLangSwitchUrl(locale: string, hash?: string): string {
+  if (typeof window === "undefined") return "#";
 
   const hostname = window.location.hostname;
   const isLocalhost =
     hostname.includes("localhost") || hostname.includes("127.0.0.1");
+  const hashPart = hash || window.location.hash || "";
 
   if (isLocalhost) {
     if (locale === "en") {
-      return `${window.location.protocol}//localhost:${window.location.port}${window.location.pathname}`;
+      return `${window.location.protocol}//localhost:${window.location.port}${window.location.pathname}${hashPart}`;
     } else {
-      return `${window.location.protocol}//en.localhost:${window.location.port}${window.location.pathname}`;
+      return `${window.location.protocol}//en.localhost:${window.location.port}${window.location.pathname}${hashPart}`;
     }
   } else {
     if (locale === "en") {
-      return `https://accedezavotrecapital.ca${window.location.pathname}`;
+      return `https://accedezavotrecapital.ca${window.location.pathname}${hashPart}`;
     } else {
-      return `https://accesshomeequity.ca${window.location.pathname}`;
+      return `https://accesshomeequity.ca${window.location.pathname}${hashPart}`;
     }
   }
+}
+
+function getCurrentSectionHash(): string {
+  if (typeof window === "undefined") return "";
+
+  const sections = document.querySelectorAll("section[id]");
+  let currentSection = "";
+
+  for (const section of sections) {
+    const rect = section.getBoundingClientRect();
+    // If section top is above middle of viewport, it's the current section
+    if (rect.top <= window.innerHeight / 2) {
+      currentSection = `#${section.id}`;
+    }
+  }
+
+  return currentSection;
 }
 
 export default function Header() {
   const { t, locale } = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [langSwitchUrl, setLangSwitchUrl] = useState<string | null>(null);
 
-  useEffect(() => {
-    setLangSwitchUrl(getLangSwitchUrl(locale));
-  }, [locale]);
+  const handleLanguageSwitch = (fromLocale: string, toLocale: string) => {
+    trackLanguageSwitch(fromLocale, toLocale);
+    const hash = getCurrentSectionHash();
+    const url = getLangSwitchUrl(locale, hash);
+    window.location.href = url;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,8 +92,8 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="h-16 md:h-20">
           <div className="h-full flex items-center">
-            <div className="w-full flex items-center justify-center lg:grid lg:grid-cols-3 lg:items-center">
-              {/* Mobile Logo - only when scrolled (mobile uses hero logo at top) */}
+            <div className="w-full flex items-center justify-center lg:grid lg:grid-cols-3 lg:items-center relative">
+              {/* Mobile Logo - centered, only when scrolled */}
               {isScrolled && (
                 <Link href="/" className="flex lg:hidden items-center gap-2">
                   <div className="w-8 h-8 rounded-lg flex">
@@ -89,6 +109,63 @@ export default function Header() {
                   </span>
                 </Link>
               )}
+
+              {/* Mobile Language Toggle - absolute right */}
+              <div className="absolute right-0 flex lg:hidden items-center text-sm font-medium">
+                {locale === "en" ? (
+                  <button
+                    onClick={() => handleLanguageSwitch("en", "fr")}
+                    className={`hover:underline cursor-pointer ${
+                      isScrolled
+                        ? "text-muted-foreground hover:text-foreground"
+                        : "text-primary-foreground/70 hover:text-primary-foreground"
+                    }`}
+                  >
+                    FR
+                  </button>
+                ) : (
+                  <span
+                    className={
+                      isScrolled
+                        ? "text-foreground font-bold"
+                        : "text-primary-foreground font-bold"
+                    }
+                  >
+                    FR
+                  </span>
+                )}
+                <span
+                  className={`mx-1 ${
+                    isScrolled
+                      ? "text-muted-foreground"
+                      : "text-primary-foreground/70"
+                  }`}
+                >
+                  /
+                </span>
+                {locale === "fr" ? (
+                  <button
+                    onClick={() => handleLanguageSwitch("fr", "en")}
+                    className={`hover:underline cursor-pointer ${
+                      isScrolled
+                        ? "text-muted-foreground hover:text-foreground"
+                        : "text-primary-foreground/70 hover:text-primary-foreground"
+                    }`}
+                  >
+                    EN
+                  </button>
+                ) : (
+                  <span
+                    className={
+                      isScrolled
+                        ? "text-foreground font-bold"
+                        : "text-primary-foreground font-bold"
+                    }
+                  >
+                    EN
+                  </span>
+                )}
+              </div>
 
               {/* Desktop Navigation (left) */}
               <nav className="hidden lg:flex items-center gap-6 justify-self-start">
@@ -149,65 +226,61 @@ export default function Header() {
 
               {/* CTA Button (right) */}
               <div className="hidden md:flex items-center gap-4 ml-auto lg:ml-0 justify-self-end">
-                {langSwitchUrl && (
-                  <div className="flex items-center text-sm font-medium">
-                    {locale === "en" ? (
-                      <a
-                        href={langSwitchUrl}
-                        onClick={() => trackLanguageSwitch("en", "fr")}
-                        className={`hover:underline ${
-                          isScrolled
-                            ? "text-muted-foreground/50 hover:text-foreground"
-                            : "text-primary-foreground/40 hover:text-primary-foreground"
-                        }`}
-                      >
-                        FR
-                      </a>
-                    ) : (
-                      <span
-                        className={
-                          isScrolled
-                            ? "text-foreground"
-                            : "text-primary-foreground"
-                        }
-                      >
-                        FR
-                      </span>
-                    )}
-                    <span
-                      className={`mx-1 ${
+                <div className="flex items-center text-sm font-medium">
+                  {locale === "en" ? (
+                    <button
+                      onClick={() => handleLanguageSwitch("en", "fr")}
+                      className={`hover:underline cursor-pointer ${
                         isScrolled
-                          ? "text-muted-foreground/50"
-                          : "text-primary-foreground/40"
+                          ? "text-muted-foreground/50 hover:text-foreground"
+                          : "text-primary-foreground/40 hover:text-primary-foreground"
                       }`}
                     >
-                      /
+                      FR
+                    </button>
+                  ) : (
+                    <span
+                      className={
+                        isScrolled
+                          ? "text-foreground"
+                          : "text-primary-foreground"
+                      }
+                    >
+                      FR
                     </span>
-                    {locale === "fr" ? (
-                      <a
-                        href={langSwitchUrl}
-                        onClick={() => trackLanguageSwitch("fr", "en")}
-                        className={`hover:underline ${
-                          isScrolled
-                            ? "text-muted-foreground/50 hover:text-foreground"
-                            : "text-primary-foreground/40 hover:text-primary-foreground"
-                        }`}
-                      >
-                        EN
-                      </a>
-                    ) : (
-                      <span
-                        className={
-                          isScrolled
-                            ? "text-foreground"
-                            : "text-primary-foreground"
-                        }
-                      >
-                        EN
-                      </span>
-                    )}
-                  </div>
-                )}
+                  )}
+                  <span
+                    className={`mx-1 ${
+                      isScrolled
+                        ? "text-muted-foreground/50"
+                        : "text-primary-foreground/40"
+                    }`}
+                  >
+                    /
+                  </span>
+                  {locale === "fr" ? (
+                    <button
+                      onClick={() => handleLanguageSwitch("fr", "en")}
+                      className={`hover:underline cursor-pointer ${
+                        isScrolled
+                          ? "text-muted-foreground/50 hover:text-foreground"
+                          : "text-primary-foreground/40 hover:text-primary-foreground"
+                      }`}
+                    >
+                      EN
+                    </button>
+                  ) : (
+                    <span
+                      className={
+                        isScrolled
+                          ? "text-foreground"
+                          : "text-primary-foreground"
+                      }
+                    >
+                      EN
+                    </span>
+                  )}
+                </div>
                 <a
                   href="tel:+15149848182"
                   onClick={() => trackPhoneClick("header")}
