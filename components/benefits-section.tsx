@@ -53,7 +53,7 @@ export default function BenefitsSection() {
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-balance">
             {t.benefits.title}
           </h2>
-          <p className="text-sm md:text-lg text-primary-foreground/80">
+          <p className="text-base md:text-xl text-primary-foreground/80">
             {t.benefits.subtitle}
           </p>
         </div>
@@ -67,10 +67,10 @@ export default function BenefitsSection() {
               <div className="text-4xl md:text-5xl font-bold text-primary-foreground/30 mb-3 md:mb-4">
                 0{index + 1}
               </div>
-              <h3 className="font-serif text-lg md:text-2xl font-bold mb-3 md:mb-4">
+              <h3 className="font-serif text-xl md:text-2xl font-bold mb-3 md:mb-4">
                 {benefit.title}
               </h3>
-              <p className="text-sm md:text-base text-primary-foreground/80 mb-4 md:mb-6">
+              <p className="text-base md:text-lg text-primary-foreground/80 mb-4 md:mb-6">
                 {benefit.description}
               </p>
               <ul className="space-y-2 md:space-y-3 mt-auto">
@@ -80,7 +80,7 @@ export default function BenefitsSection() {
                     className="flex items-center gap-2 md:gap-3"
                   >
                     <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 text-accent flex-shrink-0" />
-                    <span className="text-xs md:text-sm">{point}</span>
+                    <span className="text-sm md:text-base">{point}</span>
                   </li>
                 ))}
               </ul>
@@ -94,7 +94,7 @@ export default function BenefitsSection() {
               <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 md:mb-2">
                 {stat.value}
               </div>
-              <p className="text-[10px] sm:text-xs md:text-sm text-primary-foreground/70">
+              <p className="text-xs sm:text-sm md:text-base text-primary-foreground/70">
                 {stat.label}
               </p>
             </div>

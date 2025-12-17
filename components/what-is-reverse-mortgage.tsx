@@ -210,14 +210,14 @@ export default function WhatIsReverseMortgage() {
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 md:mb-16">
-          <span className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-primary/10 text-primary rounded-full text-xs md:text-sm font-medium mb-3 md:mb-4">
+          <span className="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-primary/10 text-primary rounded-full text-sm md:text-base font-medium mb-3 md:mb-4">
             {t.whatIs.badge}
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 md:mb-6 text-balance">
             {t.whatIs.title}{" "}
             <span className="text-primary">{t.whatIs.titleHighlight}</span>?
           </h2>
-          <p className="text-base md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             {t.whatIs.subtitle}
           </p>
         </div>
@@ -227,71 +227,204 @@ export default function WhatIsReverseMortgage() {
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-center mb-2 md:mb-4">
               {t.whatIs.howItWorks}
             </h3>
-            <p className="text-sm md:text-base text-muted-foreground text-center mb-6 md:mb-10 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-muted-foreground text-center mb-6 md:mb-10 max-w-2xl mx-auto">
               {t.whatIs.howItWorksSubtitle}
             </p>
 
-            <div className="grid grid-cols-[1fr_auto_1fr] gap-2 sm:gap-3 md:gap-4 lg:gap-6 items-stretch">
-              {/* Traditional - compact on mobile */}
-              <div className="relative bg-secondary/20 border border-border rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8">
-                <div className="relative">
-                  <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
-                    <h4 className="text-xs sm:text-sm md:text-lg font-semibold text-muted-foreground">
-                      {t.whatIs.traditional}
+            {/* Mobile: Stacked layout (Reverse on top) */}
+            <div className="flex flex-col gap-4 md:hidden">
+              {/* Reverse - highlighted - FIRST on mobile */}
+              <div className="relative bg-primary/10 border-2 border-primary rounded-xl p-4 shadow-xl shadow-primary/20">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <div className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-bold shadow-lg whitespace-nowrap">
+                    {t.whatIs.forPlus55}
+                  </div>
+                </div>
+
+                <div className="relative pt-2">
+                  <div className="flex items-center gap-2 mb-4">
+                    <h4 className="text-base font-bold text-foreground">
+                      {t.whatIs.reverse}
                     </h4>
                   </div>
 
-                  <div className="flex items-center justify-center gap-1 sm:gap-2 md:gap-3 mb-3 md:mb-6 py-2 md:py-4">
+                  <div className="flex items-center justify-center gap-3 mb-4 py-3 bg-primary/10 rounded-xl">
                     <div className="text-center">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-secondary/80 flex items-center justify-center mb-1 md:mb-2">
-                        <span className="text-base sm:text-lg md:text-2xl">
-                          👤
-                        </span>
+                      <div className="w-12 h-12 rounded-full bg-primary/20 ring-2 ring-primary/30 flex items-center justify-center mb-1">
+                        <span className="text-lg">👤</span>
                       </div>
-                      <p className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground">
+                      <p className="text-xs font-medium text-primary">
                         {t.whatIs.you}
                       </p>
                     </div>
                     <div className="flex flex-col items-center px-1">
-                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-6 md:h-6 text-muted-foreground/80" />
-                      <span className="text-[8px] sm:text-[10px] text-muted-foreground/80 mt-0.5">
-                        {t.whatIs.monthlyPayments}
+                      <ArrowRight className="w-6 h-6 text-primary rotate-180" />
+                      <span className="text-sm text-primary font-bold mt-0.5">
+                        $$$
                       </span>
                     </div>
                     <div className="text-center">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-secondary/80 flex items-center justify-center mb-1 md:mb-2">
-                        <span className="text-base sm:text-lg md:text-2xl">
-                          🏦
-                        </span>
+                      <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-1">
+                        <span className="text-lg">🏦</span>
                       </div>
-                      <p className="text-[8px] sm:text-[10px] md:text-xs text-muted-foreground">
+                      <p className="text-xs font-medium text-primary">
                         {t.whatIs.bank}
                       </p>
                     </div>
                   </div>
 
-                  <ul className="space-y-1.5 md:space-y-3">
-                    <li className="flex items-start gap-1.5 md:gap-3">
-                      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 md:mt-2 shrink-0" />
-                      <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/80">
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                      <span className="text-sm font-medium text-foreground">
+                        {t.whatIs.reversePoint1}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                      <span className="text-sm font-medium text-foreground">
+                        {t.whatIs.reversePoint2}
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
+                      <span className="text-sm font-medium text-foreground">
+                        {t.whatIs.reversePoint3}
+                      </span>
+                    </li>
+                  </ul>
+
+                  <div className="mt-4 pt-3 border-t border-primary/20">
+                    <p className="text-center text-sm font-bold text-primary">
+                      {t.whatIs.upToValue}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* VS divider - mobile */}
+              <div className="flex items-center justify-center py-1">
+                <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
+                  <span className="text-sm font-bold text-muted-foreground">
+                    VS
+                  </span>
+                </div>
+              </div>
+
+              {/* Traditional - SECOND on mobile */}
+              <div className="relative bg-secondary/20 border border-border rounded-xl p-4">
+                <div className="flex items-center gap-2 mb-4">
+                  <h4 className="text-base font-semibold text-muted-foreground">
+                    {t.whatIs.traditional}
+                  </h4>
+                </div>
+
+                <div className="flex items-center justify-center gap-3 mb-4 py-3">
+                  <div className="text-center">
+                    <div className="w-12 h-12 rounded-full bg-secondary/80 flex items-center justify-center mb-1">
+                      <span className="text-lg">👤</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {t.whatIs.you}
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center px-1">
+                    <ArrowRight className="w-5 h-5 text-muted-foreground/80" />
+                    <span className="text-xs text-muted-foreground/80 mt-0.5">
+                      {t.whatIs.monthlyPayments}
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <div className="w-12 h-12 rounded-full bg-secondary/80 flex items-center justify-center mb-1">
+                      <span className="text-lg">🏦</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      {t.whatIs.bank}
+                    </p>
+                  </div>
+                </div>
+
+                <ul className="space-y-2">
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 shrink-0" />
+                    <span className="text-sm text-muted-foreground/80">
+                      {t.whatIs.traditionalPoint1}
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 shrink-0" />
+                    <span className="text-sm text-muted-foreground/80">
+                      {t.whatIs.traditionalPoint2}
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 shrink-0" />
+                    <span className="text-sm text-muted-foreground/80">
+                      {t.whatIs.traditionalPoint3}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Desktop: Side-by-side layout */}
+            <div className="hidden md:grid grid-cols-[1fr_auto_1fr] gap-4 lg:gap-6 items-stretch">
+              {/* Traditional */}
+              <div className="relative bg-secondary/20 border border-border rounded-2xl p-6 lg:p-8">
+                <div className="relative">
+                  <div className="flex items-center gap-3 mb-6">
+                    <h4 className="text-lg font-semibold text-muted-foreground">
+                      {t.whatIs.traditional}
+                    </h4>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-3 mb-6 py-4">
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-full bg-secondary/80 flex items-center justify-center mb-2">
+                        <span className="text-2xl">👤</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {t.whatIs.you}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-center px-1">
+                      <ArrowRight className="w-6 h-6 text-muted-foreground/80" />
+                      <span className="text-xs text-muted-foreground/80 mt-0.5">
+                        {t.whatIs.monthlyPayments}
+                      </span>
+                    </div>
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-full bg-secondary/80 flex items-center justify-center mb-2">
+                        <span className="text-2xl">🏦</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {t.whatIs.bank}
+                      </p>
+                    </div>
+                  </div>
+
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60 mt-2 shrink-0" />
+                      <span className="text-base text-muted-foreground/80">
                         {t.whatIs.traditionalPoint1}
                       </span>
                     </li>
-                    <li className="flex items-start gap-1.5 md:gap-3">
-                      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 md:mt-2 shrink-0" />
-                      <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/80">
+                    <li className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60 mt-2 shrink-0" />
+                      <span className="text-base text-muted-foreground/80">
                         {t.whatIs.traditionalPoint2}
                       </span>
                     </li>
-                    <li className="hidden sm:flex items-start gap-1.5 md:gap-3">
-                      <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-muted-foreground/60 mt-1.5 md:mt-2 shrink-0" />
-                      <span className="text-[10px] sm:text-xs md:text-sm text-muted-foreground/80">
+                    <li className="flex items-start gap-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60 mt-2 shrink-0" />
+                      <span className="text-base text-muted-foreground/80">
                         {t.whatIs.traditionalPoint3}
                       </span>
                     </li>
-                    <li className="hidden md:flex items-start gap-3">
+                    <li className="flex items-start gap-3">
                       <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60 mt-2 shrink-0" />
-                      <span className="text-sm text-muted-foreground/80">
+                      <span className="text-base text-muted-foreground/80">
                         {t.whatIs.traditionalPoint4}
                       </span>
                     </li>
@@ -301,86 +434,82 @@ export default function WhatIsReverseMortgage() {
 
               {/* VS divider */}
               <div className="flex items-center justify-center">
-                <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-secondary flex items-center justify-center">
-                  <span className="text-xs md:text-sm font-bold text-muted-foreground">
+                <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+                  <span className="text-sm font-bold text-muted-foreground">
                     VS
                   </span>
                 </div>
               </div>
 
               {/* Reverse - highlighted */}
-              <div className="relative bg-primary/10 border-2 border-primary rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 shadow-xl shadow-primary/20">
-                <div className="absolute -top-2.5 md:-top-4 left-1/2 -translate-x-1/2">
-                  <div className="bg-primary text-primary-foreground px-2 py-0.5 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-sm font-bold shadow-lg whitespace-nowrap">
+              <div className="relative bg-primary/10 border-2 border-primary rounded-2xl p-6 lg:p-8 shadow-xl shadow-primary/20">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <div className="bg-primary text-primary-foreground px-4 py-1.5 rounded-full text-sm font-bold shadow-lg whitespace-nowrap">
                     {t.whatIs.forPlus55}
                   </div>
                 </div>
 
-                <div className="relative pt-1 md:pt-2">
-                  <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-6">
-                    <h4 className="text-xs sm:text-sm md:text-lg font-bold text-foreground">
+                <div className="relative pt-2">
+                  <div className="flex items-center gap-3 mb-6">
+                    <h4 className="text-lg font-bold text-foreground">
                       {t.whatIs.reverse}
                     </h4>
                   </div>
 
-                  <div className="flex items-center justify-center gap-1 sm:gap-2 md:gap-3 mb-3 md:mb-6 py-2 md:py-4 bg-primary/10 rounded-lg md:rounded-xl">
+                  <div className="flex items-center justify-center gap-3 mb-6 py-4 bg-primary/10 rounded-xl">
                     <div className="text-center">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-primary/20 ring-2 md:ring-4 ring-primary/30 flex items-center justify-center mb-1 md:mb-2">
-                        <span className="text-base sm:text-lg md:text-2xl">
-                          👤
-                        </span>
+                      <div className="w-16 h-16 rounded-full bg-primary/20 ring-4 ring-primary/30 flex items-center justify-center mb-2">
+                        <span className="text-2xl">👤</span>
                       </div>
-                      <p className="text-[8px] sm:text-[10px] md:text-xs font-medium text-primary">
+                      <p className="text-sm font-medium text-primary">
                         {t.whatIs.you}
                       </p>
                     </div>
                     <div className="flex flex-col items-center px-1">
-                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-8 md:h-8 text-primary rotate-180" />
-                      <span className="text-[8px] sm:text-xs text-primary font-bold mt-0.5">
+                      <ArrowRight className="w-8 h-8 text-primary rotate-180" />
+                      <span className="text-sm text-primary font-bold mt-0.5">
                         $$$
                       </span>
                     </div>
                     <div className="text-center">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full bg-primary/20 flex items-center justify-center mb-1 md:mb-2">
-                        <span className="text-base sm:text-lg md:text-2xl">
-                          🏦
-                        </span>
+                      <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-2">
+                        <span className="text-2xl">🏦</span>
                       </div>
-                      <p className="text-[8px] sm:text-[10px] md:text-xs font-medium text-primary">
+                      <p className="text-sm font-medium text-primary">
                         {t.whatIs.bank}
                       </p>
                     </div>
                   </div>
 
-                  <ul className="space-y-1.5 md:space-y-3">
-                    <li className="flex items-start gap-1.5 md:gap-3">
-                      <CheckCircle2 className="w-3.5 h-3.5 md:w-5 md:h-5 text-primary mt-0.5 shrink-0" />
-                      <span className="text-[10px] sm:text-xs md:text-sm font-medium text-foreground">
+                  <ul className="space-y-3">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                      <span className="text-base font-medium text-foreground">
                         {t.whatIs.reversePoint1}
                       </span>
                     </li>
-                    <li className="flex items-start gap-1.5 md:gap-3">
-                      <CheckCircle2 className="w-3.5 h-3.5 md:w-5 md:h-5 text-primary mt-0.5 shrink-0" />
-                      <span className="text-[10px] sm:text-xs md:text-sm font-medium text-foreground">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                      <span className="text-base font-medium text-foreground">
                         {t.whatIs.reversePoint2}
                       </span>
                     </li>
-                    <li className="hidden sm:flex items-start gap-1.5 md:gap-3">
-                      <CheckCircle2 className="w-3.5 h-3.5 md:w-5 md:h-5 text-primary mt-0.5 shrink-0" />
-                      <span className="text-[10px] sm:text-xs md:text-sm font-medium text-foreground">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                      <span className="text-base font-medium text-foreground">
                         {t.whatIs.reversePoint3}
                       </span>
                     </li>
-                    <li className="hidden md:flex items-start gap-3">
+                    <li className="flex items-start gap-3">
                       <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                      <span className="text-sm font-medium text-foreground">
+                      <span className="text-base font-medium text-foreground">
                         {t.whatIs.reversePoint4}
                       </span>
                     </li>
                   </ul>
 
-                  <div className="mt-3 md:mt-6 pt-2 md:pt-4 border-t border-primary/20">
-                    <p className="text-center text-[10px] sm:text-xs md:text-sm font-bold text-primary">
+                  <div className="mt-6 pt-4 border-t border-primary/20">
+                    <p className="text-center text-base font-bold text-primary">
                       {t.whatIs.upToValue}
                     </p>
                   </div>
@@ -517,7 +646,7 @@ export default function WhatIsReverseMortgage() {
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 md:mb-4">
                 {t.whatIs.repaymentTitle}
               </h3>
-              <p className="text-sm md:text-base text-primary-foreground/80 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-primary-foreground/80 max-w-2xl mx-auto">
                 {t.whatIs.repaymentSubtitle}
               </p>
             </div>
@@ -531,7 +660,7 @@ export default function WhatIsReverseMortgage() {
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-2 md:mb-4">
                     <trigger.icon className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
-                  <p className="text-xs md:text-sm font-medium">
+                  <p className="text-sm md:text-base font-medium">
                     {trigger.text}
                   </p>
                 </div>

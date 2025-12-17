@@ -175,14 +175,14 @@ export default function UseCases() {
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-4">
             {t.useCases.title}
           </h2>
-          <p className="text-white/70 text-sm md:text-lg max-w-2xl mx-auto">
+          <p className="text-white/70 text-base md:text-xl max-w-2xl mx-auto">
             {t.useCases.subtitle}
           </p>
         </div>
 
         <div className="relative max-w-6xl mx-auto">
           {/* Cards stack */}
-          <div className="relative min-h-[550px] sm:min-h-[680px] md:min-h-[700px] lg:min-h-[720px]">
+          <div className="relative min-h-[480px] sm:min-h-[580px] md:min-h-[700px] lg:min-h-[720px]">
             {useCases.map((useCase, index) => (
               <div
                 key={index}
@@ -206,7 +206,7 @@ export default function UseCases() {
                   </div>
 
                   {/* Content overlay */}
-                  <div className="relative z-10 h-full flex flex-col p-5 sm:p-6 md:p-10 lg:p-12 pb-20 md:pb-24">
+                  <div className="relative z-10 h-full flex flex-col p-5 sm:p-6 md:p-10 lg:p-12 pb-24 sm:pb-24 md:pb-28">
                     {/* Main content area - grows to fill space */}
                     <div className="flex-1 max-w-xl lg:max-w-2xl">
                       {/* Counter badge */}
@@ -218,22 +218,22 @@ export default function UseCases() {
                       </div>
 
                       {/* Title */}
-                      <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 md:mb-6">
+                      <h3 className="font-serif text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-3 md:mb-6">
                         {useCase.title}
                       </h3>
 
                       {/* Dream to Reality - with more spacing */}
-                      <div className="mb-5 md:mb-8">
-                        <p className="text-sm md:text-lg text-white/70 italic mb-2 md:mb-3">
+                      <div className="mb-4 md:mb-8">
+                        <p className="text-sm sm:text-base md:text-xl text-white/70 italic mb-1 md:mb-3">
                           "{useCase.dream}"
                         </p>
-                        <p className="text-lg sm:text-xl md:text-2xl font-serif font-semibold text-sky-300">
+                        <p className="text-lg sm:text-xl md:text-3xl font-serif font-semibold text-sky-300">
                           {useCase.reality}
                         </p>
                       </div>
 
-                      {/* Description - hidden on smallest screens to prevent overflow */}
-                      <p className="text-sm md:text-lg text-white/90 mb-5 md:mb-8 leading-relaxed max-w-lg line-clamp-3 md:line-clamp-none">
+                      {/* Description - hidden on mobile to prevent overflow */}
+                      <p className="hidden sm:block text-base md:text-lg text-white/90 mb-5 md:mb-8 leading-relaxed max-w-lg line-clamp-3 md:line-clamp-none">
                         {useCase.description}
                       </p>
 
@@ -242,10 +242,10 @@ export default function UseCases() {
                         {useCase.benefits.map((benefit, bIndex) => (
                           <div
                             key={bIndex}
-                            className="flex items-center gap-1 md:gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-2 md:px-3 py-1 md:py-1.5"
+                            className="flex items-center gap-1.5 md:gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-2.5 md:px-3 py-1 md:py-1.5"
                           >
-                            <Check className="w-3 h-3 text-sky-300" />
-                            <span className="text-white text-xs md:text-sm font-medium">
+                            <Check className="w-3.5 h-3.5 text-sky-300" />
+                            <span className="text-white text-sm md:text-base font-medium">
                               {benefit}
                             </span>
                           </div>
@@ -253,11 +253,11 @@ export default function UseCases() {
                       </div>
 
                       {/* Amount */}
-                      <div className="bg-white text-[#0a2b59] px-4 md:px-5 py-2 md:py-3 rounded-xl md:rounded-2xl inline-block">
-                        <span className="text-[10px] md:text-xs uppercase tracking-wider opacity-70 block">
+                      <div className="bg-white text-[#0a2b59] px-4 md:px-5 py-2.5 md:py-3 rounded-xl md:rounded-2xl inline-block">
+                        <span className="text-xs md:text-sm uppercase tracking-wider opacity-70 block">
                           {t.useCases.typicalAmount}
                         </span>
-                        <p className="text-lg md:text-2xl font-bold">
+                        <p className="text-xl md:text-2xl font-bold">
                           {useCase.amount}
                         </p>
                       </div>
@@ -307,10 +307,10 @@ export default function UseCases() {
 
         {/* Bottom CTA */}
         <div className="mt-12 md:mt-20 text-center">
-          <h3 className="font-serif text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">
+          <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 md:mb-4">
             {t.useCases.bottomTitle}
           </h3>
-          <p className="text-white/70 text-sm md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
+          <p className="text-white/70 text-base md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto">
             {t.useCases.bottomSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">

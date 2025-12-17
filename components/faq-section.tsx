@@ -36,7 +36,9 @@ export default function FAQSection() {
           <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
             {t.faq.title}
           </h2>
-          <p className="text-lg text-muted-foreground">{t.faq.subtitle}</p>
+          <p className="text-lg md:text-xl text-muted-foreground">
+            {t.faq.subtitle}
+          </p>
         </div>
 
         <div className="max-w-3xl mx-auto">
@@ -57,10 +59,10 @@ export default function FAQSection() {
                 value={`item-${index}`}
                 className="bg-card border border-border rounded-xl px-6 data-[state=open]:shadow-lg transition-shadow"
               >
-                <AccordionTrigger className="text-left font-medium text-card-foreground hover:no-underline py-5">
+                <AccordionTrigger className="text-left font-medium text-base md:text-lg text-card-foreground hover:no-underline py-5">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                <AccordionContent className="text-base md:text-lg text-muted-foreground pb-5 leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

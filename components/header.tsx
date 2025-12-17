@@ -95,8 +95,11 @@ export default function Header() {
             <div className="w-full flex items-center justify-center lg:grid lg:grid-cols-3 lg:items-center relative">
               {/* Mobile Logo - centered, only when scrolled */}
               {isScrolled && (
-                <Link href="/" className="flex lg:hidden items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg flex">
+                <Link
+                  href="/"
+                  className="flex lg:hidden items-center gap-2 max-w-[65%]"
+                >
+                  <div className="w-8 h-8 rounded-lg flex shrink-0">
                     <Image
                       src="/logo.png"
                       alt={siteName}
@@ -104,7 +107,7 @@ export default function Header() {
                       height={32}
                     />
                   </div>
-                  <span className="font-semibold text-xl text-foreground">
+                  <span className="font-semibold text-base sm:text-lg text-foreground truncate">
                     {siteName}
                   </span>
                 </Link>
@@ -189,7 +192,7 @@ export default function Header() {
                         });
                       }
                     }}
-                    className={`text-sm font-medium transition-colors ${
+                    className={`text-base font-medium transition-colors ${
                       isScrolled
                         ? "text-muted-foreground hover:text-foreground"
                         : "text-primary-foreground/80 hover:text-primary-foreground"

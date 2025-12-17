@@ -19,7 +19,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Calculator, Home, TrendingUp, Info, Users } from "lucide-react";
+import { Calculator, Home, TrendingUp, Info, Users, Lock } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
 import { trackCalculatorInteraction } from "@/lib/tracking";
 
@@ -58,7 +58,7 @@ const CANADIAN_PROVINCES = [
   "Prince Edward Island",
 ];
 
-export default function CalculatorSection() {
+export default function LandingCalculator() {
   const { t, locale } = useLocale();
   const [age, setAge] = useState(65);
   const [spouseAge, setSpouseAge] = useState<number | null>(null);
@@ -67,6 +67,13 @@ export default function CalculatorSection() {
   const [city, setCity] = useState("");
   const [homeValue, setHomeValue] = useState(400000);
   const [showResults, setShowResults] = useState(false);
+
+  // Unlock state
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isUnlocking, setIsUnlocking] = useState(false);
+  const [unlockName, setUnlockName] = useState("");
+  const [unlockPhone, setUnlockPhone] = useState("");
+  const [unlockError, setUnlockError] = useState("");
 
   // For English: use province selector; For French: use city selector with fixed Quebec province
   const locationValid = locale === "en" ? province !== "" : city !== "";
@@ -77,8 +84,6 @@ export default function CalculatorSection() {
 
     if (effectiveAge < 55) return null;
 
-    // Percentages based on Equitable Bank Flex product: 15% at 55, scaling to 55% at 80+
-    // Each age group has a min and max percentage range
     let minPercentage = 0.15;
     let maxPercentage = 0.2;
 
@@ -133,6 +138,81 @@ export default function CalculatorSection() {
     }
   };
 
+  const formatPhoneNumber = (value: string) => {
+    const phoneNumber = value.replace(/\D/g, "");
+    const limitedNumber = phoneNumber.slice(0, 10);
+
+    if (limitedNumber.length === 0) {
+      return "";
+    } else if (limitedNumber.length <= 3) {
+      return `(${limitedNumber}`;
+    } else if (limitedNumber.length <= 6) {
+      return `(${limitedNumber.slice(0, 3)}) ${limitedNumber.slice(3)}`;
+    } else {
+      return `(${limitedNumber.slice(0, 3)}) ${limitedNumber.slice(3, 6)}-${limitedNumber.slice(6)}`;
+    }
+  };
+
+  const handlePhoneChange = (value: string) => {
+    const formatted = formatPhoneNumber(value);
+    setUnlockPhone(formatted);
+  };
+
+  const handleUnlock = async () => {
+    setUnlockError("");
+
+    // Validate name
+    if (!unlockName.trim()) {
+      setUnlockError(t.landing.errorName);
+      return;
+    }
+
+    // Validate phone
+    const phoneDigits = unlockPhone.replace(/\D/g, "");
+    if (phoneDigits.length !== 10) {
+      setUnlockError(t.landing.errorPhone);
+      return;
+    }
+
+    setIsUnlocking(true);
+
+    try {
+      // Send to n8n webhook with "ads" as formType
+      await fetch(
+        "https://n8n-wwfb.onrender.com/webhook/65e54c43-dfcc-441e-bd8e-706d0051de10",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            firstName: unlockName.split(" ")[0] || unlockName,
+            lastName: unlockName.split(" ").slice(1).join(" ") || "",
+            phone: phoneDigits,
+            age: age.toString(),
+            homeValue: homeValue.toString(),
+            city: locale === "en" ? province : city,
+            hasSpouse: hasSpouse,
+            spouseAge: spouseAge,
+            estimatedMin: eligibility?.minAmount,
+            estimatedMax: eligibility?.maxAmount,
+            formType: "ads",
+            timestamp: new Date().toISOString(),
+          }),
+        }
+      );
+
+      // Animate unlock
+      setIsUnlocked(true);
+    } catch (error) {
+      console.error("Unlock submission error:", error);
+      // Still unlock even if webhook fails
+      setIsUnlocked(true);
+    } finally {
+      setIsUnlocking(false);
+    }
+  };
+
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("fr-CA", {
       style: "currency",
@@ -152,7 +232,7 @@ export default function CalculatorSection() {
           <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6 text-balance">
             {t.calculator.title}
           </h2>
-          <p className="text-base md:text-xl text-muted-foreground">
+          <p className="text-sm md:text-lg text-muted-foreground">
             {t.calculator.subtitle}
           </p>
         </div>
@@ -202,7 +282,7 @@ export default function CalculatorSection() {
                       className="w-full"
                     />
                     {age < 55 && (
-                      <p className="text-sm md:text-base text-destructive">
+                      <p className="text-xs md:text-sm text-destructive">
                         {t.calculator.minAgeError}
                       </p>
                     )}
@@ -236,7 +316,7 @@ export default function CalculatorSection() {
                         <div className="flex justify-between items-center">
                           <Label
                             htmlFor="spouseAge"
-                            className="text-sm md:text-base"
+                            className="text-xs md:text-sm"
                           >
                             {t.calculator.spouseAge}
                           </Label>
@@ -257,11 +337,11 @@ export default function CalculatorSection() {
                           className="w-full"
                         />
                         {spouseAge !== null && spouseAge < 55 && (
-                          <p className="text-sm md:text-base text-destructive">
+                          <p className="text-xs md:text-sm text-destructive">
                             {t.calculator.spouseMinAgeError}
                           </p>
                         )}
-                        <p className="text-xs md:text-sm text-muted-foreground flex items-start gap-1">
+                        <p className="text-[10px] md:text-xs text-muted-foreground flex items-start gap-1">
                           <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
                           {t.calculator.spouseAgeNote}
                         </p>
@@ -271,7 +351,6 @@ export default function CalculatorSection() {
 
                   {/* Province & City - different layout for EN vs FR */}
                   {locale === "en" ? (
-                    // English: Province selector only (all of Canada)
                     <div className="space-y-1 md:space-y-2">
                       <Label
                         htmlFor="province"
@@ -299,7 +378,6 @@ export default function CalculatorSection() {
                       </Select>
                     </div>
                   ) : (
-                    // French: Quebec fixed + City selector
                     <div className="grid grid-cols-2 gap-3 md:gap-4">
                       <div className="space-y-1 md:space-y-2">
                         <Label
@@ -371,7 +449,7 @@ export default function CalculatorSection() {
                       }}
                       className="w-full"
                     />
-                    <div className="flex justify-between text-xs md:text-sm text-muted-foreground">
+                    <div className="flex justify-between text-[10px] md:text-xs text-muted-foreground">
                       <span>250 000 $</span>
                       <span>3 000 000 $</span>
                     </div>
@@ -387,91 +465,171 @@ export default function CalculatorSection() {
                   </Button>
                 </div>
 
-                {/* Results Section */}
-                <div
-                  className={`space-y-4 md:space-y-6 ${!showResults && "opacity-50"}`}
-                >
-                  <div className="bg-secondary rounded-xl p-4 md:p-6 border border-border">
-                    <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
-                      <Home className="w-5 h-5 md:w-6 md:h-6 text-primary" />
-                      <h3 className="font-bold text-base md:text-lg">
-                        {t.calculator.resultsTitle}
-                      </h3>
+                {/* Results Section with Blur Overlay */}
+                <div className="relative">
+                  <div
+                    className={`space-y-4 md:space-y-6 transition-all duration-500 ${
+                      !showResults
+                        ? "opacity-50"
+                        : isUnlocked
+                          ? ""
+                          : "blur-md select-none pointer-events-none"
+                    }`}
+                  >
+                    <div className="bg-secondary rounded-xl p-4 md:p-6 border border-border">
+                      <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                        <Home className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                        <h3 className="font-bold text-base md:text-lg">
+                          {t.calculator.resultsTitle}
+                        </h3>
+                      </div>
+
+                      {showResults && eligibility ? (
+                        <>
+                          <p className="text-sm md:text-base text-muted-foreground mb-3 md:mb-4">
+                            {locale === "en"
+                              ? "Based on your information, you could be eligible to receive:"
+                              : "Basé sur vos informations, vous pourriez être éligible à recevoir:"}
+                          </p>
+                          <div className="text-center py-4 md:py-6 bg-background rounded-lg mb-3 md:mb-4">
+                            <p className="text-xs md:text-sm text-muted-foreground mb-1">
+                              {locale === "en"
+                                ? "Estimated Amount"
+                                : "Montant Estimé"}
+                            </p>
+                            <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary">
+                              {formatCurrency(eligibility.minAmount)}
+                            </p>
+                            <p className="text-lg md:text-xl text-muted-foreground mt-2">
+                              {locale === "en" ? "up to" : "jusqu'à"}{" "}
+                              <span className="font-semibold text-primary/80">
+                                {formatCurrency(eligibility.maxAmount)}
+                              </span>
+                            </p>
+                            <p className="text-xs md:text-sm text-muted-foreground mt-2">
+                              {locale === "en"
+                                ? `${eligibility.minPercentage}% to ${eligibility.maxPercentage}% of your property value`
+                                : `${eligibility.minPercentage}% à ${eligibility.maxPercentage}% de la valeur de votre propriété`}
+                            </p>
+                            {hasSpouse && (
+                              <p className="text-[10px] md:text-xs text-muted-foreground mt-1">
+                                {locale === "en"
+                                  ? `(Based on age of ${eligibility.effectiveAge} years)`
+                                  : `(Basé sur l'âge de ${eligibility.effectiveAge} ans)`}
+                              </p>
+                            )}
+                          </div>
+                          <div className="flex items-center gap-2 md:gap-3 p-3 md:p-4 bg-accent/10 rounded-lg mb-3 md:mb-4">
+                            <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
+                            <p className="text-xs md:text-sm">
+                              <strong>{t.calculator.range}:</strong>{" "}
+                              {formatCurrency(eligibility.minAmount)} -{" "}
+                              {formatCurrency(eligibility.maxAmount)}
+                            </p>
+                          </div>
+
+                          <div className="p-3 md:p-4 bg-primary/5 rounded-lg border border-primary/10">
+                            <p className="text-[10px] md:text-xs text-muted-foreground flex items-start gap-2">
+                              <Info className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 mt-0.5 text-primary" />
+                              <span>{t.calculator.factorsInfo}</span>
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="text-center py-8 md:py-12">
+                          <Calculator className="w-12 h-12 md:w-16 md:h-16 text-muted-foreground/30 mx-auto mb-3 md:mb-4" />
+                          <p className="text-sm md:text-base text-muted-foreground">
+                            {t.calculator.fillForm}
+                          </p>
+                        </div>
+                      )}
                     </div>
 
-                    {showResults && eligibility ? (
-                      <>
-                        <p className="text-base md:text-lg text-muted-foreground mb-3 md:mb-4">
-                          {locale === "en"
-                            ? "Based on your information, you could be eligible to receive:"
-                            : "Basé sur vos informations, vous pourriez être éligible à recevoir:"}
-                        </p>
-                        <div className="text-center py-4 md:py-6 bg-background rounded-lg mb-3 md:mb-4">
-                          <p className="text-sm md:text-base text-muted-foreground mb-1">
-                            {locale === "en"
-                              ? "Estimated Amount"
-                              : "Montant Estimé"}
-                          </p>
-                          <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary">
-                            {formatCurrency(eligibility.minAmount)}
-                          </p>
-                          <p className="text-lg md:text-xl text-muted-foreground mt-2">
-                            {locale === "en" ? "up to" : "jusqu'à"}{" "}
-                            <span className="font-semibold text-primary/80">
-                              {formatCurrency(eligibility.maxAmount)}
-                            </span>
-                          </p>
-                          <p className="text-sm md:text-base text-muted-foreground mt-2">
-                            {locale === "en"
-                              ? `${eligibility.minPercentage}% to ${eligibility.maxPercentage}% of your property value`
-                              : `${eligibility.minPercentage}% à ${eligibility.maxPercentage}% de la valeur de votre propriété`}
-                          </p>
-                          {hasSpouse && (
-                            <p className="text-xs md:text-sm text-muted-foreground mt-1">
-                              {locale === "en"
-                                ? `(Based on age of ${eligibility.effectiveAge} years)`
-                                : `(Basé sur l'âge de ${eligibility.effectiveAge} ans)`}
-                            </p>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-2 md:gap-3 p-3 md:p-4 bg-accent/10 rounded-lg mb-3 md:mb-4">
-                          <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-primary flex-shrink-0" />
-                          <p className="text-sm md:text-base">
-                            <strong>{t.calculator.range}:</strong>{" "}
-                            {formatCurrency(eligibility.minAmount)} -{" "}
-                            {formatCurrency(eligibility.maxAmount)}
-                          </p>
-                        </div>
-
-                        <div className="p-3 md:p-4 bg-primary/5 rounded-lg border border-primary/10">
-                          <p className="text-xs md:text-sm text-muted-foreground flex items-start gap-2">
-                            <Info className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 mt-0.5 text-primary" />
-                            <span>{t.calculator.factorsInfo}</span>
-                          </p>
-                        </div>
-                      </>
-                    ) : (
-                      <div className="text-center py-8 md:py-12">
-                        <Calculator className="w-12 h-12 md:w-16 md:h-16 text-muted-foreground/30 mx-auto mb-3 md:mb-4" />
-                        <p className="text-base md:text-lg text-muted-foreground">
-                          {t.calculator.fillForm}
+                    {showResults && (
+                      <div className="space-y-3 md:space-y-4">
+                        <p className="text-[10px] md:text-xs text-center text-muted-foreground">
+                          {t.calculator.disclaimer}
                         </p>
                       </div>
                     )}
                   </div>
 
-                  {showResults && (
-                    <div className="space-y-3 md:space-y-4">
-                      <Button
-                        variant="outline"
-                        className="w-full bg-transparent"
-                        asChild
-                      >
-                        <a href="#contact">{t.calculator.getPersonalized}</a>
-                      </Button>
-                      <p className="text-xs md:text-sm text-center text-muted-foreground">
-                        {t.calculator.disclaimer}
-                      </p>
+                  {/* Unlock Overlay */}
+                  {showResults && !isUnlocked && (
+                    <div
+                      className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
+                        isUnlocked
+                          ? "opacity-0 pointer-events-none"
+                          : "opacity-100"
+                      }`}
+                    >
+                      <div className="bg-card/95 backdrop-blur-sm border border-border rounded-xl p-6 md:p-8 shadow-2xl max-w-sm mx-4 w-full">
+                        <div className="text-center mb-6">
+                          <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <Lock className="w-6 h-6 text-primary" />
+                          </div>
+                          <h3 className="font-serif text-lg md:text-xl font-bold text-foreground mb-2">
+                            {t.landing.unlockTitle}
+                          </h3>
+                          <p className="text-sm text-muted-foreground">
+                            {t.landing.unlockSubtitle}
+                          </p>
+                        </div>
+
+                        {unlockError && (
+                          <div className="bg-destructive/10 border border-destructive/20 text-destructive text-xs sm:text-sm p-3 rounded-lg mb-4">
+                            {unlockError}
+                          </div>
+                        )}
+
+                        <div className="space-y-4">
+                          <div>
+                            <Label htmlFor="unlock-name" className="text-sm">
+                              {t.landing.nameLabel}
+                            </Label>
+                            <Input
+                              id="unlock-name"
+                              placeholder={t.landing.namePlaceholder}
+                              value={unlockName}
+                              onChange={(e) => setUnlockName(e.target.value)}
+                              className="mt-1"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="unlock-phone" className="text-sm">
+                              {t.landing.phoneLabel}
+                            </Label>
+                            <Input
+                              id="unlock-phone"
+                              type="tel"
+                              placeholder={t.landing.phonePlaceholder}
+                              value={unlockPhone}
+                              onChange={(e) =>
+                                handlePhoneChange(e.target.value)
+                              }
+                              inputMode="numeric"
+                              className="mt-1"
+                            />
+                          </div>
+                          <Button
+                            onClick={handleUnlock}
+                            disabled={isUnlocking}
+                            className="w-full bg-primary hover:bg-primary/90"
+                            size="lg"
+                          >
+                            {isUnlocking ? (
+                              <span className="flex items-center gap-2">
+                                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                {locale === "en"
+                                  ? "Unlocking..."
+                                  : "Déverrouillage..."}
+                              </span>
+                            ) : (
+                              t.landing.unlockButton
+                            )}
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>

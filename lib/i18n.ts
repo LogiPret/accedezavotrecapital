@@ -449,6 +449,42 @@ export const translations = {
       email: "Courriel :",
       phone: "Téléphone :",
     },
+    // Landing page
+    landing: {
+      title: "Vérifier si l'hypothèque inversée peut vraiment vous aider",
+      subtitle:
+        "Transformer la valeur de votre maison en liquidité, sans paiements mensuels et sans avoir à vendre votre propriété",
+      // Stats
+      stat1Value: "55%",
+      stat1Label: "de la valeur de votre maison",
+      stat2Value: "0$",
+      stat2Label: "paiements mensuels",
+      stat3Value: "100%",
+      stat3Label: "non imposable",
+      // Calculator unlock
+      unlockTitle: "Découvrez votre montant estimé",
+      unlockSubtitle:
+        "Entrez vos informations pour voir votre estimation personnalisée",
+      nameLabel: "Votre nom",
+      namePlaceholder: "Jean Tremblay",
+      phoneLabel: "Numéro de téléphone",
+      phonePlaceholder: "(514) 555-1234",
+      unlockButton: "Voir mon estimation",
+      errorName: "Veuillez entrer votre nom",
+      errorPhone: "Veuillez entrer un numéro de téléphone valide (10 chiffres)",
+    },
+    // About us section
+    aboutUs: {
+      title: "Qui Sommes-Nous?",
+      subtitle:
+        "Votre partenaire de confiance pour l'hypothèque inversée au Québec",
+      brokerTitle: "Courtier Hypothécaire agréé",
+      brokerBio:
+        "Accédez à votre capital.ca est dirigé par Mark A. Barbieri, un expert chevronné en prêts hypothécaires inversés, dédié aux propriétaires âgés. Fort de plus de 25 ans d'expérience, acquise tant au sein de la plus grande banque canadienne que dans le secteur du courtage hypothécaire, Mark et son équipe offrent une expertise approfondie et une approche centrée sur le client à chaque étape du processus.",
+      yearsExperience: "25+ ans d'expérience",
+      licensedBroker: "Courtier agréé AMF",
+      freeConsultation: "Consultation gratuite",
+    },
     // Terms of Use page
     terms: {
       backToHome: "Retour à l'accueil",
@@ -942,6 +978,41 @@ export const translations = {
         "For any questions regarding this privacy policy, contact:",
       email: "Email:",
       phone: "Phone:",
+    },
+    // Landing page
+    landing: {
+      title: "See if a Reverse Mortgage Can Really Help You",
+      subtitle:
+        "Transform your home's value into cash, with no monthly payments and without having to sell your property",
+      // Stats
+      stat1Value: "55%",
+      stat1Label: "of your home's value",
+      stat2Value: "$0",
+      stat2Label: "monthly payments",
+      stat3Value: "100%",
+      stat3Label: "tax-free",
+      // Calculator unlock
+      unlockTitle: "Discover your estimated amount",
+      unlockSubtitle:
+        "Enter your information to see your personalized estimate",
+      nameLabel: "Your name",
+      namePlaceholder: "John Smith",
+      phoneLabel: "Phone number",
+      phonePlaceholder: "(514) 555-1234",
+      unlockButton: "See my estimate",
+      errorName: "Please enter your name",
+      errorPhone: "Please enter a valid phone number (10 digits)",
+    },
+    // About us section
+    aboutUs: {
+      title: "Who We Are",
+      subtitle: "Your trusted partner for reverse mortgages in Canada",
+      brokerTitle: "Licensed Mortgage Broker",
+      brokerBio:
+        "Access Home Equity is led by Mark A. Barbieri, a seasoned Reverse-Mortgage expert dedicated to helping senior homeowners. With over 25 years of experience, gained working at both Canada's largest bank & within the mortgage brokerage sector, Mark and his team offer a profound expertise and a client-first approach at every step of the process.",
+      yearsExperience: "25+ years experience",
+      licensedBroker: "AMF Licensed Broker",
+      freeConsultation: "Free consultation",
     },
     // Terms of Use page
     terms: {

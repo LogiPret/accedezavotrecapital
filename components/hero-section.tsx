@@ -58,17 +58,17 @@ export default function HeroSection() {
 
           {/* Hero Content */}
           <div className="text-primary-foreground">
-            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight mb-3 sm:mb-4 md:mb-6 text-balance">
+            <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-3 sm:mb-4 md:mb-6 text-balance">
               {t.hero.title}
             </h1>
-            <p className="text-sm sm:text-base md:text-lg text-primary-foreground/90 mb-4 sm:mb-6 md:mb-8 leading-relaxed max-w-xl">
+            <p className="text-base sm:text-lg md:text-xl text-primary-foreground/90 mb-4 sm:mb-6 md:mb-8 leading-relaxed max-w-xl">
               {t.hero.subtitle}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
               <Button
                 size="lg"
-                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold w-full sm:w-auto text-sm sm:text-base md:text-base py-5 sm:py-6"
+                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-semibold w-full sm:w-auto text-base sm:text-lg md:text-lg py-5 sm:py-6"
                 asChild
               >
                 <Link
@@ -99,27 +99,27 @@ export default function HeroSection() {
 
             {/* Feature badges */}
             <div className="grid grid-cols-1 gap-2 sm:gap-3 md:grid-cols-3 md:gap-3">
-              <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3 md:p-3">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-9 md:h-9 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-4 h-4 sm:w-4 sm:h-4 md:w-4 md:h-4" />
+              <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-3 sm:p-3.5 md:p-4">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-10 md:h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="w-5 h-5 sm:w-5 sm:h-5 md:w-5 md:h-5" />
                 </div>
-                <span className="text-xs sm:text-sm md:text-sm font-medium">
+                <span className="text-sm sm:text-base md:text-base font-medium">
                   {t.hero.badge1}
                 </span>
               </div>
-              <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3 md:p-3">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-9 md:h-9 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
-                  <DollarSign className="w-4 h-4 sm:w-4 sm:h-4 md:w-4 md:h-4" />
+              <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-3 sm:p-3.5 md:p-4">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-10 md:h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
+                  <DollarSign className="w-5 h-5 sm:w-5 sm:h-5 md:w-5 md:h-5" />
                 </div>
-                <span className="text-xs sm:text-sm md:text-sm font-medium">
+                <span className="text-sm sm:text-base md:text-base font-medium">
                   {t.hero.badge2}
                 </span>
               </div>
-              <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-2.5 sm:p-3 md:p-3">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-9 md:h-9 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
-                  <Home className="w-4 h-4 sm:w-4 sm:h-4 md:w-4 md:h-4" />
+              <div className="flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm rounded-lg p-3 sm:p-3.5 md:p-4">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 md:w-10 md:h-10 bg-primary-foreground/20 rounded-lg flex items-center justify-center shrink-0">
+                  <Home className="w-5 h-5 sm:w-5 sm:h-5 md:w-5 md:h-5" />
                 </div>
-                <span className="text-xs sm:text-sm md:text-sm font-medium">
+                <span className="text-sm sm:text-base md:text-base font-medium">
                   {t.hero.badge3}
                 </span>
               </div>

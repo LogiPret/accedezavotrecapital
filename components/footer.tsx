@@ -76,7 +76,7 @@ export default function Footer() {
                       });
                     }
                   }}
-                  className="text-card/70 hover:text-card transition-colors text-sm"
+                  className="text-card/70 hover:text-card transition-colors text-base"
                 >
                   {t.footer.link1}
                 </Link>
@@ -100,7 +100,7 @@ export default function Footer() {
                       });
                     }
                   }}
-                  className="text-card/70 hover:text-card transition-colors text-sm"
+                  className="text-card/70 hover:text-card transition-colors text-base"
                 >
                   {t.footer.link2}
                 </Link>
@@ -124,7 +124,7 @@ export default function Footer() {
                       });
                     }
                   }}
-                  className="text-card/70 hover:text-card transition-colors text-sm"
+                  className="text-card/70 hover:text-card transition-colors text-base"
                 >
                   {t.footer.link3}
                 </Link>
@@ -148,7 +148,7 @@ export default function Footer() {
                       });
                     }
                   }}
-                  className="text-card/70 hover:text-card transition-colors text-sm"
+                  className="text-card/70 hover:text-card transition-colors text-base"
                 >
                   {t.footer.link5}
                 </Link>
@@ -179,10 +179,10 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-card/20 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-card/60 text-sm text-center md:text-left">
+            <p className="text-card/60 text-base text-center md:text-left">
               © {currentYear} {t.footer.copyright}
             </p>
-            <div className="flex flex-wrap justify-center gap-6 text-sm">
+            <div className="flex flex-wrap justify-center gap-6 text-base">
               <Link
                 href="/politique-de-confidentialite"
                 className="text-card/60 hover:text-card transition-colors"
@@ -197,7 +197,7 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-          <p className="text-card/40 text-xs text-center mt-6">
+          <p className="text-card/40 text-sm text-center mt-6">
             {t.footer.disclaimer}
           </p>
         </div>

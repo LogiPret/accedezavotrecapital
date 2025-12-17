@@ -179,7 +179,9 @@ export default function ContactForm({
         <h3 className="text-lg md:text-xl font-bold text-card-foreground mb-2">
           {t.form.successTitle}
         </h3>
-        <p className="text-sm text-muted-foreground">{t.form.successMessage}</p>
+        <p className="text-base text-muted-foreground">
+          {t.form.successMessage}
+        </p>
       </div>
     );
   }
@@ -194,7 +196,7 @@ export default function ContactForm({
       }
     >
       {error && (
-        <div className="bg-destructive/10 border border-destructive/20 text-destructive text-xs sm:text-sm p-3 rounded-lg">
+        <div className="bg-destructive/10 border border-destructive/20 text-destructive text-sm sm:text-base p-3 rounded-lg">
           {error}
         </div>
       )}
@@ -205,8 +207,8 @@ export default function ContactForm({
             htmlFor={`${formType}-firstName`}
             className={
               compact
-                ? "text-card-foreground text-xs sm:text-sm"
-                : "text-xs md:text-sm"
+                ? "text-card-foreground text-sm sm:text-base"
+                : "text-sm md:text-base"
             }
           >
             {t.form.firstName} {t.form.required}
@@ -230,8 +232,8 @@ export default function ContactForm({
             htmlFor={`${formType}-lastName`}
             className={
               compact
-                ? "text-card-foreground text-xs sm:text-sm"
-                : "text-xs md:text-sm"
+                ? "text-card-foreground text-sm sm:text-base"
+                : "text-sm md:text-base"
             }
           >
             {t.form.lastName} {t.form.required}
@@ -256,8 +258,8 @@ export default function ContactForm({
           htmlFor={`${formType}-email`}
           className={
             compact
-              ? "text-card-foreground text-xs sm:text-sm"
-              : "text-xs md:text-sm"
+              ? "text-card-foreground text-sm sm:text-base"
+              : "text-sm md:text-base"
           }
         >
           {t.form.email} {t.form.required}
@@ -278,8 +280,8 @@ export default function ContactForm({
           htmlFor={`${formType}-phone`}
           className={
             compact
-              ? "text-card-foreground text-xs sm:text-sm"
-              : "text-xs md:text-sm"
+              ? "text-card-foreground text-sm sm:text-base"
+              : "text-sm md:text-base"
           }
         >
           {t.form.phone} {t.form.required}
@@ -302,8 +304,8 @@ export default function ContactForm({
             htmlFor={`${formType}-age`}
             className={
               compact
-                ? "text-card-foreground text-xs sm:text-sm"
-                : "text-xs md:text-sm"
+                ? "text-card-foreground text-sm sm:text-base"
+                : "text-sm md:text-base"
             }
           >
             {t.form.age} {t.form.required}
@@ -334,8 +336,8 @@ export default function ContactForm({
             htmlFor={`${formType}-homeValue`}
             className={
               compact
-                ? "text-card-foreground text-xs sm:text-sm"
-                : "text-xs md:text-sm"
+                ? "text-card-foreground text-sm sm:text-base"
+                : "text-sm md:text-base"
             }
           >
             {t.form.homeValue}
@@ -368,8 +370,8 @@ export default function ContactForm({
           htmlFor={`${formType}-message`}
           className={
             compact
-              ? "text-card-foreground text-xs sm:text-sm"
-              : "text-xs md:text-sm"
+              ? "text-card-foreground text-sm sm:text-base"
+              : "text-sm md:text-base"
           }
         >
           {t.form.message}
@@ -399,7 +401,7 @@ export default function ContactForm({
         {isSubmitting ? t.form.submitting : t.form.submit}
       </Button>
 
-      <p className="text-[10px] sm:text-xs text-muted-foreground text-center leading-tight">
+      <p className="text-xs sm:text-sm text-muted-foreground text-center leading-tight">
         {t.form.disclaimer}
       </p>
     </form>
