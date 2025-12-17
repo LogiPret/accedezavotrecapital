@@ -1,21 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import {
-  Home,
-  DollarSign,
-  Shield,
-  CheckCircle2,
-  ArrowDown,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Home, DollarSign, Shield, CheckCircle2 } from "lucide-react";
 import LandingFAQSection from "@/components/landing-faq-section";
 import AboutUsSection from "@/components/about-us-section";
 import LandingCalculator from "@/components/landing-calculator";
 import Footer from "@/components/footer";
 import { useLocale } from "@/lib/locale-context";
 import UseCases from "@/components/use-cases";
-import { trackCTAClick, trackSectionView } from "@/lib/tracking";
+import { trackSectionView } from "@/lib/tracking";
 
 export default function LandingPage() {
   const { t, locale } = useLocale();
@@ -24,13 +17,6 @@ export default function LandingPage() {
   useEffect(() => {
     trackSectionView("landing_page");
   }, []);
-
-  const scrollToCalculator = () => {
-    trackCTAClick("calculate_amount", "landing_hero");
-    document
-      .getElementById("calculatrice")
-      ?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <main className="min-h-screen bg-background">
@@ -51,16 +37,6 @@ export default function LandingPage() {
 
         <div className="relative z-10 container mx-auto px-4 pt-10 md:pt-16 lg:pt-20 pb-8 md:pb-12">
           <div className="max-w-5xl mx-auto">
-            {/* Trust badge */}
-            <div className="flex justify-center mb-6 md:mb-8">
-              <div className="inline-flex items-center gap-2 bg-white/15 border border-white/20 rounded-full px-4 py-2 text-sm font-medium text-white">
-                <CheckCircle2 className="w-4 h-4" />
-                {locale === "en"
-                  ? "Trusted by 1000+ Canadian homeowners"
-                  : "Approuvé par plus de 1000 propriétaires canadiens"}
-              </div>
-            </div>
-
             {/* Main headline */}
             <div className="text-center mb-8 md:mb-10">
               <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 md:mb-8 text-balance leading-[1.1]">
@@ -71,7 +47,12 @@ export default function LandingPage() {
               </p>
             </div>
 
-            {/* Stats - Integrated into hero */}
+            {/* Calculator embedded in hero */}
+            <div className="mb-8 md:mb-10">
+              <LandingCalculator embedded={true} />
+            </div>
+
+            {/* Stats - Below calculator */}
             <div className="grid grid-cols-3 gap-3 md:gap-6 max-w-3xl mx-auto mb-8 md:mb-10">
               {/* Stat 1 - 55% */}
               <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 text-center hover:bg-white/15 transition-colors">
@@ -113,30 +94,15 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* CTA Button */}
-            <div className="text-center">
-              <Button
-                onClick={scrollToCalculator}
-                size="lg"
-                className="bg-white hover:bg-white/90 text-primary text-base md:text-lg px-8 md:px-12 py-6 md:py-7 rounded-full shadow-lg shadow-black/20 hover:shadow-xl hover:shadow-black/25 transition-all hover:scale-105 group font-semibold"
-              >
-                {locale === "en"
-                  ? "Calculate My Amount Now"
-                  : "Calculer Mon Montant Maintenant"}
-                <ArrowDown className="w-5 h-5 ml-2 group-hover:translate-y-1 transition-transform" />
-              </Button>
-              <p className="mt-4 text-sm text-white/80">
-                {locale === "en"
-                  ? "Free • No obligation • Results in 30 seconds"
-                  : "Gratuit • Sans engagement • Résultats en 30 secondes"}
-              </p>
-            </div>
+            {/* Quick info text */}
+            <p className="text-center text-sm text-white/80">
+              {locale === "en"
+                ? "Free • No obligation • Results in 30 seconds"
+                : "Gratuit • Sans engagement • Résultats en 30 secondes"}
+            </p>
           </div>
         </div>
       </section>
-
-      {/* Calculator Section with Blur Unlock */}
-      <LandingCalculator />
 
       <UseCases />
 
