@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   Home,
   DollarSign,
@@ -14,11 +15,18 @@ import LandingCalculator from "@/components/landing-calculator";
 import Footer from "@/components/footer";
 import { useLocale } from "@/lib/locale-context";
 import UseCases from "@/components/use-cases";
+import { trackCTAClick, trackSectionView } from "@/lib/tracking";
 
 export default function LandingPage() {
   const { t, locale } = useLocale();
 
+  // Track landing page view on mount
+  useEffect(() => {
+    trackSectionView("landing_page");
+  }, []);
+
   const scrollToCalculator = () => {
+    trackCTAClick("calculate_amount", "landing_hero");
     document
       .getElementById("calculatrice")
       ?.scrollIntoView({ behavior: "smooth" });

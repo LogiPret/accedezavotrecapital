@@ -72,3 +72,25 @@ export const trackFAQClick = (questionIndex: number, questionText: string) => {
     question_preview: questionText.slice(0, 50),
   });
 };
+
+// Landing page unlock form
+export const trackLandingUnlockStart = () => {
+  track("landing_unlock_start", { form_type: "ads" });
+};
+
+export const trackLandingUnlockSubmit = (
+  success: boolean,
+  estimatedMin?: number,
+  estimatedMax?: number
+) => {
+  track("landing_unlock_submit", {
+    form_type: "ads",
+    success,
+    estimated_min: estimatedMin,
+    estimated_max: estimatedMax,
+  });
+};
+
+export const trackLandingUnlockError = (errorType: string) => {
+  track("landing_unlock_error", { form_type: "ads", error_type: errorType });
+};

@@ -21,7 +21,12 @@ import {
 } from "@/components/ui/card";
 import { Calculator, Home, TrendingUp, Info, Users, Lock } from "lucide-react";
 import { useLocale } from "@/lib/locale-context";
-import { trackCalculatorInteraction } from "@/lib/tracking";
+import {
+  trackCalculatorInteraction,
+  trackLandingUnlockStart,
+  trackLandingUnlockSubmit,
+  trackLandingUnlockError,
+} from "@/lib/tracking";
 
 const QUEBEC_CITIES = [
   "Montréal",
@@ -74,6 +79,15 @@ export default function LandingCalculator() {
   const [unlockName, setUnlockName] = useState("");
   const [unlockPhone, setUnlockPhone] = useState("");
   const [unlockError, setUnlockError] = useState("");
+  const [hasTrackedUnlockStart, setHasTrackedUnlockStart] = useState(false);
+
+  // Track unlock form start when user begins filling it
+  const handleUnlockFormInteraction = () => {
+    if (!hasTrackedUnlockStart) {
+      trackLandingUnlockStart();
+      setHasTrackedUnlockStart(true);
+    }
+  };
 
   // For English: use province selector; For French: use city selector with fixed Quebec province
   const locationValid = locale === "en" ? province !== "" : city !== "";
@@ -233,6 +247,7 @@ export default function LandingCalculator() {
     // Validate name
     if (!unlockName.trim()) {
       setUnlockError(t.landing.errorName);
+      trackLandingUnlockError("missing_name");
       return;
     }
 
@@ -240,6 +255,7 @@ export default function LandingCalculator() {
     const phoneDigits = unlockPhone.replace(/\D/g, "");
     if (phoneDigits.length !== 10) {
       setUnlockError(t.landing.errorPhone);
+      trackLandingUnlockError("invalid_phone");
       return;
     }
 
@@ -276,8 +292,14 @@ export default function LandingCalculator() {
 
       // Animate unlock
       setIsUnlocked(true);
+      trackLandingUnlockSubmit(
+        true,
+        eligibility?.minAmount,
+        eligibility?.maxAmount
+      );
     } catch (error) {
       console.error("Unlock submission error:", error);
+      trackLandingUnlockSubmit(false);
       // Still unlock even if webhook fails
       setIsUnlocked(true);
     } finally {
@@ -664,6 +686,7 @@ export default function LandingCalculator() {
                               placeholder={t.landing.namePlaceholder}
                               value={unlockName}
                               onChange={(e) => setUnlockName(e.target.value)}
+                              onFocus={handleUnlockFormInteraction}
                               className="mt-1"
                             />
                           </div>
@@ -679,6 +702,7 @@ export default function LandingCalculator() {
                               onChange={(e) =>
                                 handlePhoneChange(e.target.value)
                               }
+                              onFocus={handleUnlockFormInteraction}
                               inputMode="numeric"
                               className="mt-1"
                             />
