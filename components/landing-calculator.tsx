@@ -78,51 +78,120 @@ export default function LandingCalculator() {
   // For English: use province selector; For French: use city selector with fixed Quebec province
   const locationValid = locale === "en" ? province !== "" : city !== "";
 
+  // Convert numeric age to Monday-compatible range format
+  const getAgeRange = (numericAge: number): string => {
+    if (numericAge >= 80) return "80+";
+    if (numericAge >= 75) return "75-79";
+    if (numericAge >= 70) return "70-74";
+    if (numericAge >= 65) return "65-69";
+    if (numericAge >= 60) return "60-64";
+    if (numericAge >= 55) return "55-59";
+    return "55-59"; // fallback
+  };
+
   const eligibility = useMemo(() => {
     const effectiveAge =
       hasSpouse && spouseAge ? Math.min(age, spouseAge) : age;
 
     if (effectiveAge < 55) return null;
 
-    let minPercentage = 0.15;
-    let maxPercentage = 0.2;
+    // City/Province coefficient adjustments based on market stability
+    // Reference: Historical CHIP data shows slight regional variations
+    const getLocationCoefficient = (): number => {
+      if (locale === "en") {
+        // Province-based adjustments for English site
+        const provinceCoefficients: Record<string, number> = {
+          "British Columbia": 0.02, // Strong market
+          Ontario: 0.01,
+          Alberta: 0.0,
+          Quebec: 0.0,
+          Manitoba: -0.01,
+          Saskatchewan: -0.01,
+          "Nova Scotia": -0.01,
+          "New Brunswick": -0.02,
+          "Newfoundland and Labrador": -0.02,
+          "Prince Edward Island": -0.02,
+        };
+        return provinceCoefficients[province] || 0;
+      } else {
+        // Quebec cities - Montreal area gets slight premium
+        const cityCoefficients: Record<string, number> = {
+          Montréal: 0.01,
+          Laval: 0.01,
+          Longueuil: 0.01,
+          Brossard: 0.01,
+          Québec: 0.0,
+          Gatineau: 0.0,
+          Sherbrooke: 0.0,
+          Autre: -0.01,
+        };
+        return cityCoefficients[city] || 0;
+      }
+    };
 
-    if (effectiveAge >= 55) {
-      minPercentage = 0.15;
-      maxPercentage = 0.2;
-    }
-    if (effectiveAge >= 60) {
-      minPercentage = 0.2;
-      maxPercentage = 0.28;
-    }
-    if (effectiveAge >= 65) {
-      minPercentage = 0.28;
-      maxPercentage = 0.36;
-    }
-    if (effectiveAge >= 70) {
-      minPercentage = 0.36;
-      maxPercentage = 0.45;
-    }
-    if (effectiveAge >= 75) {
-      minPercentage = 0.45;
-      maxPercentage = 0.52;
-    }
+    // LTV lookup table based on real CHIP and Equitable Bank calculator results
+    // CHIP age 65, $700k Longueuil = $278,500-$306,350 (39.8%-43.8%)
+    // Equitable age 67, $850k = $374,000 (44%)
+    const ltvTable: { age: number; minLTV: number; maxLTV: number }[] = [
+      { age: 55, minLTV: 0.2, maxLTV: 0.25 },
+      { age: 60, minLTV: 0.28, maxLTV: 0.35 },
+      { age: 65, minLTV: 0.38, maxLTV: 0.44 },
+      { age: 70, minLTV: 0.42, maxLTV: 0.48 },
+      { age: 75, minLTV: 0.48, maxLTV: 0.53 },
+      { age: 80, minLTV: 0.5, maxLTV: 0.55 },
+    ];
+
+    // Find the appropriate age bracket and interpolate
+    let minLTV: number;
+    let maxLTV: number;
+
     if (effectiveAge >= 80) {
-      minPercentage = 0.5;
-      maxPercentage = 0.55;
+      minLTV = 0.5;
+      maxLTV = 0.55;
+    } else {
+      // Find the two brackets to interpolate between
+      let lowerBracket = ltvTable[0];
+      let upperBracket = ltvTable[ltvTable.length - 1];
+
+      for (let i = 0; i < ltvTable.length - 1; i++) {
+        if (
+          effectiveAge >= ltvTable[i].age &&
+          effectiveAge < ltvTable[i + 1].age
+        ) {
+          lowerBracket = ltvTable[i];
+          upperBracket = ltvTable[i + 1];
+          break;
+        }
+      }
+
+      // Linear interpolation within the bracket
+      const ageRange = upperBracket.age - lowerBracket.age;
+      const ageProgress = (effectiveAge - lowerBracket.age) / ageRange;
+
+      minLTV =
+        lowerBracket.minLTV +
+        ageProgress * (upperBracket.minLTV - lowerBracket.minLTV);
+      maxLTV =
+        lowerBracket.maxLTV +
+        ageProgress * (upperBracket.maxLTV - lowerBracket.maxLTV);
     }
 
-    const minAmount = Math.round(homeValue * minPercentage);
-    const maxAmount = Math.round(homeValue * maxPercentage);
+    // Apply location coefficient
+    const locationCoeff = getLocationCoefficient();
+    const adjustedMinLTV = Math.min(minLTV + locationCoeff, 0.55);
+    const adjustedMaxLTV = Math.min(maxLTV + locationCoeff, 0.55);
+
+    const minAmount = Math.round(homeValue * adjustedMinLTV);
+    const maxAmount = Math.round(homeValue * adjustedMaxLTV);
 
     return {
       minAmount,
       maxAmount,
-      minPercentage: Math.round(minPercentage * 100),
-      maxPercentage: Math.round(maxPercentage * 100),
+      minPercentage: Math.round(adjustedMinLTV * 100),
+      maxPercentage: Math.round(adjustedMaxLTV * 100),
       effectiveAge,
     };
-  }, [age, spouseAge, hasSpouse, homeValue]);
+  }, [age, spouseAge, hasSpouse, homeValue, city, province, locale]);
 
   const handleCalculate = () => {
     if (age >= 55 && locationValid && homeValue >= 250000) {
@@ -178,6 +247,9 @@ export default function LandingCalculator() {
 
     try {
       // Send to n8n webhook with "ads" as formType
+      // Phone with +1 country code prefix, age as range format for Monday
+      const phoneWithCountryCode = `+1${phoneDigits}`;
+
       await fetch(
         "https://n8n-wwfb.onrender.com/webhook/65e54c43-dfcc-441e-bd8e-706d0051de10",
         {
@@ -188,12 +260,12 @@ export default function LandingCalculator() {
           body: JSON.stringify({
             firstName: unlockName.split(" ")[0] || unlockName,
             lastName: unlockName.split(" ").slice(1).join(" ") || "",
-            phone: phoneDigits,
-            age: age.toString(),
+            phone: phoneWithCountryCode,
+            age: getAgeRange(age),
             homeValue: homeValue.toString(),
             city: locale === "en" ? province : city,
             hasSpouse: hasSpouse,
-            spouseAge: spouseAge,
+            spouseAge: spouseAge ? getAgeRange(spouseAge) : null,
             estimatedMin: eligibility?.minAmount,
             estimatedMax: eligibility?.maxAmount,
             formType: "ads",

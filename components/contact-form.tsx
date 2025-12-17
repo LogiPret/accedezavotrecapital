@@ -127,8 +127,9 @@ export default function ContactForm({
     }
 
     try {
-      // Send phone as digits only to n8n
+      // Send phone with +1 country code prefix to n8n (digits only)
       const phoneDigits = formData.phone.replace(/\D/g, "");
+      const phoneWithCountryCode = `+1${phoneDigits}`;
 
       const response = await fetch(
         "https://n8n-wwfb.onrender.com/webhook/65e54c43-dfcc-441e-bd8e-706d0051de10",
@@ -139,7 +140,7 @@ export default function ContactForm({
           },
           body: JSON.stringify({
             ...formData,
-            phone: phoneDigits,
+            phone: phoneWithCountryCode,
             formType,
             timestamp: new Date().toISOString(),
           }),
