@@ -21,7 +21,8 @@ export default function HeroSection() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat grayscale opacity-40 lg:opacity-40"
           style={{
-            backgroundImage: "url('/senior-couple-home-living.jpg')",
+            backgroundImage:
+              "url('/happy-senior-couple-in-their-home-garden-quebec.jpg')",
             backgroundPosition: "center center",
           }}
         />

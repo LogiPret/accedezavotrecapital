@@ -2,6 +2,10 @@ export type Locale = "fr" | "en";
 
 export const translations = {
   fr: {
+    // Affiliation Banner
+    affiliation: {
+      text: "Une divison de",
+    },
     // Header
     nav: {
       whatIs: "Qu'est-ce que c'est",
@@ -541,6 +545,10 @@ export const translations = {
     },
   },
   en: {
+    // Affiliation Banner
+    affiliation: {
+      text: "A division of",
+    },
     // Header
     nav: {
       whatIs: "What Is It",

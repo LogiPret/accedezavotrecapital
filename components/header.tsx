@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -12,61 +12,74 @@ import {
   trackCTAClick,
 } from "@/lib/tracking";
 
-function getLangSwitchUrl(locale: string, hash?: string): string {
+function getLangSwitchUrl(locale: string): string {
   if (typeof window === "undefined") return "#";
 
   const hostname = window.location.hostname;
   const isLocalhost =
     hostname.includes("localhost") || hostname.includes("127.0.0.1");
-  const hashPart = hash || window.location.hash || "";
+
+  // Store absolute scroll position in URL
+  const scrollY = Math.round(window.scrollY);
+  const scrollParam = scrollY > 0 ? `#scroll=${scrollY}` : "";
 
   if (isLocalhost) {
     if (locale === "en") {
-      return `${window.location.protocol}//localhost:${window.location.port}${window.location.pathname}${hashPart}`;
+      return `${window.location.protocol}//localhost:${window.location.port}${window.location.pathname}${scrollParam}`;
     } else {
-      return `${window.location.protocol}//en.localhost:${window.location.port}${window.location.pathname}${hashPart}`;
+      return `${window.location.protocol}//en.localhost:${window.location.port}${window.location.pathname}${scrollParam}`;
     }
   } else {
     if (locale === "en") {
-      return `https://accedezavotrecapital.ca${window.location.pathname}${hashPart}`;
+      return `https://accedezavotrecapital.ca${window.location.pathname}${scrollParam}`;
     } else {
-      return `https://accesshomeequity.ca${window.location.pathname}${hashPart}`;
+      return `https://accesshomeequity.ca${window.location.pathname}${scrollParam}`;
     }
   }
-}
-
-function getCurrentSectionHash(): string {
-  if (typeof window === "undefined") return "";
-
-  const sections = document.querySelectorAll("section[id]");
-  let currentSection = "";
-
-  for (const section of sections) {
-    const rect = section.getBoundingClientRect();
-    // If section top is above middle of viewport, it's the current section
-    if (rect.top <= window.innerHeight / 2) {
-      currentSection = `#${section.id}`;
-    }
-  }
-
-  return currentSection;
 }
 
 export default function Header() {
   const { t, locale } = useLocale();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   const handleLanguageSwitch = (fromLocale: string, toLocale: string) => {
     trackLanguageSwitch(fromLocale, toLocale);
-    const hash = getCurrentSectionHash();
-    const url = getLangSwitchUrl(locale, hash);
+    const url = getLangSwitchUrl(locale);
     window.location.href = url;
   };
+
+  // Use useLayoutEffect to restore scroll position before paint
+  useLayoutEffect(() => {
+    // Check for scroll position in URL hash
+    const hash = window.location.hash;
+    const scrollMatch = hash.match(/#scroll=(\d+)/);
+
+    if (scrollMatch) {
+      const targetScroll = parseInt(scrollMatch[1], 10);
+
+      // Scroll immediately before paint
+      window.scrollTo({ top: targetScroll, behavior: "instant" });
+
+      // Clean up the hash
+      window.history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+      );
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+    // Check initial scroll position on mount
+    handleScroll();
+    // Enable transitions after initial state is set
+    requestAnimationFrame(() => {
+      setHasMounted(true);
+    });
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -83,12 +96,47 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 ${
+        hasMounted ? "transition-all duration-300" : ""
+      } ${
         isScrolled
           ? "bg-card/95 backdrop-blur-sm border-b border-border shadow-sm"
           : "bg-transparent"
       }`}
     >
+      {/* Affiliation Banner */}
+      <div
+        className={`w-full ${hasMounted ? "transition-all duration-300" : ""} ${
+          isScrolled
+            ? "py-1 bg-primary/10 border-b border-primary/20"
+            : "py-1 md:py-1 bg-black/30 backdrop-blur-sm"
+        }`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-center gap-2">
+            <span
+              className={`font-medium ${
+                hasMounted ? "transition-all duration-300" : ""
+              } ${
+                isScrolled
+                  ? "text-sm md:text-xl text-foreground/70"
+                  : "text-2xl text-white/80"
+              }`}
+            >
+              {t.affiliation.text}
+            </span>
+            <Image
+              src="/planipret-logo-white.png"
+              alt="Planipret"
+              width={300}
+              height={100}
+              className={`w-auto object-contain ${
+                hasMounted ? "transition-all duration-300" : ""
+              } ${isScrolled ? "h-8 md:h-10 brightness-0" : "h-16 md:h-18"}`}
+            />
+          </div>
+        </div>
+      </div>
       <div className="container mx-auto px-4">
         <div className="h-16 md:h-20">
           <div className="h-full flex items-center">
