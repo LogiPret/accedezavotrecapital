@@ -7,10 +7,12 @@ import UseCases from "@/components/use-cases";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 import TrackedSection from "@/components/tracked-section";
+import PromoPopup from "@/components/promo-popup";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <PromoPopup />
       <Header />
       <TrackedSection sectionId="hero">
         <HeroSection />

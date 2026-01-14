@@ -470,6 +470,10 @@ export const translations = {
       footnote3:
         "Toutes les demandes et taux d'intérêt sont soumis aux critères de souscription de la Banque Équitable. Les taux peuvent changer sans préavis.",
     },
+    // Popup
+    popup: {
+      cta: "Calculer Mon Éligibilité",
+    },
     // Landing page
     landing: {
       title: "Vérifier si l'hypothèque inversée peut vraiment vous aider",
@@ -1023,6 +1027,10 @@ export const translations = {
         "Equitable Bank regularly monitors competitor posted rates. If a competitor's posted rate is lower, we will offer you a better rate. New mortgage originations only.",
       footnote3:
         "All applications and interest rates are subject to Equitable Bank underwriting criteria. Rates may change without notice.",
+    },
+    // Popup
+    popup: {
+      cta: "Calculate My Eligibility",
     },
     // Landing page
     landing: {
