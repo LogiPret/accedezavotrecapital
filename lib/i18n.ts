@@ -453,6 +453,23 @@ export const translations = {
       email: "Courriel :",
       phone: "Téléphone :",
     },
+    // Promo Banner
+    promo: {
+      badge: "Offre à durée limitée",
+      title: "Économisez sur les frais d'établissement",
+      savings: "995$ de rabais!",
+      deadline: "Offre valide jusqu'au 15 février 2026",
+      partnershipText: "En partenariat avec",
+      benefit1: "Pas de frais d'établissement",
+      benefit2: "Meilleurs taux garantis",
+      partner: "En partenariat avec",
+      footnote1:
+        "Économisez 995$ sur les frais d'ouverture de dossier. Offre disponible pour les nouvelles demandes soumises entre le 15 janvier 2026 et le 15 février 2026, et financées dans les 30 jours. Les promotions sont conditionnelles aux critères de prêt de la Banque Équitable.",
+      footnote2:
+        "La Banque Équitable surveille régulièrement les taux affichés par ses concurrents. Si le taux affiché d'un concurrent est inférieur, nous vous offrirons un meilleur taux. Nouveaux montages de prêt hypothécaire seulement.",
+      footnote3:
+        "Toutes les demandes et taux d'intérêt sont soumis aux critères de souscription de la Banque Équitable. Les taux peuvent changer sans préavis.",
+    },
     // Landing page
     landing: {
       title: "Vérifier si l'hypothèque inversée peut vraiment vous aider",
@@ -471,10 +488,13 @@ export const translations = {
         "Entrez vos informations pour voir votre estimation personnalisée",
       nameLabel: "Votre nom",
       namePlaceholder: "Jean Tremblay",
+      emailLabel: "Courriel",
+      emailPlaceholder: "jean.tremblay@exemple.com",
       phoneLabel: "Numéro de téléphone",
       phonePlaceholder: "(514) 555-1234",
       unlockButton: "Voir mon estimation",
       errorName: "Veuillez entrer votre nom",
+      errorEmail: "Veuillez entrer une adresse courriel valide",
       errorPhone: "Veuillez entrer un numéro de téléphone valide (10 chiffres)",
     },
     // About us section
@@ -987,6 +1007,23 @@ export const translations = {
       email: "Email:",
       phone: "Phone:",
     },
+    // Promo Banner
+    promo: {
+      badge: "Limited Time Offer",
+      title: "Save on Setup Fees",
+      savings: "$995 Savings!",
+      deadline: "Offer valid until February 15, 2026",
+      partnershipText: "In partnership with",
+      benefit1: "No setup fees",
+      benefit2: "Best rates guaranteed",
+      partner: "In partnership with",
+      footnote1:
+        "Save $995 on setup fees. Offer available for new applications submitted between January 15, 2026 and February 15, 2026, and funded within 30 days. Promotions are conditional on meeting Equitable Bank lending criteria.",
+      footnote2:
+        "Equitable Bank regularly monitors competitor posted rates. If a competitor's posted rate is lower, we will offer you a better rate. New mortgage originations only.",
+      footnote3:
+        "All applications and interest rates are subject to Equitable Bank underwriting criteria. Rates may change without notice.",
+    },
     // Landing page
     landing: {
       title: "See if a Reverse Mortgage Can Really Help You",
@@ -1005,10 +1042,13 @@ export const translations = {
         "Enter your information to see your personalized estimate",
       nameLabel: "Your name",
       namePlaceholder: "John Smith",
+      emailLabel: "Email",
+      emailPlaceholder: "john.smith@example.com",
       phoneLabel: "Phone number",
       phonePlaceholder: "(514) 555-1234",
       unlockButton: "See my estimate",
       errorName: "Please enter your name",
+      errorEmail: "Please enter a valid email address",
       errorPhone: "Please enter a valid phone number (10 digits)",
     },
     // About us section

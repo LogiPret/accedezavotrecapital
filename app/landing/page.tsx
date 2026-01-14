@@ -8,6 +8,7 @@ import LandingCalculator from "@/components/landing-calculator";
 import Footer from "@/components/footer";
 import { useLocale } from "@/lib/locale-context";
 import UseCases from "@/components/use-cases";
+import PromoBanner from "@/components/promo-banner";
 import { trackSectionView } from "@/lib/tracking";
 
 export default function LandingPage() {
@@ -103,6 +104,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* Promo Banner */}
+      <PromoBanner />
 
       <UseCases />
 
