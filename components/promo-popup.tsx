@@ -5,11 +5,17 @@ import { Clock, X } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
+// Promotion end date: February 28, 2026 at 23:59:59 EST
+const PROMO_END_DATE = new Date("2026-03-01T04:59:59Z"); // Feb 28 23:59:59 EST in UTC
+
 export default function PromoPopup() {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    // Don't show if past the promotion end date
+    if (new Date() > PROMO_END_DATE) return;
+
     // Check if popup was already dismissed this session
     const dismissed = sessionStorage.getItem("promo-popup-dismissed");
     if (!dismissed) {
@@ -40,7 +46,10 @@ export default function PromoPopup() {
       <div className="relative w-full max-w-lg animate-in fade-in zoom-in-95 duration-300">
         <div className="relative overflow-hidden rounded-2xl">
           {/* Background */}
-          <div className="absolute inset-0 bg-primary rounded-2xl border border-white/25" />
+          <div
+            className="absolute inset-0 rounded-2xl border border-white/25"
+            style={{ backgroundColor: "#023e4c" }}
+          />
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIgMS44LTQgNC00czQgMS44IDQgNC0xLjggNC00IDQtNC0xLjgtNC00eiIvPjwvZz48L2c+PC9zdmc+')] opacity-30 rounded-2xl" />
 
           {/* Shine effect */}
@@ -64,7 +73,7 @@ export default function PromoPopup() {
               <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
                 <span
                   className="text-sm font-semibold uppercase tracking-wide"
-                  style={{ color: "#ffcb31" }}
+                  style={{ color: "#00c58c" }}
                 >
                   {t.promo.badge}
                 </span>
@@ -76,7 +85,7 @@ export default function PromoPopup() {
               </h2>
               <p
                 className="text-3xl sm:text-4xl font-bold mb-4"
-                style={{ color: "#ffcb31" }}
+                style={{ color: "#00c58c" }}
               >
                 {t.promo.savings}
               </p>
@@ -95,13 +104,20 @@ export default function PromoPopup() {
                   {t.promo.partnershipText}
                 </span>
                 <Image
-                  src="/eq_bank_logo.svg"
-                  alt="EQ Bank"
-                  width={60}
-                  height={18}
-                  className="h-8 w-auto"
+                  src="/heb3.png"
+                  alt="HEB"
+                  width={40}
+                  height={16}
+                  className="h-6 w-auto mb-1"
                 />
               </div>
+
+              {/* Disclaimer */}
+              <p className="text-xs text-white/60">
+                {locale === "fr"
+                  ? "Des conditions s'appliquent"
+                  : "Some conditions apply"}
+              </p>
             </div>
           </div>
         </div>

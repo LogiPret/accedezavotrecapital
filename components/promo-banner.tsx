@@ -4,8 +4,14 @@ import { useLocale } from "@/lib/locale-context";
 import { Clock } from "lucide-react";
 import Image from "next/image";
 
+// Promotion end date: February 28, 2026 at 23:59:59 EST
+const PROMO_END_DATE = new Date("2026-03-01T04:59:59Z"); // Feb 28 23:59:59 EST in UTC
+
 export default function PromoBanner() {
   const { t } = useLocale();
+
+  // Don't render if past the promotion end date
+  if (new Date() > PROMO_END_DATE) return null;
 
   return (
     <section className="bg-[#0a2b59] py-6 md:py-10">
@@ -56,8 +62,8 @@ export default function PromoBanner() {
                       {t.promo.partnershipText}
                     </span>
                     <Image
-                      src="/eq_bank_logo.svg"
-                      alt="EQ Bank"
+                      src="/heb2.png"
+                      alt="HEB"
                       width={80}
                       height={24}
                       className="h-12 w-auto"

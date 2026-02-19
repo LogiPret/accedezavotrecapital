@@ -456,19 +456,19 @@ export const translations = {
     // Promo Banner
     promo: {
       badge: "Offre à durée limitée",
-      title: "Économisez sur les frais d'établissement",
-      savings: "995$ de rabais!",
-      deadline: "Offre valide jusqu'au 15 février 2026",
+      title: "Rabais sur les frais d'établissement",
+      savings: "1 000$ de rabais!",
+      deadline: "Offre valide jusqu'au 28 février 2026",
       partnershipText: "En partenariat avec",
-      benefit1: "Pas de frais d'établissement",
+      benefit1: "Rabais de 1 000$ sur les frais d'établissement",
       benefit2: "Meilleurs taux garantis",
       partner: "En partenariat avec",
       footnote1:
-        "Économisez 995$ sur les frais d'ouverture de dossier. Offre disponible pour les nouvelles demandes soumises entre le 15 janvier 2026 et le 15 février 2026, et financées dans les 30 jours. Les promotions sont conditionnelles aux critères de prêt de la Banque Équitable.",
+        "Pour les demandes soumises entre le 26 janvier 2026 et le 28 février 2026, et financées avant le 17 avril 2026. Le rabais s'applique uniquement à certaines transactions conformes aux directives de prêt de HomeEquity Bank et est appliqué directement à la demande lors du financement. Cette offre peut être modifiée ou annulée sans préavis et est offerte aux courtiers hypothécaires admissibles.",
       footnote2:
-        "La Banque Équitable surveille régulièrement les taux affichés par ses concurrents. Si le taux affiché d'un concurrent est inférieur, nous vous offrirons un meilleur taux. Nouveaux montages de prêt hypothécaire seulement.",
+        "Les taux et conditions peuvent changer sans préavis. Cette offre ne peut être combinée avec aucune autre offre. Certaines conditions peuvent s'appliquer.",
       footnote3:
-        "Toutes les demandes et taux d'intérêt sont soumis aux critères de souscription de la Banque Équitable. Les taux peuvent changer sans préavis.",
+        "Toutes les demandes et taux d'intérêt sont soumis aux critères de souscription. Les taux peuvent changer sans préavis.",
     },
     // Popup
     popup: {
@@ -1014,19 +1014,19 @@ export const translations = {
     // Promo Banner
     promo: {
       badge: "Limited Time Offer",
-      title: "Save on Setup Fees",
-      savings: "$995 Savings!",
-      deadline: "Offer valid until February 15, 2026",
+      title: "Set-Up Fee Rebate",
+      savings: "$1,000 Rebate!",
+      deadline: "Offer valid until February 28, 2026",
       partnershipText: "In partnership with",
-      benefit1: "No setup fees",
+      benefit1: "$1,000 set-up fee rebate",
       benefit2: "Best rates guaranteed",
       partner: "In partnership with",
       footnote1:
-        "Save $995 on setup fees. Offer available for new applications submitted between January 15, 2026 and February 15, 2026, and funded within 30 days. Promotions are conditional on meeting Equitable Bank lending criteria.",
+        "For applications submitted between January 26, 2026, and February 28, 2026, and funded before April 17, 2026. Rebate applies only to certain transactions within HomeEquity Bank's lending guidelines and applied directly to the application and processed upon funding. This offer is subject to change or cancellation without notice and is available to eligible mortgage brokers.",
       footnote2:
-        "Equitable Bank regularly monitors competitor posted rates. If a competitor's posted rate is lower, we will offer you a better rate. New mortgage originations only.",
+        "Rates and conditions are subject to change without notice. It cannot be combined with any other offer. Some conditions may apply.",
       footnote3:
-        "All applications and interest rates are subject to Equitable Bank underwriting criteria. Rates may change without notice.",
+        "All applications and interest rates are subject to underwriting criteria. Rates may change without notice.",
     },
     // Popup
     popup: {
