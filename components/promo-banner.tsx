@@ -4,8 +4,8 @@ import { useLocale } from "@/lib/locale-context";
 import { Clock } from "lucide-react";
 import Image from "next/image";
 
-// Promotion end date: February 28, 2026 at 23:59:59 EST
-const PROMO_END_DATE = new Date("2026-03-01T04:59:59Z"); // Feb 28 23:59:59 EST in UTC
+// Promotion end date: March 31, 2026 at 23:59:59 EST
+const PROMO_END_DATE = new Date("2026-04-01T04:59:59Z"); // Mar 31 23:59:59 EST in UTC
 
 export default function PromoBanner() {
   const { t } = useLocale();
@@ -14,11 +14,14 @@ export default function PromoBanner() {
   if (new Date() > PROMO_END_DATE) return null;
 
   return (
-    <section className="bg-[#0a2b59] py-6 md:py-10">
+    <section className="bg-[#001a3a] py-6 md:py-10">
       <div className="container mx-auto px-4">
         <div className="relative overflow-hidden rounded-2xl py-8 md:py-12">
           {/* Animated gradient background */}
-          <div className="absolute inset-0 bg-primary rounded-2xl border border-1 border-white/25" />
+          <div
+            className="absolute inset-0 rounded-2xl border border-1 border-white/25"
+            style={{ backgroundColor: "#002750" }}
+          />
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIgMS44LTQgNC00czQgMS44IDQgNC0xLjggNC00IDQtNC0xLjgtNC00eiIvPjwvZz48L2c+PC9zdmc+')] opacity-30 rounded-2xl" />
 
           {/* Shine effect */}
@@ -34,7 +37,7 @@ export default function PromoBanner() {
                 <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
                   <span
                     className="text-sm font-semibold uppercase tracking-wide"
-                    style={{ color: "#ffcb31" }}
+                    style={{ color: "#d4a843" }}
                   >
                     {t.promo.badge}
                   </span>
@@ -43,7 +46,7 @@ export default function PromoBanner() {
                 {/* Main headline */}
                 <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-3 leading-tight">
                   {t.promo.title}
-                  <span className="block" style={{ color: "#ffcb31" }}>
+                  <span className="block" style={{ color: "#d4a843" }}>
                     {t.promo.savings}
                   </span>
                 </h2>
@@ -57,16 +60,16 @@ export default function PromoBanner() {
                     </p>
                   </div>
                   {/* Partnership text with logo */}
-                  <div className="flex items-center gap-2 pt-4">
+                  <div className="flex items-center gap-3 pt-4">
                     <span className="text-xl text-white/80">
                       {t.promo.partnershipText}
                     </span>
                     <Image
-                      src="/heb2.png"
-                      alt="HEB"
-                      width={80}
-                      height={24}
-                      className="h-12 w-auto"
+                      src="/eq_bank_logo.svg"
+                      alt="Equitable Bank"
+                      width={140}
+                      height={36}
+                      className="h-10 w-auto brightness-0 invert"
                     />
                   </div>
                 </div>

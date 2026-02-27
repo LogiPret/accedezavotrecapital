@@ -4,7 +4,7 @@ export const translations = {
   fr: {
     // Affiliation Banner
     affiliation: {
-      text: "Une divison de",
+      text: "Fier Partenaire de",
     },
     // Header
     nav: {
@@ -455,18 +455,18 @@ export const translations = {
     },
     // Promo Banner
     promo: {
-      badge: "Offre à durée limitée",
-      title: "Rabais sur les frais d'établissement",
-      savings: "1 000$ de rabais!",
-      deadline: "Offre valide jusqu'au 28 février 2026",
-      partnershipText: "En partenariat avec",
-      benefit1: "Rabais de 1 000$ sur les frais d'établissement",
+      badge: "Offre exclusive",
+      title: "Hypothèque inversée à",
+      savings: "4,99%†",
+      deadline: "Se termine le 31 mars 2026 — Places limitées!",
+      partnershipText: "Offert par",
+      benefit1: "Taux d'intérêt de 4,99% (TAP² de 5,797%)",
       benefit2: "Meilleurs taux garantis",
-      partner: "En partenariat avec",
+      partner: "Offert par",
       footnote1:
-        "Pour les demandes soumises entre le 26 janvier 2026 et le 28 février 2026, et financées avant le 17 avril 2026. Le rabais s'applique uniquement à certaines transactions conformes aux directives de prêt de HomeEquity Bank et est appliqué directement à la demande lors du financement. Cette offre peut être modifiée ou annulée sans préavis et est offerte aux courtiers hypothécaires admissibles.",
+        "† L'offre consiste en un taux d'intérêt de 4,99 % (TAP² de 5,797 %) sur l'hypothèque inversée à taux fixe 1 an Flex et Flex Lite (l'« Offre »). L'offre est disponible uniquement pour les nouvelles demandes d'hypothèque inversée, soumises entre 0 h 01 le 23 février 2026 et 23 h 59 le 31 mars 2026, et financées dans les 30 jours suivant l'approbation. Les taux de renouvellement standard s'appliquent et peuvent être supérieurs au taux initial. L'offre est assujettie au respect des critères de prêt hypothécaire de la Banque Équitable et peut être modifiée sans préavis. L'offre ne peut être combinée avec d'autres offres que si la Banque Équitable le permet à sa seule discrétion.",
       footnote2:
-        "Les taux et conditions peuvent changer sans préavis. Cette offre ne peut être combinée avec aucune autre offre. Certaines conditions peuvent s'appliquer.",
+        "Les taux et conditions peuvent changer sans préavis. Certaines conditions peuvent s'appliquer.",
       footnote3:
         "Toutes les demandes et taux d'intérêt sont soumis aux critères de souscription. Les taux peuvent changer sans préavis.",
     },
@@ -571,7 +571,7 @@ export const translations = {
   en: {
     // Affiliation Banner
     affiliation: {
-      text: "A division of",
+      text: "Proud Partner of",
     },
     // Header
     nav: {
@@ -1013,18 +1013,18 @@ export const translations = {
     },
     // Promo Banner
     promo: {
-      badge: "Limited Time Offer",
-      title: "Set-Up Fee Rebate",
-      savings: "$1,000 Rebate!",
-      deadline: "Offer valid until February 28, 2026",
-      partnershipText: "In partnership with",
-      benefit1: "$1,000 set-up fee rebate",
+      badge: "Exclusive Offer",
+      title: "Reverse Mortgage at",
+      savings: "4.99%†",
+      deadline: "Ends March 31, 2026 — Limited Availability!",
+      partnershipText: "Offered by",
+      benefit1: "4.99% interest rate (5.797% APR²)",
       benefit2: "Best rates guaranteed",
-      partner: "In partnership with",
+      partner: "Offered by",
       footnote1:
-        "For applications submitted between January 26, 2026, and February 28, 2026, and funded before April 17, 2026. Rebate applies only to certain transactions within HomeEquity Bank's lending guidelines and applied directly to the application and processed upon funding. This offer is subject to change or cancellation without notice and is available to eligible mortgage brokers.",
+        '† Offer consists of a 4.99% interest rate (5.797% APR²) on the 1-Year Fixed Reverse Mortgage Flex and Flex Lite (the "Offer"). Offer is available on new reverse mortgage applications only, submitted between 12:01 a.m. on February 23, 2026, and 11:59 p.m. on March 31, 2026, and funded within 30 days of approval. Standard reset rates apply and may be higher than the original rate. Offer is subject to borrowers meeting the Equitable Bank mortgage lending criteria and is subject to change without notice. Offer may only be combined with other offers as permitted by Equitable Bank in its sole discretion.',
       footnote2:
-        "Rates and conditions are subject to change without notice. It cannot be combined with any other offer. Some conditions may apply.",
+        "Rates and conditions are subject to change without notice. Some conditions may apply.",
       footnote3:
         "All applications and interest rates are subject to underwriting criteria. Rates may change without notice.",
     },

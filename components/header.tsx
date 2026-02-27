@@ -119,15 +119,19 @@ export default function Header() {
                 hasMounted ? "transition-all duration-300" : ""
               } ${
                 isScrolled
-                  ? "text-sm md:text-xl text-foreground/70"
-                  : "text-2xl text-white/80"
+                  ? "text-xs md:text-lg text-foreground/70"
+                  : "text-xl text-white/80"
               }`}
             >
               {t.affiliation.text}
             </span>
             <Image
-              src="/planipret-logo-white.png"
-              alt="Planipret"
+              src={
+                locale === "en"
+                  ? "/mortgageplanners.png"
+                  : "/planipret-logo-white.png"
+              }
+              alt={locale === "en" ? "Mortgage Planners" : "Planipret"}
               width={300}
               height={100}
               className={`w-auto object-contain ${
